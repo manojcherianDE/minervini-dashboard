@@ -36,32 +36,45 @@ if [[ "$allowed" != "1" ]]; then
   exit 1
 fi
 
-# --- market selection (arg 1: sp500 | dax; default sp500) --------------------
+# --- market selection (arg 1: sp500 | dax | both; default sp500) -------------
 MARKET="${1:-sp500}"
+SP_LINK="${DASHBOARD_URL%/}/#sp500"
+DAX_LINK="${DASHBOARD_URL%/}/#dax"
+
+# facts <data-file>  → sets globals f_date f_verdict f_buy f_watch (best-effort)
+facts(){
+  local file="$1"
+  f_date="$(grep -m1 'reportDate:' "$file" | sed -E 's/.*"([^"]+)".*/\1/' || true)"
+  f_verdict="$(grep -m1 'verdict:' "$file" | sed -E 's/.*"([^"]+)".*/\1/' || true)"
+  f_buy="$(grep -c 'result: "PASS"' "$file" || true)"
+  f_watch="$(grep -c 'result: "WATCHLIST"' "$file" || true)"
+}
+
+# --- build the message + inline keyboard -------------------------------------
 case "$MARKET" in
-  dax)   DATA_FILE="data/runs_dax.js"; MARKET_NAME="DAX 40";      LINK="${DASHBOARD_URL%/}/#dax";;
-  sp500) DATA_FILE="data/runs.js";     MARKET_NAME="S&amp;P 500"; LINK="${DASHBOARD_URL%/}/#sp500";;
-  *) echo "Unknown market '$MARKET' (use: sp500 | dax)" >&2; exit 1;;
+  sp500)
+    facts data/runs.js
+    msg="<b>📈 S&amp;P 500 Minervini Weekly Screen</b>"$'\n'"🗓 Latest run: <b>${f_date}</b>"$'\n'"🚦 Market: <b>${f_verdict}</b>"$'\n'"✅ Buy Now: <b>${f_buy:-0}</b>  ·  👀 Watchlist: <b>${f_watch:-0}</b>"
+    reply_markup="{\"inline_keyboard\":[[{\"text\":\"🔄 Open latest run\",\"url\":\"${SP_LINK}\"}]]}"
+    ;;
+  dax)
+    facts data/runs_dax.js
+    msg="<b>📈 DAX 40 Minervini Weekly Screen</b>"$'\n'"🗓 Latest run: <b>${f_date}</b>"$'\n'"🚦 Market: <b>${f_verdict}</b>"$'\n'"✅ Buy Now: <b>${f_buy:-0}</b>  ·  👀 Watchlist: <b>${f_watch:-0}</b>"
+    reply_markup="{\"inline_keyboard\":[[{\"text\":\"🔄 Open latest run\",\"url\":\"${DAX_LINK}\"}]]}"
+    ;;
+  both)
+    msg="<b>📊 Minervini Weekly Screen</b>"
+    facts data/runs.js
+    msg+=$'\n\n'"🇺🇸 <b>S&amp;P 500</b> — ${f_date}"$'\n'"🚦 ${f_verdict}  ·  ✅ ${f_buy:-0} Buy  ·  👀 ${f_watch:-0} Watch"
+    facts data/runs_dax.js
+    msg+=$'\n\n'"🇩🇪 <b>DAX 40</b> — ${f_date}"$'\n'"🚦 ${f_verdict}  ·  ✅ ${f_buy:-0} Buy  ·  👀 ${f_watch:-0} Watch"
+    reply_markup="{\"inline_keyboard\":[[{\"text\":\"🇺🇸 S&P 500\",\"url\":\"${SP_LINK}\"},{\"text\":\"🇩🇪 DAX 40\",\"url\":\"${DAX_LINK}\"}]]}"
+    ;;
+  *) echo "Unknown market '$MARKET' (use: sp500 | dax | both)" >&2; exit 1;;
 esac
 
-# --- pull a few facts from the latest run (best-effort) ----------------------
-latest_date="$(grep -m1 'reportDate:' "$DATA_FILE" | sed -E 's/.*"([^"]+)".*/\1/' || true)"
-verdict="$(grep -m1 'verdict:' "$DATA_FILE" | sed -E 's/.*"([^"]+)".*/\1/' || true)"
-buy_count="$(grep -c 'result: "PASS"' "$DATA_FILE" || true)"
-watch_count="$(grep -c 'result: "WATCHLIST"' "$DATA_FILE" || true)"
-
-# --- build the message --------------------------------------------------------
-msg="<b>📈 ${MARKET_NAME} Minervini Weekly Screen</b>"
-[[ -n "${latest_date}" ]] && msg+=$'\n'"🗓 Latest run: <b>${latest_date}</b>"
-[[ -n "${verdict}"     ]] && msg+=$'\n'"🚦 Market: <b>${verdict}</b>"
-if [[ -n "${buy_count}" || -n "${watch_count}" ]]; then
-  msg+=$'\n'"✅ Buy Now: <b>${buy_count:-0}</b>  ·  👀 Watchlist: <b>${watch_count:-0}</b>"
-fi
-msg+=$'\n\n'"<i>Tap below for the live, refreshable dashboard.</i>"
+msg+=$'\n\n'"<i>Tap a button for the live, refreshable dashboard.</i>"
 msg+=$'\n'"<i>For informational purposes only. Not financial advice.</i>"
-
-# inline keyboard: one URL button that opens the live dashboard at this market's latest run
-reply_markup="{\"inline_keyboard\":[[{\"text\":\"🔄 Open latest run\",\"url\":\"${LINK}\"}]]}"
 
 # --- send ---------------------------------------------------------------------
 resp="$(curl -fsS "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
