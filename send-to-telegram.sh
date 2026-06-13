@@ -36,14 +36,22 @@ if [[ "$allowed" != "1" ]]; then
   exit 1
 fi
 
-# --- pull a few facts from the latest run in data/runs.js (best-effort) -------
-latest_date="$(grep -m1 'reportDate:' data/runs.js | sed -E 's/.*"([^"]+)".*/\1/' || true)"
-verdict="$(grep -m1 'verdict:' data/runs.js | sed -E 's/.*"([^"]+)".*/\1/' || true)"
-buy_count="$(grep -c 'result: "PASS"' data/runs.js || true)"
-watch_count="$(grep -c 'result: "WATCHLIST"' data/runs.js || true)"
+# --- market selection (arg 1: sp500 | dax; default sp500) --------------------
+MARKET="${1:-sp500}"
+case "$MARKET" in
+  dax)   DATA_FILE="data/runs_dax.js"; MARKET_NAME="DAX 40";      LINK="${DASHBOARD_URL%/}/#dax";;
+  sp500) DATA_FILE="data/runs.js";     MARKET_NAME="S&amp;P 500"; LINK="${DASHBOARD_URL%/}/#sp500";;
+  *) echo "Unknown market '$MARKET' (use: sp500 | dax)" >&2; exit 1;;
+esac
+
+# --- pull a few facts from the latest run (best-effort) ----------------------
+latest_date="$(grep -m1 'reportDate:' "$DATA_FILE" | sed -E 's/.*"([^"]+)".*/\1/' || true)"
+verdict="$(grep -m1 'verdict:' "$DATA_FILE" | sed -E 's/.*"([^"]+)".*/\1/' || true)"
+buy_count="$(grep -c 'result: "PASS"' "$DATA_FILE" || true)"
+watch_count="$(grep -c 'result: "WATCHLIST"' "$DATA_FILE" || true)"
 
 # --- build the message --------------------------------------------------------
-msg="<b>📈 S&amp;P 500 Minervini Weekly Screen</b>"
+msg="<b>📈 ${MARKET_NAME} Minervini Weekly Screen</b>"
 [[ -n "${latest_date}" ]] && msg+=$'\n'"🗓 Latest run: <b>${latest_date}</b>"
 [[ -n "${verdict}"     ]] && msg+=$'\n'"🚦 Market: <b>${verdict}</b>"
 if [[ -n "${buy_count}" || -n "${watch_count}" ]]; then
@@ -52,8 +60,8 @@ fi
 msg+=$'\n\n'"<i>Tap below for the live, refreshable dashboard.</i>"
 msg+=$'\n'"<i>For informational purposes only. Not financial advice.</i>"
 
-# inline keyboard: one URL button that opens the live dashboard (defaults to latest run)
-reply_markup="{\"inline_keyboard\":[[{\"text\":\"🔄 Open latest run\",\"url\":\"${DASHBOARD_URL}\"}]]}"
+# inline keyboard: one URL button that opens the live dashboard at this market's latest run
+reply_markup="{\"inline_keyboard\":[[{\"text\":\"🔄 Open latest run\",\"url\":\"${LINK}\"}]]}"
 
 # --- send ---------------------------------------------------------------------
 resp="$(curl -fsS "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \

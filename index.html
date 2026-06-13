@@ -42,6 +42,9 @@
   .refresh:hover{background:rgba(255,255,255,.22)}
   .refresh:active{transform:translateY(1px)}
   .updated{font-size:11px; opacity:.65; min-height:14px}
+  .marketpick{display:inline-flex; gap:4px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22); border-radius:999px; padding:3px}
+  .marketpick button{font-size:13px; font-weight:700; padding:6px 14px; border-radius:999px; border:none; background:transparent; color:rgba(255,255,255,.8); cursor:pointer}
+  .marketpick button.active{background:#fff; color:var(--navy)}
   .verdict-badge{
     display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:13.5px;
     padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.14);
@@ -106,6 +109,7 @@
   .cell{display:inline-flex; width:22px; height:22px; border-radius:6px; align-items:center; justify-content:center; font-size:12px; font-weight:800}
   .cell.p{background:var(--green-bg); color:var(--green)}
   .cell.f{background:var(--red-bg); color:var(--red)}
+  .cell.na{background:#eef1f6; color:#9aa7b6}
   .score{font-weight:800; font-variant-numeric:tabular-nums}
   .res{font-weight:800; font-size:11.5px; padding:3px 9px; border-radius:999px; display:inline-block}
   .res.PASS{background:var(--green-bg); color:var(--green)}
@@ -202,6 +206,7 @@
       <div class="frame" id="h-date">—</div>
     </div>
     <div class="header-right">
+      <div class="marketpick" id="marketPick"></div>
       <div class="weekpick">
         <span>Week:</span>
         <select id="weekSelect" onchange="render(this.value)"></select>
@@ -230,6 +235,7 @@
 </footer>
 
 <script src="data/runs.js"></script>
+<script src="data/runs_dax.js"></script>
 <script>
 const $ = (s,el=document)=>el.querySelector(s);
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -248,14 +254,46 @@ const verdictClass = v => {
   return "bad";
 };
 
-let CURRENT = 0;
+let CURRENT = 0;   // active week index within the active market
+let MARKET  = 0;   // active market index
+const MARKETS = [];
 
-// Reload runs.js from disk (picks up a newly appended week) and jump to latest.
+function buildMarkets(){
+  MARKETS.length = 0;
+  if (Array.isArray(window.SCREEN_RUNS) && window.SCREEN_RUNS.length)
+    MARKETS.push({ key:"sp500", label:"S&P 500", src:"data/runs.js", runs:window.SCREEN_RUNS });
+  if (Array.isArray(window.SCREEN_RUNS_DAX) && window.SCREEN_RUNS_DAX.length)
+    MARKETS.push({ key:"dax", label:"DAX 40", src:"data/runs_dax.js", runs:window.SCREEN_RUNS_DAX });
+}
+const activeRuns = () => (MARKETS[MARKET] && MARKETS[MARKET].runs) || [];
+
+function buildMarketPicker(){
+  const wrap = $("#marketPick");
+  if (MARKETS.length < 2){ wrap.style.display = "none"; return; }
+  wrap.style.display = "";
+  wrap.innerHTML = MARKETS.map((m,i)=>`<button class="${i===MARKET?'active':''}" onclick="switchMarket(${i})">${esc(m.label)}</button>`).join("");
+}
+
+function switchMarket(i){
+  MARKET = +i; CURRENT = 0;
+  if (MARKETS[MARKET]) location.hash = MARKETS[MARKET].key;
+  buildMarketPicker(); buildWeeks(); render(0);
+}
+
+function buildWeeks(){
+  const sel = $("#weekSelect"); sel.innerHTML = "";
+  activeRuns().forEach((r,i)=>{
+    const o=document.createElement("option"); o.value=i; o.textContent=r.reportDate+(i===0?"  (latest)":""); sel.appendChild(o);
+  });
+}
+
+// Reload the active market's data file (picks up a newly appended week) and jump to latest.
 function refreshLatest(){
   const u = $("#updatedAt"); if(u) u.textContent = "Refreshing…";
+  const m = MARKETS[MARKET]; if(!m){ return; }
   const s = document.createElement("script");
-  s.src = "data/runs.js?ts=" + Date.now();          // cache-bust so a new week is seen
-  s.onload = () => { init(true); };
+  s.src = m.src + "?ts=" + Date.now();              // cache-bust so a new week is seen
+  s.onload  = () => { buildMarkets(); buildMarketPicker(); CURRENT=0; buildWeeks(); render(0); stampUpdated(); };
   s.onerror = () => { if(u) u.textContent = "Could not reload data"; };
   document.body.appendChild(s);
 }
@@ -265,21 +303,18 @@ function stampUpdated(){
   u.textContent = "Loaded " + new Date().toLocaleString([], {hour:'2-digit',minute:'2-digit',month:'short',day:'numeric'});
 }
 
-function init(isRefresh){
-  const runs = window.SCREEN_RUNS || [];
-  const sel = $("#weekSelect");
-  if(!runs.length){ $("#main").innerHTML='<div class="empty">No screen data found. Add a run to <code>data/runs.js</code>.</div>'; return; }
-  sel.innerHTML = "";
-  runs.forEach((r,i)=>{
-    const o=document.createElement("option"); o.value=i; o.textContent=r.reportDate+(i===0?"  (latest)":""); sel.appendChild(o);
-  });
-  render(0);
-  stampUpdated();
+function init(){
+  buildMarkets();
+  if(!MARKETS.length){ $("#main").innerHTML='<div class="empty">No screen data found. Add a run to <code>data/runs.js</code>.</div>'; $("#marketPick").style.display="none"; return; }
+  const h = (location.hash||"").replace("#","").toLowerCase();
+  const hi = MARKETS.findIndex(m=>m.key===h);
+  MARKET = hi>=0 ? hi : 0;
+  buildMarketPicker(); buildWeeks(); render(0); stampUpdated();
 }
 
 function render(idx){
   idx = +idx; CURRENT = idx;
-  const d = window.SCREEN_RUNS[idx]; if(!d) return;
+  const d = activeRuns()[idx]; if(!d) return;
   $("#weekSelect").value = idx;
 
   // header
@@ -315,14 +350,21 @@ function marketSection(d){
       <span class="track"><span class="fill ${pos?'pos':'neg'}" style="width:${w}%"></span></span>
       <span class="pct ${pos?'pos':'neg'}">${pos?'+':''}${s.change.toFixed(2)}%</span></div>`;
   }).join("");
+  const hasSectors = m.sectors && m.sectors.length;
+  const rightPanel = hasSectors
+    ? `<div class="pad">
+         <h4 style="margin:0 0 12px;font-size:11.5px;letter-spacing:.6px;color:var(--navy);text-transform:uppercase">Sector Performance · ${esc(m.sectorAsOf||'')}</h4>
+         <div class="sectorbars">${bars}</div>
+         ${m.sectorNote?`<p class="note">${esc(m.sectorNote)}</p>`:''}
+       </div>`
+    : `<div class="pad">
+         <h4 style="margin:0 0 12px;font-size:11.5px;letter-spacing:.6px;color:var(--navy);text-transform:uppercase">Market Read</h4>
+         <p style="margin:0;font-size:13.5px;color:#3a4757">${esc(m.sectorNote||m.verdictNote||'')}</p>
+       </div>`;
   return `<section><h2 class="sec"><span class="num">1</span>Market Condition — ${esc(m.index||'S&P 500')}</h2>
     <div class="market-grid">
       <div class="panel"><table><thead><tr><th>Metric</th><th>Value</th><th>Signal</th></tr></thead><tbody>${rows}</tbody></table></div>
-      <div class="panel"><div class="pad">
-        <h4 style="margin:0 0 12px;font-size:11.5px;letter-spacing:.6px;color:var(--navy);text-transform:uppercase">Sector Performance · ${esc(m.sectorAsOf||'')}</h4>
-        <div class="sectorbars">${bars}</div>
-        ${m.sectorNote?`<p class="note">${esc(m.sectorNote)}</p>`:''}
-      </div></div>
+      <div class="panel">${rightPanel}</div>
     </div></section>`;
 }
 
@@ -344,7 +386,10 @@ function matrixSection(d){
   const crit=d.criteria||[];
   const head=crit.map((c,i)=>`<th title="${esc(c.label)}">C${i+1}</th>`).join("");
   const rows=(d.summary||[]).map(s=>{
-    const cells=(s.flags||[]).map(f=>`<td><span class="cell ${f?'p':'f'}">${f?'✓':'✕'}</span></td>`).join("");
+    const cells=(s.flags||[]).map(f=>{
+      const cls = f===1?'p':f===0?'f':'na', ch = f===1?'✓':f===0?'✕':'–';
+      return `<td><span class="cell ${cls}">${ch}</span></td>`;
+    }).join("");
     const r=(s.result||"").toUpperCase();
     return `<tr><td>${esc(s.ticker)}</td>${cells}<td class="score">${esc(s.score)}</td><td><span class="res ${r}">${esc(s.result)}</span></td></tr>`;
   }).join("");
@@ -377,36 +422,52 @@ function stockCard(s){
     const cls=t.good===true?'sig-good':t.good===false?'sig-bad':'';
     return `<div class="tech-row"><span class="m">${esc(t.metric)}</span><span class="v">${esc(t.value)}</span><span class="s ${cls}">${esc(t.signal)}</span></div>`;
   }).join("");
-  const epsMax=Math.max(10,...(s.eps||[]).map(e=>Math.abs(num(e.growth))));
-  const eps=(s.eps||[]).map(e=>{
-    const g=num(e.growth), pos=g>=0, h=(Math.abs(g)/epsMax)*44;
-    return `<div class="q"><div class="qbar"><span class="b ${pos?'pos':'neg'}" style="height:${Math.max(3,h)}px"></span></div>
-      <div class="qg ${pos?'pos':'neg'}">${esc(e.growth)}</div><div class="ql">${esc(e.quarter.replace(' (Most Recent)',''))}${/most recent/i.test(e.quarter)?' <span style="color:var(--blue);font-weight:800">• latest</span>':''}</div></div>`;
-  }).join("");
-  const e=s.entry||{};
-  const entry=`
-    <div class="row"><span class="p">Pivot</span><span class="x pivot">${esc(e.pivot)}</span></div>
-    <div class="row"><span class="p">Entry</span><span class="x">${esc(e.entryCondition)}</span></div>
-    <div class="row"><span class="p">Volume trigger</span><span class="x">${esc(e.volumeTrigger)}</span></div>
-    <div class="row"><span class="p">Stop (8%)</span><span class="x stop">${esc(e.stop)}</span></div>
-    <div class="row"><span class="p">Target 1 (+20%)</span><span class="x t1">${esc(e.target1)}</span></div>
-    <div class="row"><span class="p">Target 2 (+30%)</span><span class="x t2">${esc(e.target2)}</span></div>
-    <div class="row"><span class="p">Risk : Reward</span><span class="x">${esc(e.rr)}</span></div>
-    <div class="row"><span class="p">Position sizing</span><span class="x">${esc(e.sizing)}</span></div>`;
-  const alerts=(s.alerts||[]).map(a=>{
-    const k=(a.type||"").toLowerCase(); const cls=k.includes("breakout")?"breakout":k.includes("warning")?"warning":k.includes("stop")?"stop":"";
-    return `<div class="alert ${cls}"><span class="at">${esc(a.type)}</span><span>${esc(a.price)}</span></div>`;
-  }).join("");
+  // EPS block — only when the screen provides EPS data (S&P does, DAX doesn't)
+  let epsBlock = "";
+  if (s.eps && s.eps.length){
+    const epsMax=Math.max(10,...s.eps.map(e=>Math.abs(num(e.growth))));
+    const eps=s.eps.map(e=>{
+      const g=num(e.growth), pos=g>=0, h=(Math.abs(g)/epsMax)*44;
+      return `<div class="q"><div class="qbar"><span class="b ${pos?'pos':'neg'}" style="height:${Math.max(3,h)}px"></span></div>
+        <div class="qg ${pos?'pos':'neg'}">${esc(e.growth)}</div><div class="ql">${esc(e.quarter.replace(' (Most Recent)',''))}${/most recent/i.test(e.quarter)?' <span style="color:var(--blue);font-weight:800">• latest</span>':''}</div></div>`;
+    }).join("");
+    epsBlock = `<div class="block"><h4>EPS Growth (YoY, last 4 Q)</h4><div class="eps">${eps}</div>${s.epsNote?`<p class="note">${esc(s.epsNote)}</p>`:''}</div>`;
+  }
+  // Entry plan — only when present (watchlist names may have none)
+  let entryBlock = "";
+  if (s.entry){
+    const e=s.entry;
+    const row=(p,v,cls)=> v?`<div class="row"><span class="p">${p}</span><span class="x ${cls||''}">${esc(v)}</span></div>`:'';
+    entryBlock = `<div class="block"><h4>Entry &amp; Exit Plan</h4><div class="entry-tbl">
+      ${row('Pivot', e.pivot, 'pivot')}
+      ${row('Entry', e.entryCondition)}
+      ${row('Volume trigger', e.volumeTrigger)}
+      ${row('Stop (8%)', e.stop, 'stop')}
+      ${row('Target 1 (+20%)', e.target1, 't1')}
+      ${row('Target 2 (+30%)', e.target2, 't2')}
+      ${row('Risk : Reward', e.rr)}
+      ${row('Position sizing', e.sizing)}
+    </div></div>`;
+  }
+  // Alerts — only when present
+  let alertsBlock = "";
+  if (s.alerts && s.alerts.length){
+    const alerts=s.alerts.map(a=>{
+      const k=(a.type||"").toLowerCase(); const cls=k.includes("breakout")?"breakout":k.includes("warning")?"warning":k.includes("stop")?"stop":"";
+      return `<div class="alert ${cls}"><span class="at">${esc(a.type)}</span><span>${esc(a.price)}</span></div>`;
+    }).join("");
+    alertsBlock = `<div class="block"><h4>Alerts</h4><div class="alerts">${alerts}</div></div>`;
+  }
   return `<article class="stock" data-grp="${st.grp}">
     <div class="sh"><span class="rank">${esc(s.rank)}</span>
       <div><div class="tk">${esc(s.ticker)}</div><div class="nm">${esc(s.name)}</div></div>
       <span class="badge ${st.cls}">${esc(s.status)}</span></div>
-    <div class="meta"><span>${esc(s.sector)}</span><span>Tech score <b>${esc(s.techScore)}</b></span><span>${esc(s.dataDate)}</span></div>
+    <div class="meta"><span>${esc(s.sector)}</span>${s.techScore?`<span>Score <b>${esc(s.techScore)}</b></span>`:''}<span>${esc(s.dataDate)}</span></div>
     <div class="block"><h4>Technical Analysis</h4>${tech}</div>
-    <div class="block"><h4>EPS Growth (YoY, last 4 Q)</h4><div class="eps">${eps}</div>${s.epsNote?`<p class="note">${esc(s.epsNote)}</p>`:''}</div>
-    <div class="block"><h4>Entry &amp; Exit Plan</h4><div class="entry-tbl">${entry}</div></div>
-    <div class="block"><h4>TradingView Alerts</h4><div class="alerts">${alerts}</div></div>
-    <div class="block notes"><h4>Analysis Notes</h4>${esc(s.notes)}</div>
+    ${epsBlock}
+    ${entryBlock}
+    ${alertsBlock}
+    ${s.notes?`<div class="block notes"><h4>Analysis Notes</h4>${esc(s.notes)}</div>`:''}
   </article>`;
 }
 
@@ -436,7 +497,9 @@ function sourcesSection(d){
   const src=(d.dataSources||[]).map(s=>`<li>${esc(s)}</li>`).join("");
   const dq=(d.dataQuality||[]).map(x=>{
     const st=(x.status||"").toUpperCase();
-    const cls=st.includes("IN REPORT")?"in":st.includes("EXCLUDED")?"excl":"fail";
+    const cls=(st.includes("LIVE")||st.includes("IN REPORT")) ? "in"
+            : (st.includes("EXCLUDED")||st.includes("NOT SCREENED")||st.includes("DENIED")) ? "excl"
+            : "fail"; // STALE / ESTIMATED / PARTIAL / FAILED → amber
     return `<tr><td class="val">${esc(x.ticker)}</td><td>${esc(x.source)}</td><td>${esc(x.date)}</td><td><span class="dq-status ${cls}">${esc(x.status)}</span></td></tr>`;
   }).join("");
   return `<section><h2 class="sec"><span class="num">6</span>Data Sources &amp; Quality</h2>

@@ -9,7 +9,8 @@ screen: Trend Template → Extension → VCP).
 | File | Purpose |
 |------|---------|
 | `index.html` | The dashboard template. No build step, no external libraries. |
-| `data/runs.js` | The data — one object per weekly run, **newest first**. |
+| `data/runs.js` | **S&P 500** data — one object per weekly run, **newest first** (`window.SCREEN_RUNS`). |
+| `data/runs_dax.js` | **DAX 40** data — same shape (`window.SCREEN_RUNS_DAX`); 7 criteria, no EPS, EUR prices. |
 | `server.py` | Tiny static server for local preview (`python3 server.py` → http://127.0.0.1:8077). |
 | `README.md` | This file. |
 
@@ -21,8 +22,11 @@ screen: Trend Template → Extension → VCP).
 
 ## How it works
 
-`index.html` reads the global `window.SCREEN_RUNS` array defined in `data/runs.js`.
-It builds the **Week** dropdown from that array and renders the selected run:
+`index.html` reads `window.SCREEN_RUNS` (S&P 500) from `data/runs.js` and, if present,
+`window.SCREEN_RUNS_DAX` (DAX 40) from `data/runs_dax.js`. When both exist it shows a
+**market toggle** (S&P 500 / DAX 40) in the header; you can deep-link a market with a URL
+hash (`…/#dax` or `…/#sp500`). It builds the **Week** dropdown from the active market and
+renders the selected run:
 
 1. **KPI strip** — Buy Now / Watchlist / Failed counts + market state
 2. **Market Condition** — index metrics + diverging sector-performance bars
