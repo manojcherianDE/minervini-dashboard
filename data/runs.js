@@ -13,6 +13,264 @@
 
 window.SCREEN_RUNS = [
   {
+    reportDate: "2026-06-12",
+    title: "S&P 500 Momentum Screen",
+    framework: "Minervini SEPA Framework — Weekly Report",
+    market: {
+      index: "S&P 500",
+      verdict: "CONFIRMED UPTREND",
+      verdictNote: "Index still above 50MA & 200MA, but breadth narrowed — several mega-caps slipped below their moving averages this week.",
+      metrics: [
+        { metric: "S&P 500 Price (FMP, Jun 12)", value: "$7,431.46", signal: "-2.5% from 52-week high ($7,620.90)" },
+        { metric: "50-Day MA", value: "$7,247.79", signal: "Price +2.5% above 50MA", good: true },
+        { metric: "200-Day MA", value: "$6,881.99", signal: "Price +8.0% above 200MA", good: true },
+        { metric: "52-Week Range", value: "$5,943.23 – $7,620.90", signal: "At 97.5% of 52-week high" }
+      ],
+      sectorAsOf: "NASDAQ, June 12, 2026",
+      sectors: [
+        { sector: "Utilities", change: 1.39 },
+        { sector: "Technology", change: 0.94 },
+        { sector: "Basic Materials", change: 0.86 },
+        { sector: "Consumer Defensive", change: 0.58 },
+        { sector: "Real Estate", change: 0.57 },
+        { sector: "Financial Services", change: 0.37 },
+        { sector: "Energy", change: -0.26 },
+        { sector: "Consumer Cyclical", change: -0.35 },
+        { sector: "Healthcare", change: -0.37 },
+        { sector: "Industrials", change: -0.71 },
+        { sector: "Communication Services", change: -0.84 }
+      ],
+      sectorNote: "Defensives (Utilities) and Technology led on Jun 12; Communication Services and Industrials lagged. Leadership is rotating and narrowing."
+    },
+    dataSources: [
+      "Primary: FMP (Financial Modeling Prep) connector — live single-stock quotes (Jun 12 close)",
+      "AVGO via Yahoo Finance fallback (FMP ACCESS DENIED)",
+      "Sector performance: FMP sector-performance-snapshot (Jun 12)"
+    ],
+    dataQualityNote: "Prices are Friday June 12 close (weekend refresh). NVDA–UBER via FMP live; AVGO via Yahoo fallback. Volume triggers are NOT included — confirm 10-day average volume and the breakout bar on TradingView before any trade.",
+    dataQuality: [
+      { ticker: "NVDA", source: "FMP Live", date: "Jun 12, 2026", status: "IN REPORT" },
+      { ticker: "AAPL", source: "FMP Live", date: "Jun 12, 2026", status: "IN REPORT" },
+      { ticker: "AMZN", source: "FMP Live", date: "Jun 12, 2026", status: "IN REPORT" },
+      { ticker: "AMD", source: "FMP Live", date: "Jun 12, 2026", status: "IN REPORT" },
+      { ticker: "AVGO", source: "Yahoo Finance (FMP denied)", date: "Jun 12, 2026", status: "IN REPORT" },
+      { ticker: "MSFT", source: "FMP Live", date: "Jun 12, 2026", status: "FAILED SCREEN" },
+      { ticker: "PLTR", source: "FMP Live", date: "Jun 12, 2026", status: "FAILED SCREEN" },
+      { ticker: "TSLA", source: "FMP Live", date: "Jun 12, 2026", status: "IN REPORT" },
+      { ticker: "META", source: "FMP Live", date: "Jun 12, 2026", status: "FAILED SCREEN" },
+      { ticker: "NFLX", source: "FMP Live", date: "Jun 12, 2026", status: "FAILED SCREEN" },
+      { ticker: "UBER", source: "FMP Live", date: "Jun 12, 2026", status: "FAILED SCREEN" }
+    ],
+    criteria: [
+      { key: "c1", label: "Price > 150MA" },
+      { key: "c2", label: "Price > 200MA" },
+      { key: "c3", label: "200MA Trending Up" },
+      { key: "c4", label: "50MA > 200MA" },
+      { key: "c5", label: "Price > 50MA" },
+      { key: "c6", label: "Price ≥ 30% Above 52wLow" },
+      { key: "c7", label: "Price Within 25% of 52wHigh" },
+      { key: "c8", label: "RS ≥ 80 Proxy (within 15% of 52wHigh)" }
+    ],
+    summary: [
+      { ticker: "AAPL", flags: [1,1,1,1,1,1,1,1], score: "8/8", result: "PASS" },
+      { ticker: "NVDA", flags: [1,1,1,1,0,1,1,1], score: "7/8", result: "WATCHLIST" },
+      { ticker: "AMD",  flags: [1,1,1,1,1,1,1,1], score: "8/8", result: "WATCHLIST" },
+      { ticker: "AVGO", flags: [0,1,1,1,0,1,1,0], score: "5/8", result: "WATCHLIST" },
+      { ticker: "AMZN", flags: [0,1,0,1,0,0,1,1], score: "4/8", result: "WATCHLIST" },
+      { ticker: "TSLA", flags: [0,0,1,0,1,1,1,0], score: "4/8", result: "WATCHLIST" },
+      { ticker: "MSFT", flags: [0,0,0,0,0,0,0,0], score: "0/8", result: "FAIL" },
+      { ticker: "META", flags: [0,0,0,0,0,0,0,0], score: "0/8", result: "FAIL" },
+      { ticker: "PLTR", flags: [0,0,0,0,0,0,0,0], score: "0/8", result: "FAIL" },
+      { ticker: "NFLX", flags: [0,0,0,0,0,0,0,0], score: "0/8", result: "FAIL" },
+      { ticker: "UBER", flags: [0,0,0,0,0,0,0,0], score: "0/8", result: "FAIL" }
+    ],
+    stocksNote: "Big shift vs June 1: only AAPL holds a clean 8/8 with price above its 50MA. NVDA & AMD remain technically strong but are below the 50MA (NVDA) or far extended (AMD). MSFT, META, PLTR, NFLX, UBER have broken down. EPS figures are last-reported quarter (unchanged since June 1). Volume triggers omitted — verify on TradingView.",
+    stocks: [
+      {
+        rank: 1, ticker: "AAPL", name: "Apple Inc.", sector: "Technology",
+        status: "BUY NOW", techScore: "8/8", dataDate: "FMP Live, Jun 12, 2026",
+        technical: [
+          { metric: "Price (FMP, Jun 12)", value: "$291.13", signal: "-8.3% from 52-week high" },
+          { metric: "50-Day MA", value: "$285.49", signal: "Price ABOVE 50MA ✓", good: true },
+          { metric: "200-Day MA", value: "$266.87", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "50MA vs 200MA", value: "50MA > 200MA ✓", signal: "Golden Cross (bullish)", good: true },
+          { metric: "52-Week High", value: "$317.40", signal: "Pivot level" },
+          { metric: "52-Week Low", value: "$195.07", signal: "+49% above 52w low", good: true }
+        ],
+        eps: [
+          { quarter: "Q1 (Most Recent)", growth: "-29.2%", pass: false, revenue: "Rev: -22.7%" },
+          { quarter: "Q4", growth: "+53.5%", pass: true, revenue: "—" },
+          { quarter: "Q3", growth: "+17.8%", pass: false, revenue: "—" },
+          { quarter: "Q2", growth: "-4.8%", pass: false, revenue: "—" }
+        ],
+        epsNote: "EPS as of last reported quarter (unchanged since Jun 1). March quarter seasonally soft; Dec quarter +53.5%.",
+        entry: {
+          pivot: "$317.40 (52-week high)",
+          entryCondition: "Daily close above $317.40",
+          volumeTrigger: "≥40% above 10-day avg volume — VERIFY ON TRADINGVIEW",
+          stop: "$292.01 (8% below pivot)",
+          target1: "$380.88 (+20%)",
+          target2: "$412.62 (+30%)",
+          rr: "2.5:1",
+          sizing: "50% initial at pivot | 30% at first add-on | 20% at third entry"
+        },
+        alerts: [
+          { type: "BREAKOUT ALERT", price: "$317.41 — close above pivot" },
+          { type: "WARNING LEVEL", price: "$285.00 — approaching 50MA" },
+          { type: "STOP ALERT", price: "$292.01 — hard stop below pivot entry" }
+        ],
+        notes: "The cleanest setup in the screen — 8/8 with price above a rising 50MA and 200MA, 8% below its ATH. The only S&P name still in a textbook Stage-2 structure this week. Pivot is the 52-week high $317.40."
+      },
+      {
+        rank: 2, ticker: "NVDA", name: "NVIDIA Corporation", sector: "Technology",
+        status: "WATCHLIST — Near Buy", techScore: "7/8", dataDate: "FMP Live, Jun 12, 2026",
+        technical: [
+          { metric: "Price (FMP, Jun 12)", value: "$205.19", signal: "-13.3% from 52-week high" },
+          { metric: "50-Day MA", value: "$206.91", signal: "Price just BELOW 50MA ✗", good: false },
+          { metric: "200-Day MA", value: "$189.26", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "50MA vs 200MA", value: "50MA > 200MA ✓", signal: "Golden Cross (bullish)", good: true },
+          { metric: "52-Week High", value: "$236.54", signal: "Pivot level" },
+          { metric: "52-Week Low", value: "$142.03", signal: "+44% above 52w low", good: true }
+        ],
+        eps: [
+          { quarter: "Q1 (Most Recent)", growth: "+35.8%", pass: true, revenue: "Rev: +19.8%" },
+          { quarter: "Q4", growth: "+35.4%", pass: true, revenue: "—" },
+          { quarter: "Q3", growth: "+20.4%", pass: false, revenue: "—" },
+          { quarter: "Q2", growth: "+42.1%", pass: true, revenue: "—" }
+        ],
+        epsNote: "Fundamentals intact (last-reported quarter). Technicals slipped: now consolidating just under the 50MA.",
+        entry: {
+          pivot: "$236.54 (52-week high)",
+          entryCondition: "Daily close above $236.54 AND reclaim of 50MA first",
+          volumeTrigger: "≥40% above 10-day avg volume — VERIFY ON TRADINGVIEW",
+          stop: "$217.62 (8% below pivot)",
+          target1: "$283.85 (+20%)",
+          target2: "$307.50 (+30%)",
+          rr: "2.5:1",
+          sizing: "Wait for 50MA reclaim before initiating"
+        },
+        alerts: [
+          { type: "BREAKOUT ALERT", price: "$236.55 — close above pivot" },
+          { type: "RECLAIM ALERT", price: "$207.00 — back above 50MA = re-arm" },
+          { type: "STOP ALERT", price: "$217.62 — hard stop below pivot entry" }
+        ],
+        notes: "Still 7/8 with strong fundamentals, but price has dipped fractionally below its 50MA ($206.91) — not an active buy under Minervini rules until it reclaims the 50MA and clears the pivot. Watch for a tight base."
+      },
+      {
+        rank: 3, ticker: "AMD", name: "Advanced Micro Devices", sector: "Technology",
+        status: "EXTENDED — WATCH", techScore: "8/8", dataDate: "FMP Live, Jun 12, 2026",
+        technical: [
+          { metric: "Price (FMP, Jun 12)", value: "$511.57", signal: "+4.7% on the day; -6.4% from ATH" },
+          { metric: "50-Day MA", value: "$386.78", signal: "Price +32% above 50MA (extended)", good: false },
+          { metric: "200-Day MA", value: "$253.93", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "50MA vs 200MA", value: "50MA > 200MA ✓", signal: "Golden Cross (bullish)", good: true },
+          { metric: "52-Week High", value: "$546.44", signal: "Pivot level" },
+          { metric: "52-Week Low", value: "$117.78", signal: "+334% above 52w low", good: true }
+        ],
+        eps: [
+          { quarter: "Q1 (Most Recent)", growth: "-8.7%", pass: false, revenue: "Rev: -0.2%" },
+          { quarter: "Q4", growth: "+21.1%", pass: false, revenue: "—" },
+          { quarter: "Q3", growth: "+40.7%", pass: true, revenue: "—" },
+          { quarter: "Q2", growth: "+22.7%", pass: false, revenue: "—" }
+        ],
+        epsNote: "Last-reported quarter. Technically 8/8 but the extension is the problem, not the trend.",
+        entry: {
+          pivot: "$546.44 (52-week high)",
+          entryCondition: "Do NOT chase — wait for a base/pullback toward the 50MA",
+          volumeTrigger: "≥40% above 10-day avg volume — VERIFY ON TRADINGVIEW",
+          stop: "$502.72 (8% below pivot)",
+          target1: "$655.73 (+20%)",
+          target2: "$710.37 (+30%)",
+          rr: "2.5:1",
+          sizing: "No new entry while >25% above 50MA"
+        },
+        alerts: [
+          { type: "PULLBACK ALERT", price: "$430.00 — pullback toward 50MA = re-evaluate" },
+          { type: "BREAKOUT ALERT", price: "$546.45 — only after a base forms" },
+          { type: "STOP ALERT", price: "$502.72 — if entered on a confirmed breakout" }
+        ],
+        notes: "Perfect 8/8 template but trading +32% above its 50MA — Minervini's explicit 'never chase extended stocks' rule applies. Up +4.7% on Jun 12 alone. Wait for a volatility contraction near the 50MA before any entry."
+      },
+      {
+        rank: 4, ticker: "AVGO", name: "Broadcom Inc.", sector: "Technology",
+        status: "WATCHLIST", techScore: "5/8", dataDate: "Yahoo (FMP denied), Jun 12, 2026",
+        technical: [
+          { metric: "Price (Yahoo, Jun 12)", value: "$382.07", signal: "-22.8% from 52-week high" },
+          { metric: "50-Day MA", value: "$406.45", signal: "Price BELOW 50MA ✗", good: false },
+          { metric: "200-Day MA", value: "$358.10", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "50MA vs 200MA", value: "50MA > 200MA ✓", signal: "Golden Cross (bullish)", good: true },
+          { metric: "52-Week High", value: "$495.00", signal: "Prior pivot" },
+          { metric: "52-Week Low", value: "$244.17", signal: "+56% above 52w low", good: true }
+        ],
+        alerts: [
+          { type: "RECLAIM ALERT", price: "$406.00 — back above 50MA = re-arm" },
+          { type: "PIVOT ALERT", price: "$495.00 — prior 52-week high" }
+        ],
+        notes: "Long-term trend intact (above 200MA, golden cross) but price is below the 50MA and 23% off its high — building a base, not buyable yet. Pulled via Yahoo fallback (FMP denied AVGO)."
+      },
+      {
+        rank: 5, ticker: "AMZN", name: "Amazon.com Inc.", sector: "Consumer Cyclical",
+        status: "WATCHLIST", techScore: "4/8", dataDate: "FMP Live, Jun 12, 2026",
+        technical: [
+          { metric: "Price (FMP, Jun 12)", value: "$238.55", signal: "-14.4% from 52-week high" },
+          { metric: "50-Day MA", value: "$254.77", signal: "Price BELOW 50MA ✗", good: false },
+          { metric: "200-Day MA", value: "$232.51", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "50MA vs 200MA", value: "50MA > 200MA ✓", signal: "Golden Cross (bullish)", good: true },
+          { metric: "52-Week High", value: "$278.56", signal: "Pivot level" },
+          { metric: "52-Week Low", value: "$196.00", signal: "+22% above 52w low", good: false }
+        ],
+        eps: [
+          { quarter: "Q1 (Most Recent)", growth: "+42.6%", pass: true, revenue: "Rev: -14.9%" },
+          { quarter: "Q4", growth: "0.0%", pass: false, revenue: "—" },
+          { quarter: "Q3", growth: "+16.1%", pass: false, revenue: "—" },
+          { quarter: "Q2", growth: "+5.7%", pass: false, revenue: "—" }
+        ],
+        epsNote: "Last-reported quarter. Technically slipped below the 50MA this week.",
+        alerts: [
+          { type: "RECLAIM ALERT", price: "$255.00 — back above 50MA = re-arm" },
+          { type: "PIVOT ALERT", price: "$278.56 — 52-week high" }
+        ],
+        notes: "Dropped below its 50MA; only 4/8 now. Above the 200MA with a golden cross, so the longer-term uptrend holds — watch for a base above the 200MA ($232) and a 50MA reclaim."
+      },
+      {
+        rank: 6, ticker: "TSLA", name: "Tesla Inc.", sector: "Consumer Cyclical",
+        status: "WATCHLIST", techScore: "4/8", dataDate: "FMP Live, Jun 12, 2026",
+        technical: [
+          { metric: "Price (FMP, Jun 12)", value: "$406.43", signal: "+1.8% on the day; -18.5% from ATH" },
+          { metric: "50-Day MA", value: "$398.30", signal: "Price ABOVE 50MA ✓", good: true },
+          { metric: "200-Day MA", value: "$415.69", signal: "Price BELOW 200MA ✗", good: false },
+          { metric: "50MA vs 200MA", value: "50MA < 200MA ✗", signal: "Death Cross (bearish)", good: false },
+          { metric: "52-Week High", value: "$498.83", signal: "Pivot level" },
+          { metric: "52-Week Low", value: "$288.77", signal: "+41% above 52w low", good: true }
+        ],
+        eps: [
+          { quarter: "Q1 (Most Recent)", growth: "-45.8%", pass: false, revenue: "Rev: -10.1%" },
+          { quarter: "Q4", growth: "-38.5%", pass: false, revenue: "—" },
+          { quarter: "Q3", growth: "+17.1%", pass: false, revenue: "—" },
+          { quarter: "Q2", growth: "+186.6%", pass: true, revenue: "—" }
+        ],
+        epsNote: "Last-reported quarter; fundamentals weak. Thesis is autonomy/Robotaxi optionality.",
+        alerts: [
+          { type: "RECLAIM ALERT", price: "$416.00 — back above 200MA = re-arm" },
+          { type: "PIVOT ALERT", price: "$498.83 — 52-week high" }
+        ],
+        notes: "Above its 50MA but below the 200MA with a death cross (50MA<200MA) — 4/8. Speculative; needs to reclaim the 200MA ($415.69) before it's a Minervini candidate again."
+      }
+    ],
+    riskRules: [
+      "Never risk more than 1–2% of total portfolio on any single trade.",
+      "Always enter with a pre-defined stop loss — 8% below entry. No exceptions.",
+      "Cut all losses immediately without hesitation. Do not average down.",
+      "Never buy a stock that is more than 5% past its pivot (chasing = poor R:R).",
+      "Take partial profits at Target 1 (+20%); trail the remainder with a tight stop.",
+      "In a Confirmed Uptrend: 80–120% invested. Under Pressure: 50%. Downtrend: cash.",
+      "If 3 consecutive trades fail, step back and reassess market conditions.",
+      "ALWAYS verify price and volume live on TradingView 1D chart before placing any trade."
+    ],
+    verification: "Confirm current price, 50MA, 200MA, 52-week high, and 10-day average volume on TradingView 1D chart before any trade. Prices are June 12, 2026 close; volume triggers are NOT included in this refresh.",
+    disclaimer: "For informational purposes only. Not financial advice."
+  },
+  {
     reportDate: "2026-06-01",
     title: "S&P 500 Momentum Screen",
     framework: "Minervini SEPA Framework — Weekly Report",

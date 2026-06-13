@@ -11,6 +11,210 @@
 
 window.SCREEN_RUNS_DAX = [
   {
+    reportDate: "2026-06-12",
+    title: "DAX 40 Weekly Momentum Screen",
+    framework: "Minervini SEPA Framework | German Equities",
+    market: {
+      index: "DAX 40",
+      verdict: "CONFIRMED UPTREND",
+      verdictNote: "DAX above both 50MA and 200MA (50 > 200), but ~3% off its high; leadership remains narrow.",
+      metrics: [
+        { metric: "DAX Index Level (Jun 12)", value: "24,635.30", signal: "-3.4% from 52-week high (25,507.79)" },
+        { metric: "50-Day MA", value: "24,361.53", signal: "Price +1.1% above 50MA", good: true },
+        { metric: "200-Day MA", value: "24,181.75", signal: "Price +1.9% above 200MA; 50MA > 200MA", good: true }
+      ],
+      sectorAsOf: "",
+      sectors: [],
+      sectorNote: "DAX is in a confirmed uptrend (price > 50MA > 200MA, correct order). Genuine Stage-2 leadership is narrow: semis (IFX), banks (CBK), industrials (SIE). Autos, chemicals, defense (RHM) and SAP remain in Stage-3/4 declines. Data is Friday Jun 12 close via Yahoo (XETRA)."
+    },
+    dataSources: [
+      "Yahoo Finance (.DE / XETRA tickers) — FMP denies most German names (FMP+Yahoo fallback policy)",
+      "50/200-day MAs computed from the 1-year daily close series",
+      "Friday June 12, 2026 close — verify live on TradingView (XETR)"
+    ],
+    dataQualityNote: "All DAX prices and 52-week ranges pulled live from Yahoo Finance (Jun 12 close); 50MA/200MA computed from the daily series. RSI (C7) not computed — shown as N/A. Verify on TradingView (XETR) before trading.",
+    dataQuality: [
+      { ticker: "^GDAXI", source: "Yahoo Finance", date: "Jun 12, 2026", status: "LIVE" },
+      { ticker: "IFX.DE", source: "Yahoo Finance", date: "Jun 12, 2026", status: "LIVE" },
+      { ticker: "CBK.DE", source: "Yahoo Finance", date: "Jun 12, 2026", status: "LIVE" },
+      { ticker: "SIE.DE", source: "Yahoo Finance", date: "Jun 12, 2026", status: "LIVE" },
+      { ticker: "ENR.DE", source: "Yahoo Finance", date: "Jun 12, 2026", status: "LIVE" },
+      { ticker: "ALV.DE", source: "Yahoo Finance", date: "Jun 12, 2026", status: "LIVE" },
+      { ticker: "BAS.DE", source: "Yahoo Finance", date: "Jun 12, 2026", status: "LIVE" },
+      { ticker: "DB1.DE", source: "Yahoo Finance", date: "Jun 12, 2026", status: "LIVE" },
+      { ticker: "AIR.DE / DTE.DE / MTX.DE", source: "Yahoo Finance", date: "Jun 12, 2026", status: "FAILED SCREEN" },
+      { ticker: "RHM/SAP/BMW/MBG/VOW3/MUV2", source: "Yahoo Finance", date: "Jun 12, 2026", status: "FAILED SCREEN" }
+    ],
+    criteria: [
+      { key: "c1", label: "Price > 200MA" },
+      { key: "c2", label: "200MA Trending Up" },
+      { key: "c3", label: "Price ≥ 30% Above 52W Low" },
+      { key: "c4", label: "Within 25% of 52W High" },
+      { key: "c5", label: "50MA > 200MA" },
+      { key: "c6", label: "Price > 50MA" },
+      { key: "c7", label: "RSI ≥ 50" }
+    ],
+    summary: [
+      { ticker: "IFX",  flags: [1,1,1,1,1,1,null], score: "6/6", result: "PASS" },
+      { ticker: "CBK",  flags: [1,1,1,1,1,1,null], score: "6/6", result: "PASS" },
+      { ticker: "SIE",  flags: [1,1,1,1,1,1,null], score: "6/6", result: "PASS" },
+      { ticker: "ENR",  flags: [1,1,1,1,1,0,null], score: "5/6", result: "WATCHLIST" },
+      { ticker: "ALV",  flags: [1,1,0,1,1,1,null], score: "5/6", result: "WATCHLIST" },
+      { ticker: "BAS",  flags: [1,1,0,1,1,0,null], score: "4/6", result: "WATCHLIST" },
+      { ticker: "DB1",  flags: [1,1,0,1,1,0,null], score: "4/6", result: "WATCHLIST" },
+      { ticker: "AIR",  flags: [0,0,0,1,0,1,null], score: "2/6", result: "FAIL" },
+      { ticker: "MTX",  flags: [0,0,0,1,0,1,null], score: "2/6", result: "FAIL" },
+      { ticker: "DTE",  flags: [0,0,0,1,0,0,null], score: "1/6", result: "FAIL" },
+      { ticker: "RHM",  flags: [0,0,0,0,0,0,null], score: "0/6", result: "FAIL" },
+      { ticker: "SAP",  flags: [0,0,0,0,0,0,null], score: "0/6", result: "FAIL" },
+      { ticker: "BMW",  flags: [0,0,0,0,0,0,null], score: "0/6", result: "FAIL" },
+      { ticker: "MBG",  flags: [0,0,0,0,0,0,null], score: "0/6", result: "FAIL" },
+      { ticker: "VOW3", flags: [0,0,0,0,0,0,null], score: "0/6", result: "FAIL" },
+      { ticker: "MUV2", flags: [0,0,0,0,0,0,null], score: "0/6", result: "FAIL" }
+    ],
+    stocksNote: "Three clean buys (IFX, CBK, SIE) still above a rising 50MA near their highs. ENR pulled back below its 50MA; ALV/BAS/DB1 are constructive (above 200MA, golden cross) but below the 50MA or short of the +30%-above-low test. AVOID names broken. All data Yahoo Jun 12 close — verify on TradingView (XETR).",
+    stocks: [
+      {
+        rank: 1, ticker: "IFX", name: "Infineon Technologies AG", sector: "Semiconductors",
+        status: "BUY NOW", techScore: "6/6", dataDate: "Yahoo, Jun 12, 2026",
+        technical: [
+          { metric: "Price", value: "€80.06", signal: "-9.5% from 52W high" },
+          { metric: "50-Day MA", value: "€61.94", signal: "Price ABOVE 50MA ✓ (+29%, extended)", good: true },
+          { metric: "200-Day MA", value: "€43.48", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "52-Week High", value: "€88.46", signal: "Pivot level" },
+          { metric: "52-Week Low", value: "€30.82", signal: "+160% above 52w low", good: true }
+        ],
+        entry: {
+          pivot: "€88.46 (52-week high)",
+          entryCondition: "Daily close above €88.46 on ≥40% above-average volume",
+          volumeTrigger: "≥40% above 10-day avg volume — VERIFY ON TRADINGVIEW (XETR)",
+          stop: "€81.38 (8% below pivot)",
+          target1: "€106.15 (+20%)",
+          target2: "€115.00 (+30%)",
+          rr: "2.50:1",
+          sizing: "50% at pivot | 30% on pullback to ~50MA | 20% on secondary breakout"
+        },
+        alerts: [
+          { type: "BREAKOUT ALERT", price: "€88.46 — close above pivot" },
+          { type: "SUPPORT ALERT", price: "€62 — approx 50MA" }
+        ],
+        notes: "Still the DAX's strongest momentum name — 6/6, above a rising 50MA and 200MA, 9.5% off its high. Note price is ~29% above the 50MA, so size carefully on any breakout and prefer adds on a pullback."
+      },
+      {
+        rank: 2, ticker: "CBK", name: "Commerzbank AG", sector: "Banking",
+        status: "BUY NOW", techScore: "6/6", dataDate: "Yahoo, Jun 12, 2026",
+        technical: [
+          { metric: "Price", value: "€36.83", signal: "-4.1% from 52W high" },
+          { metric: "50-Day MA", value: "€35.66", signal: "Price ABOVE 50MA ✓", good: true },
+          { metric: "200-Day MA", value: "€33.72", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "52-Week High", value: "€38.40", signal: "Pivot level" },
+          { metric: "52-Week Low", value: "€26.23", signal: "+40% above 52w low", good: true }
+        ],
+        entry: {
+          pivot: "€38.40 (52-week high)",
+          entryCondition: "Daily close above €38.40 on ≥40% above-average volume",
+          volumeTrigger: "≥40% above 10-day avg volume — VERIFY ON TRADINGVIEW (XETR)",
+          stop: "€35.33 (8% below pivot)",
+          target1: "€46.08 (+20%)",
+          target2: "€49.92 (+30%)",
+          rr: "2.50:1",
+          sizing: "50% at pivot | 30% on pullback to ~50MA | 20% on secondary breakout"
+        },
+        alerts: [
+          { type: "BREAKOUT ALERT", price: "€38.40 — close above pivot" },
+          { type: "SUPPORT ALERT", price: "€35.66 — 50MA" }
+        ],
+        notes: "Textbook 6/6 — 4% below its 52-week high with price above a rising 50MA and 200MA. Tight, low-extension structure. UniCredit M&A backdrop remains a catalyst."
+      },
+      {
+        rank: 3, ticker: "SIE", name: "Siemens Aktiengesellschaft", sector: "Industrials",
+        status: "BUY NOW", techScore: "6/6", dataDate: "Yahoo, Jun 12, 2026",
+        technical: [
+          { metric: "Price", value: "€264.50", signal: "-5.6% from 52W high" },
+          { metric: "50-Day MA", value: "€254.68", signal: "Price ABOVE 50MA ✓", good: true },
+          { metric: "200-Day MA", value: "€241.28", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "52-Week High", value: "€280.20", signal: "Pivot level" },
+          { metric: "52-Week Low", value: "€198.00", signal: "+33.6% above 52w low", good: true }
+        ],
+        entry: {
+          pivot: "€280.20 (52-week high)",
+          entryCondition: "Daily close above €280.20 on ≥40% above-average volume",
+          volumeTrigger: "≥40% above 10-day avg volume — VERIFY ON TRADINGVIEW (XETR)",
+          stop: "€257.78 (8% below pivot)",
+          target1: "€336.24 (+20%)",
+          target2: "€364.26 (+30%)",
+          rr: "2.50:1",
+          sizing: "50% at pivot | 30% on pullback to ~50MA | 20% on secondary breakout"
+        },
+        alerts: [
+          { type: "BREAKOUT ALERT", price: "€280.20 — close above pivot" },
+          { type: "SUPPORT ALERT", price: "€255 — 50MA" }
+        ],
+        notes: "Clean 6/6 with all MAs aligned and rising; 5.6% off its high. Low-extension Stage-2 structure — a confirmed close above €280.20 on volume is the buy signal."
+      },
+      {
+        rank: 4, ticker: "ENR", name: "Siemens Energy AG", sector: "Energy / Industrials",
+        status: "WATCHLIST — pullback", techScore: "5/6", dataDate: "Yahoo, Jun 12, 2026",
+        technical: [
+          { metric: "Price", value: "€153.58", signal: "-19.9% from 52W high" },
+          { metric: "50-Day MA", value: "€168.56", signal: "Price BELOW 50MA ✗", good: false },
+          { metric: "200-Day MA", value: "€134.47", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "52-Week High", value: "€191.66", signal: "ATH pivot" },
+          { metric: "52-Week Low", value: "€83.32", signal: "+84% above 52w low", good: true }
+        ],
+        alerts: [
+          { type: "RECLAIM ALERT", price: "€169 — back above 50MA = re-arm" },
+          { type: "BREAKOUT ALERT", price: "€191.66 — close above ATH pivot" }
+        ],
+        notes: "Long-term trend intact (well above the 200MA) but the pullback has deepened below the 50MA (€168.56) — now 20% off its high. Not buyable until it reclaims the 50MA and builds a base. Watch for a VCP."
+      },
+      {
+        rank: 5, ticker: "ALV", name: "Allianz SE", sector: "Insurance",
+        status: "WATCHLIST — Near Buy", techScore: "5/6", dataDate: "Yahoo, Jun 12, 2026",
+        technical: [
+          { metric: "Price", value: "€386.40", signal: "-2.7% from 52W high" },
+          { metric: "50-Day MA", value: "€381.31", signal: "Price ABOVE 50MA ✓", good: true },
+          { metric: "200-Day MA", value: "€369.46", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "52-Week High", value: "€397.00", signal: "Pivot level" },
+          { metric: "52-Week Low", value: "€333.20", signal: "+15.9% above 52w low (fails 30% test)", good: false }
+        ],
+        alerts: [
+          { type: "BREAKOUT ALERT", price: "€397.00 — close above 52W high" },
+          { type: "SUPPORT ALERT", price: "€381 — 50MA" }
+        ],
+        notes: "MAs have re-aligned (price > 50MA > 200MA, golden cross) and it sits 2.7% off its high — much improved vs late May. The only failed criterion is the +30%-above-low test (it's a low-volatility name). A close above €397 would make it actionable."
+      },
+      {
+        rank: 6, ticker: "BAS", name: "BASF SE", sector: "Chemicals",
+        status: "WATCHLIST", techScore: "4/6", dataDate: "Yahoo, Jun 12, 2026",
+        technical: [
+          { metric: "Price", value: "€49.50", signal: "-10.1% from 52W high" },
+          { metric: "50-Day MA", value: "€52.18", signal: "Price BELOW 50MA ✗", good: false },
+          { metric: "200-Day MA", value: "€46.97", signal: "Price ABOVE 200MA ✓", good: true },
+          { metric: "52-Week High", value: "€55.05", signal: "Pivot level" },
+          { metric: "52-Week Low", value: "€40.97", signal: "+20.8% above 52w low", good: false }
+        ],
+        alerts: [
+          { type: "RECLAIM ALERT", price: "€52.20 — back above 50MA = re-arm" },
+          { type: "BREAKOUT ALERT", price: "€55.05 — close above 52W high" }
+        ],
+        notes: "Turning constructive — back above the 200MA with a golden cross (50MA > 200MA) after a long Stage-4. Still below the 50MA and short of the +30%-above-low test, so watch-only; a 50MA reclaim and base would put it in play."
+      }
+    ],
+    riskRules: [
+      "NEVER buy without a confirmed volume trigger — breakouts require ≥40% above the 10-day average daily volume on the breakout bar.",
+      "ALWAYS cut losses at 8%. Stop = entry × 0.92. Close below it → exit, no exceptions.",
+      "NEVER average down into a losing position. If price hits the stop, the thesis is broken.",
+      "Risk no more than 2% of total portfolio per position. Size = (Portfolio × 0.02) ÷ (Entry − Stop).",
+      "Scale in: 50% at pivot break, 30% on VCP pullback to ~50MA, 20% on secondary confirmation.",
+      "NEVER trade on stale data — verify live on TradingView (XETR, 1D) before any order.",
+      "Re-evaluate WATCHLIST stocks weekly — a name can become BUY NOW quickly on base completion + volume.",
+      "Preserve capital above all else. Even in a confirmed DAX uptrend, most stocks will not pass the screen."
+    ],
+    verification: "Verify on TradingView (XETR, 1D) before trading: price, 50MA, 200MA, 52-week high, and that the breakout bar exceeds the 50-period Volume MA by ≥40%. Prices are June 12, 2026 close (Yahoo); RSI not computed.",
+    disclaimer: "All prices in EUR. For informational purposes only. Not financial advice."
+  },
+  {
     reportDate: "2026-05-30",
     title: "DAX 40 Weekly Momentum Screen",
     framework: "Minervini SEPA Framework | German Equities",
