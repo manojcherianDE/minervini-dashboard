@@ -23,6 +23,19 @@ fi
 : "${TELEGRAM_CHAT_ID:?Set TELEGRAM_CHAT_ID in telegram.config}"
 : "${DASHBOARD_URL:?Set DASHBOARD_URL in telegram.config (public https URL of the dashboard)}"
 
+# --- chat-id allowlist guard -------------------------------------------------
+# The bot only ever sends to IDs listed in ALLOWED_CHAT_IDS (space/comma list).
+# Defaults to the configured TELEGRAM_CHAT_ID if the allowlist is unset.
+ALLOWED_CHAT_IDS="${ALLOWED_CHAT_IDS:-$TELEGRAM_CHAT_ID}"
+allowed=0
+for id in ${ALLOWED_CHAT_IDS//,/ }; do
+  [[ "$id" == "$TELEGRAM_CHAT_ID" ]] && allowed=1
+done
+if [[ "$allowed" != "1" ]]; then
+  echo "❌ Refusing to send: chat ID ${TELEGRAM_CHAT_ID} is not in ALLOWED_CHAT_IDS (${ALLOWED_CHAT_IDS})." >&2
+  exit 1
+fi
+
 # --- pull a few facts from the latest run in data/runs.js (best-effort) -------
 latest_date="$(grep -m1 'reportDate:' data/runs.js | sed -E 's/.*"([^"]+)".*/\1/' || true)"
 verdict="$(grep -m1 'verdict:' data/runs.js | sed -E 's/.*"([^"]+)".*/\1/' || true)"
