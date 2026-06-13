@@ -1,0 +1,15 @@
+# Copy this file to "telegram.config" and fill in the three values.
+# telegram.config holds secrets — do NOT share it or commit it to GitHub.
+
+# 1) Create a bot: open Telegram, message @BotFather, send /newbot, follow prompts.
+#    BotFather replies with a token like 123456789:AAErX... — paste it here:
+TELEGRAM_BOT_TOKEN=""
+
+# 2) Your chat ID: message your new bot once (say "hi"), then open
+#    https://api.telegram.org/bot<YOUR_TOKEN>/getUpdates in a browser and copy
+#    the "chat":{"id": <number> } value. Paste it here:
+TELEGRAM_CHAT_ID=""
+
+# 3) The public https URL where the dashboard is hosted (e.g. your Netlify or
+#    GitHub Pages URL). This is what the "Open latest run" button opens.
+DASHBOARD_URL=""

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>S&P 500 Minervini Screen — Dashboard</title>
+<style>
+  :root{
+    --navy:#1F4E79; --blue:#2E75B6; --green:#1E7E34; --red:#C0392B; --amber:#D68910;
+    --ink:#1a2332; --muted:#5b6b7f; --line:#e3e8ef; --bg:#f4f6fa; --card:#ffffff;
+    --green-bg:#e7f4ec; --red-bg:#fbeae8; --amber-bg:#fdf3e2; --blue-bg:#e9f1fa;
+    --shadow:0 1px 3px rgba(16,32,64,.08), 0 6px 24px rgba(16,32,64,.06);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue)}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 20px}
+
+  /* ---------- Header ---------- */
+  header.top{
+    background:linear-gradient(135deg,var(--navy),#16385a); color:#fff;
+    padding:26px 0 22px; box-shadow:var(--shadow);
+  }
+  .top .wrap{display:flex; flex-wrap:wrap; gap:18px; align-items:flex-end; justify-content:space-between}
+  .brand h1{margin:0; font-size:23px; letter-spacing:.2px}
+  .brand .sub{opacity:.82; font-size:13.5px; margin-top:3px}
+  .brand .frame{opacity:.7; font-size:12px; margin-top:2px; text-transform:uppercase; letter-spacing:1px}
+  .header-right{display:flex; flex-direction:column; align-items:flex-end; gap:10px}
+  .weekpick{display:flex; align-items:center; gap:8px; font-size:13px}
+  .weekpick select{
+    font-size:14px; padding:7px 11px; border-radius:8px; border:1px solid rgba(255,255,255,.3);
+    background:rgba(255,255,255,.12); color:#fff; cursor:pointer; font-weight:600;
+  }
+  .weekpick select option{color:#1a2332}
+  .refresh{font-size:13px; font-weight:700; padding:7px 12px; border-radius:8px; cursor:pointer;
+    border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.12); color:#fff}
+  .refresh:hover{background:rgba(255,255,255,.22)}
+  .refresh:active{transform:translateY(1px)}
+  .updated{font-size:11px; opacity:.65; min-height:14px}
+  .verdict-badge{
+    display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:13.5px;
+    padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.25);
+  }
+  .verdict-badge .dot{width:9px; height:9px; border-radius:50%; background:#7ee2a0; box-shadow:0 0 0 4px rgba(126,226,160,.25)}
+  .verdict-badge.warn .dot{background:#ffce6b; box-shadow:0 0 0 4px rgba(255,206,107,.25)}
+  .verdict-badge.bad .dot{background:#ff8a7a; box-shadow:0 0 0 4px rgba(255,138,122,.25)}
+
+  /* ---------- KPI strip ---------- */
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:-26px auto 0; position:relative; z-index:2}
+  .kpi{background:var(--card); border-radius:14px; padding:16px 18px; box-shadow:var(--shadow); border:1px solid var(--line)}
+  .kpi .n{font-size:30px; font-weight:800; line-height:1}
+  .kpi .l{font-size:12.5px; color:var(--muted); margin-top:6px; font-weight:600; text-transform:uppercase; letter-spacing:.4px}
+  .kpi.buy .n{color:var(--green)} .kpi.watch .n{color:var(--blue)} .kpi.fail .n{color:var(--red)}
+  .kpi.market .n{font-size:17px; font-weight:800; color:var(--navy); padding-top:5px}
+
+  section{margin:30px 0}
+  h2.sec{font-size:18px; margin:0 0 14px; display:flex; align-items:center; gap:10px}
+  h2.sec .num{
+    width:26px;height:26px;border-radius:7px;background:var(--navy);color:#fff;font-size:13px;
+    display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex:0 0 auto;
+  }
+  .panel{background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); overflow:hidden}
+  .panel .pad{padding:18px 20px}
+  .note{font-size:13px; color:var(--muted); margin:12px 0 0}
+
+  /* ---------- Tables ---------- */
+  table{width:100%; border-collapse:collapse; font-size:13.5px}
+  th,td{text-align:left; padding:10px 14px; border-bottom:1px solid var(--line)}
+  th{background:#f7f9fc; font-size:11.5px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:700}
+  tr:last-child td{border-bottom:none}
+  td.val{font-weight:700; font-variant-numeric:tabular-nums}
+  .sig-good{color:var(--green); font-weight:600}
+  .sig-bad{color:var(--red); font-weight:600}
+
+  /* ---------- Market grid ---------- */
+  .market-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:18px}
+  .sectorbars{display:flex; flex-direction:column; gap:7px}
+  .sbar{display:grid; grid-template-columns:140px 1fr 56px; align-items:center; gap:10px; font-size:12.5px}
+  .sbar .lab{color:var(--ink); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .sbar .track{position:relative; height:16px; background:#eef1f6; border-radius:5px; overflow:hidden}
+  .sbar .fill{position:absolute; top:0; bottom:0; border-radius:5px}
+  .sbar .fill.pos{background:linear-gradient(90deg,#34c178,#1E7E34); left:50%}
+  .sbar .fill.neg{background:linear-gradient(90deg,#C0392B,#e06a5d); right:50%}
+  .sbar .track::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:1px; background:#c8d0dc}
+  .sbar .pct{text-align:right; font-weight:700; font-variant-numeric:tabular-nums}
+  .sbar .pct.pos{color:var(--green)} .sbar .pct.neg{color:var(--red)}
+
+  /* ---------- Framework explainer ---------- */
+  .layers{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+  .layer{border:1px solid var(--line); border-radius:12px; padding:15px 16px; background:#fbfcfe}
+  .layer .lh{font-weight:800; color:var(--navy); font-size:14px; margin-bottom:5px}
+  .layer .lq{font-size:12px; color:var(--blue); font-weight:700; margin-bottom:8px; text-transform:uppercase; letter-spacing:.4px}
+  .layer p{margin:0; font-size:12.8px; color:var(--muted)}
+
+  /* ---------- Summary matrix ---------- */
+  .matrix-scroll{overflow-x:auto}
+  table.matrix th, table.matrix td{padding:9px 8px; text-align:center; white-space:nowrap}
+  table.matrix th:first-child, table.matrix td:first-child{text-align:left; position:sticky; left:0; background:#f7f9fc}
+  table.matrix td:first-child{background:var(--card); font-weight:800}
+  .cell{display:inline-flex; width:22px; height:22px; border-radius:6px; align-items:center; justify-content:center; font-size:12px; font-weight:800}
+  .cell.p{background:var(--green-bg); color:var(--green)}
+  .cell.f{background:var(--red-bg); color:var(--red)}
+  .score{font-weight:800; font-variant-numeric:tabular-nums}
+  .res{font-weight:800; font-size:11.5px; padding:3px 9px; border-radius:999px; display:inline-block}
+  .res.PASS{background:var(--green-bg); color:var(--green)}
+  .res.WATCHLIST{background:var(--blue-bg); color:var(--blue)}
+  .res.FAIL{background:var(--red-bg); color:var(--red)}
+  .crit-legend{display:grid; grid-template-columns:repeat(2,1fr); gap:4px 22px; font-size:12px; color:var(--muted); margin-top:14px}
+  .crit-legend b{color:var(--navy)}
+
+  /* ---------- Filters ---------- */
+  .filters{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
+  .chip{border:1px solid var(--line); background:var(--card); padding:7px 15px; border-radius:999px; font-size:13px; font-weight:700; cursor:pointer; color:var(--muted)}
+  .chip.active{background:var(--navy); color:#fff; border-color:var(--navy)}
+
+  /* ---------- Stock cards ---------- */
+  .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+  .stock{background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column}
+  .stock .sh{padding:15px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px}
+  .stock .rank{width:30px;height:30px;border-radius:8px;background:#eef2f8;color:var(--navy);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  .stock .tk{font-size:19px; font-weight:800; line-height:1}
+  .stock .nm{font-size:12.5px; color:var(--muted); margin-top:2px}
+  .stock .badge{margin-left:auto; font-size:11px; font-weight:800; padding:5px 11px; border-radius:999px; text-align:center; white-space:nowrap}
+  .badge.buy{background:var(--green-bg); color:var(--green)}
+  .badge.spec{background:var(--amber-bg); color:var(--amber)}
+  .badge.watch{background:var(--blue-bg); color:var(--blue)}
+  .stock .meta{padding:9px 18px; font-size:11.5px; color:var(--muted); background:#fafbfd; border-bottom:1px solid var(--line); display:flex; gap:14px; flex-wrap:wrap}
+  .stock .meta b{color:var(--ink)}
+  .block{padding:14px 18px; border-bottom:1px solid var(--line)}
+  .block:last-child{border-bottom:none}
+  .block h4{margin:0 0 9px; font-size:11.5px; text-transform:uppercase; letter-spacing:.6px; color:var(--navy)}
+  .kv{display:grid; grid-template-columns:auto 1fr; gap:5px 14px; font-size:13px}
+  .kv .k{color:var(--muted)} .kv .v{font-weight:700; text-align:right; font-variant-numeric:tabular-nums}
+  .tech-row{display:flex; justify-content:space-between; gap:10px; font-size:12.8px; padding:4px 0}
+  .tech-row .m{color:var(--muted)}
+  .tech-row .v{font-weight:700; font-variant-numeric:tabular-nums; text-align:right; min-width:90px}
+  .tech-row .s{font-size:11.5px; text-align:right; flex:1}
+  /* EPS bars */
+  .eps{display:flex; gap:8px}
+  .eps .q{flex:1; text-align:center}
+  .eps .qbar{height:54px; display:flex; align-items:flex-end; justify-content:center; background:#f3f6fa; border-radius:6px; padding:4px; position:relative}
+  .eps .qbar .b{width:60%; border-radius:4px 4px 0 0; min-height:3px}
+  .eps .qbar .b.pos{background:var(--green)} .eps .qbar .b.neg{background:var(--red)}
+  .eps .qg{font-size:12px; font-weight:800; margin-top:4px; font-variant-numeric:tabular-nums}
+  .eps .qg.pos{color:var(--green)} .eps .qg.neg{color:var(--red)}
+  .eps .ql{font-size:10px; color:var(--muted); margin-top:1px}
+  /* entry plan */
+  .entry-tbl{font-size:12.8px}
+  .entry-tbl .row{display:grid; grid-template-columns:128px 1fr; gap:10px; padding:5px 0; border-bottom:1px dashed var(--line)}
+  .entry-tbl .row:last-child{border-bottom:none}
+  .entry-tbl .p{color:var(--muted); font-weight:600}
+  .entry-tbl .x{font-weight:700}
+  .entry-tbl .x.stop{color:var(--red)} .entry-tbl .x.t1,.entry-tbl .x.t2{color:var(--green)} .entry-tbl .x.pivot{color:var(--navy)}
+  /* alerts */
+  .alerts{display:flex; flex-direction:column; gap:7px}
+  .alert{display:flex; gap:10px; align-items:flex-start; font-size:12.5px; padding:8px 11px; border-radius:8px; background:#fafbfd; border-left:3px solid var(--blue)}
+  .alert.breakout{border-left-color:var(--green)}
+  .alert.warning{border-left-color:var(--amber)}
+  .alert.stop{border-left-color:var(--red)}
+  .alert .at{font-weight:800; font-size:10.5px; text-transform:uppercase; letter-spacing:.4px; min-width:92px}
+  .notes{font-size:12.8px; color:#3a4757; background:#fbfcfe}
+
+  /* ---------- Risk + footer ---------- */
+  .risk-list{counter-reset:r; list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+  .risk-list li{counter-increment:r; position:relative; padding:11px 14px 11px 44px; background:#fbfcfe; border:1px solid var(--line); border-radius:10px; font-size:13px}
+  .risk-list li::before{content:counter(r); position:absolute; left:12px; top:11px; width:22px; height:22px; background:var(--navy); color:#fff; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800}
+  .verify-box{border:2px solid var(--red); background:var(--red-bg); border-radius:12px; padding:15px 18px; font-size:13.5px; color:#7d211a}
+  .verify-box b{color:var(--red)}
+  .sources{font-size:12.5px; color:var(--muted)}
+  .sources li{margin:3px 0}
+  .dq-status{font-weight:700; font-size:11px; padding:3px 8px; border-radius:6px}
+  .dq-status.in{background:var(--green-bg); color:var(--green)}
+  .dq-status.fail{background:var(--amber-bg); color:var(--amber)}
+  .dq-status.excl{background:var(--red-bg); color:var(--red)}
+  footer{padding:26px 0 50px; color:var(--muted); font-size:12px; text-align:center}
+  .disclaimer{font-style:italic}
+
+  @media (max-width:860px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .market-grid{grid-template-columns:1fr}
+    .cards{grid-template-columns:1fr}
+    .layers{grid-template-columns:1fr}
+    .risk-list{grid-template-columns:1fr}
+    .crit-legend{grid-template-columns:1fr}
+    .sbar{grid-template-columns:110px 1fr 48px}
+  }
+  .empty{padding:60px 20px; text-align:center; color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <h1 id="h-title">S&P 500 Minervini Screen</h1>
+      <div class="sub" id="h-frame">Minervini SEPA Framework — Weekly Report</div>
+      <div class="frame" id="h-date">—</div>
+    </div>
+    <div class="header-right">
+      <div class="weekpick">
+        <span>Week:</span>
+        <select id="weekSelect" onchange="render(this.value)"></select>
+        <button id="refreshBtn" class="refresh" title="Reload data and jump to the latest run" onclick="refreshLatest()">🔄 Latest</button>
+      </div>
+      <div class="updated" id="updatedAt"></div>
+      <span class="verdict-badge" id="verdictBadge"><span class="dot"></span><span id="verdictText">—</span></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="kpis">
+    <div class="kpi buy"><div class="n" id="k-buy">0</div><div class="l">Buy Now</div></div>
+    <div class="kpi watch"><div class="n" id="k-watch">0</div><div class="l">Watchlist</div></div>
+    <div class="kpi fail"><div class="n" id="k-fail">0</div><div class="l">Failed Screen</div></div>
+    <div class="kpi market"><div class="n" id="k-market">—</div><div class="l">Market State</div></div>
+  </div>
+</div>
+
+<main class="wrap" id="main"></main>
+
+<footer class="wrap">
+  <p class="disclaimer" id="f-disclaimer">For informational purposes only. Not financial advice.</p>
+  <p>Minervini Weekly Screen Dashboard · generated from the scheduled S&P 500 SEPA screen.</p>
+</footer>
+
+<script src="data/runs.js"></script>
+<script>
+const $ = (s,el=document)=>el.querySelector(s);
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const num = s => { const m=String(s).replace(/[^0-9.\-]/g,""); const v=parseFloat(m); return isNaN(v)?0:v; };
+
+const STATUS = txt => {
+  const t=(txt||"").toUpperCase();
+  if(t.includes("BUY")) return {cls:t.includes("SPEC")?"spec":"buy", grp:"buy"};
+  if(t.includes("WATCH")) return {cls:"watch", grp:"watch"};
+  return {cls:"watch", grp:"other"};
+};
+const verdictClass = v => {
+  const t=(v||"").toUpperCase();
+  if(t.includes("CONFIRM")||t.includes("UPTREND")) return "";
+  if(t.includes("PRESSURE")) return "warn";
+  return "bad";
+};
+
+let CURRENT = 0;
+
+// Reload runs.js from disk (picks up a newly appended week) and jump to latest.
+function refreshLatest(){
+  const u = $("#updatedAt"); if(u) u.textContent = "Refreshing…";
+  const s = document.createElement("script");
+  s.src = "data/runs.js?ts=" + Date.now();          // cache-bust so a new week is seen
+  s.onload = () => { init(true); };
+  s.onerror = () => { if(u) u.textContent = "Could not reload data"; };
+  document.body.appendChild(s);
+}
+
+function stampUpdated(){
+  const u = $("#updatedAt"); if(!u) return;
+  u.textContent = "Loaded " + new Date().toLocaleString([], {hour:'2-digit',minute:'2-digit',month:'short',day:'numeric'});
+}
+
+function init(isRefresh){
+  const runs = window.SCREEN_RUNS || [];
+  const sel = $("#weekSelect");
+  if(!runs.length){ $("#main").innerHTML='<div class="empty">No screen data found. Add a run to <code>data/runs.js</code>.</div>'; return; }
+  sel.innerHTML = "";
+  runs.forEach((r,i)=>{
+    const o=document.createElement("option"); o.value=i; o.textContent=r.reportDate+(i===0?"  (latest)":""); sel.appendChild(o);
+  });
+  render(0);
+  stampUpdated();
+}
+
+function render(idx){
+  idx = +idx; CURRENT = idx;
+  const d = window.SCREEN_RUNS[idx]; if(!d) return;
+  $("#weekSelect").value = idx;
+
+  // header
+  $("#h-title").textContent = d.title || "S&P 500 Minervini Screen";
+  $("#h-frame").textContent = d.framework || "";
+  $("#h-date").textContent = "Report date · " + (d.reportDate||"");
+  const vb = $("#verdictBadge"); vb.className = "verdict-badge " + verdictClass(d.market?.verdict);
+  $("#verdictText").textContent = d.market?.verdict || "—";
+
+  // KPIs
+  const counts = (d.summary||[]).reduce((a,s)=>{const r=(s.result||"").toUpperCase(); if(r==="PASS")a.buy++; else if(r==="WATCHLIST")a.watch++; else a.fail++; return a;},{buy:0,watch:0,fail:0});
+  $("#k-buy").textContent = counts.buy;
+  $("#k-watch").textContent = counts.watch;
+  $("#k-fail").textContent = counts.fail;
+  $("#k-market").textContent = (d.market?.verdict||"—").replace("CONFIRMED ","");
+
+  $("#main").innerHTML = [
+    marketSection(d), frameworkSection(), matrixSection(d),
+    cardsSection(d), riskSection(d), sourcesSection(d)
+  ].join("");
+
+  bindFilters();
+}
+
+/* ---- 1. Market condition ---- */
+function marketSection(d){
+  const m=d.market||{};
+  const rows=(m.metrics||[]).map(x=>`<tr><td>${esc(x.metric)}</td><td class="val">${esc(x.value)}</td><td>${esc(x.signal)}</td></tr>`).join("");
+  const max=Math.max(1,...(m.sectors||[]).map(s=>Math.abs(s.change)));
+  const bars=(m.sectors||[]).map(s=>{
+    const pos=s.change>=0, w=(Math.abs(s.change)/max)*50;
+    return `<div class="sbar"><span class="lab">${esc(s.sector)}</span>
+      <span class="track"><span class="fill ${pos?'pos':'neg'}" style="width:${w}%"></span></span>
+      <span class="pct ${pos?'pos':'neg'}">${pos?'+':''}${s.change.toFixed(2)}%</span></div>`;
+  }).join("");
+  return `<section><h2 class="sec"><span class="num">1</span>Market Condition — ${esc(m.index||'S&P 500')}</h2>
+    <div class="market-grid">
+      <div class="panel"><table><thead><tr><th>Metric</th><th>Value</th><th>Signal</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <div class="panel"><div class="pad">
+        <h4 style="margin:0 0 12px;font-size:11.5px;letter-spacing:.6px;color:var(--navy);text-transform:uppercase">Sector Performance · ${esc(m.sectorAsOf||'')}</h4>
+        <div class="sectorbars">${bars}</div>
+        ${m.sectorNote?`<p class="note">${esc(m.sectorNote)}</p>`:''}
+      </div></div>
+    </div></section>`;
+}
+
+/* ---- 2. Framework explainer ---- */
+function frameworkSection(){
+  return `<section><h2 class="sec"><span class="num">2</span>The 3-Layer SEPA Framework</h2>
+   <div class="layers">
+    <div class="layer"><div class="lh">Layer 1 · Trend Template</div><div class="lq">Which stocks are candidates?</div>
+      <p>The 8-criteria Stage-2 filter (price vs 50/150/200-day MAs, 52-week range, relative strength). Passing is necessary but not sufficient.</p></div>
+    <div class="layer"><div class="lh">Layer 2 · Extension Check</div><div class="lq">Is now a safe time to look?</div>
+      <p>How far price sits above its 50-day MA. A stock that has run 100–200% without consolidating is a chase, not a setup.</p></div>
+    <div class="layer"><div class="lh">Layer 3 · VCP Assessment</div><div class="lq">Is there an entry right now?</div>
+      <p>A tight, low-volatility base with shrinking volume and a defined pivot. Without it there is no clean stop and no edge.</p></div>
+   </div></section>`;
+}
+
+/* ---- 3. Summary matrix ---- */
+function matrixSection(d){
+  const crit=d.criteria||[];
+  const head=crit.map((c,i)=>`<th title="${esc(c.label)}">C${i+1}</th>`).join("");
+  const rows=(d.summary||[]).map(s=>{
+    const cells=(s.flags||[]).map(f=>`<td><span class="cell ${f?'p':'f'}">${f?'✓':'✕'}</span></td>`).join("");
+    const r=(s.result||"").toUpperCase();
+    return `<tr><td>${esc(s.ticker)}</td>${cells}<td class="score">${esc(s.score)}</td><td><span class="res ${r}">${esc(s.result)}</span></td></tr>`;
+  }).join("");
+  const legend=crit.map((c,i)=>`<div><b>C${i+1}</b> — ${esc(c.label)}</div>`).join("");
+  return `<section><h2 class="sec"><span class="num">3</span>Screen Summary — Trend Template Matrix</h2>
+    <div class="panel"><div class="matrix-scroll"><table class="matrix">
+      <thead><tr><th>Ticker</th>${head}<th>Score</th><th>Result</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>
+      <div class="pad"><div class="crit-legend">${legend}</div></div>
+    </div></section>`;
+}
+
+/* ---- 4. Stock cards ---- */
+function cardsSection(d){
+  const note=d.stocksNote?`<p class="note" style="margin-bottom:14px">${esc(d.stocksNote)}</p>`:'';
+  const cards=(d.stocks||[]).map(stockCard).join("");
+  return `<section><h2 class="sec"><span class="num">4</span>Stock Cards — Entry &amp; Exit Plans</h2>
+    ${note}
+    <div class="filters">
+      <span class="chip active" data-f="all">All (${(d.stocks||[]).length})</span>
+      <span class="chip" data-f="buy">Buy Now</span>
+      <span class="chip" data-f="watch">Watchlist</span>
+    </div>
+    <div class="cards" id="cards">${cards}</div></section>`;
+}
+
+function stockCard(s){
+  const st=STATUS(s.status);
+  const tech=(s.technical||[]).map(t=>{
+    const cls=t.good===true?'sig-good':t.good===false?'sig-bad':'';
+    return `<div class="tech-row"><span class="m">${esc(t.metric)}</span><span class="v">${esc(t.value)}</span><span class="s ${cls}">${esc(t.signal)}</span></div>`;
+  }).join("");
+  const epsMax=Math.max(10,...(s.eps||[]).map(e=>Math.abs(num(e.growth))));
+  const eps=(s.eps||[]).map(e=>{
+    const g=num(e.growth), pos=g>=0, h=(Math.abs(g)/epsMax)*44;
+    return `<div class="q"><div class="qbar"><span class="b ${pos?'pos':'neg'}" style="height:${Math.max(3,h)}px"></span></div>
+      <div class="qg ${pos?'pos':'neg'}">${esc(e.growth)}</div><div class="ql">${esc(e.quarter.replace(' (Most Recent)',''))}${/most recent/i.test(e.quarter)?' <span style="color:var(--blue);font-weight:800">• latest</span>':''}</div></div>`;
+  }).join("");
+  const e=s.entry||{};
+  const entry=`
+    <div class="row"><span class="p">Pivot</span><span class="x pivot">${esc(e.pivot)}</span></div>
+    <div class="row"><span class="p">Entry</span><span class="x">${esc(e.entryCondition)}</span></div>
+    <div class="row"><span class="p">Volume trigger</span><span class="x">${esc(e.volumeTrigger)}</span></div>
+    <div class="row"><span class="p">Stop (8%)</span><span class="x stop">${esc(e.stop)}</span></div>
+    <div class="row"><span class="p">Target 1 (+20%)</span><span class="x t1">${esc(e.target1)}</span></div>
+    <div class="row"><span class="p">Target 2 (+30%)</span><span class="x t2">${esc(e.target2)}</span></div>
+    <div class="row"><span class="p">Risk : Reward</span><span class="x">${esc(e.rr)}</span></div>
+    <div class="row"><span class="p">Position sizing</span><span class="x">${esc(e.sizing)}</span></div>`;
+  const alerts=(s.alerts||[]).map(a=>{
+    const k=(a.type||"").toLowerCase(); const cls=k.includes("breakout")?"breakout":k.includes("warning")?"warning":k.includes("stop")?"stop":"";
+    return `<div class="alert ${cls}"><span class="at">${esc(a.type)}</span><span>${esc(a.price)}</span></div>`;
+  }).join("");
+  return `<article class="stock" data-grp="${st.grp}">
+    <div class="sh"><span class="rank">${esc(s.rank)}</span>
+      <div><div class="tk">${esc(s.ticker)}</div><div class="nm">${esc(s.name)}</div></div>
+      <span class="badge ${st.cls}">${esc(s.status)}</span></div>
+    <div class="meta"><span>${esc(s.sector)}</span><span>Tech score <b>${esc(s.techScore)}</b></span><span>${esc(s.dataDate)}</span></div>
+    <div class="block"><h4>Technical Analysis</h4>${tech}</div>
+    <div class="block"><h4>EPS Growth (YoY, last 4 Q)</h4><div class="eps">${eps}</div>${s.epsNote?`<p class="note">${esc(s.epsNote)}</p>`:''}</div>
+    <div class="block"><h4>Entry &amp; Exit Plan</h4><div class="entry-tbl">${entry}</div></div>
+    <div class="block"><h4>TradingView Alerts</h4><div class="alerts">${alerts}</div></div>
+    <div class="block notes"><h4>Analysis Notes</h4>${esc(s.notes)}</div>
+  </article>`;
+}
+
+function bindFilters(){
+  document.querySelectorAll(".chip").forEach(ch=>ch.onclick=()=>{
+    document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+    ch.classList.add("active");
+    const f=ch.dataset.f;
+    document.querySelectorAll(".stock").forEach(card=>{
+      const g=card.dataset.grp;
+      card.style.display = (f==="all" || g===f) ? "" : "none";
+    });
+  });
+}
+
+/* ---- 5. Risk ---- */
+function riskSection(d){
+  const rules=(d.riskRules||[]).map(r=>`<li>${esc(r)}</li>`).join("");
+  return `<section><h2 class="sec"><span class="num">5</span>Risk Management — Non-Negotiable Rules</h2>
+    <ul class="risk-list">${rules}</ul>
+    ${d.verification?`<div class="verify-box" style="margin-top:16px"><b>⚠ VERIFICATION REQUIRED.</b> ${esc(d.verification)}</div>`:''}
+  </section>`;
+}
+
+/* ---- 6. Data sources & quality ---- */
+function sourcesSection(d){
+  const src=(d.dataSources||[]).map(s=>`<li>${esc(s)}</li>`).join("");
+  const dq=(d.dataQuality||[]).map(x=>{
+    const st=(x.status||"").toUpperCase();
+    const cls=st.includes("IN REPORT")?"in":st.includes("EXCLUDED")?"excl":"fail";
+    return `<tr><td class="val">${esc(x.ticker)}</td><td>${esc(x.source)}</td><td>${esc(x.date)}</td><td><span class="dq-status ${cls}">${esc(x.status)}</span></td></tr>`;
+  }).join("");
+  return `<section><h2 class="sec"><span class="num">6</span>Data Sources &amp; Quality</h2>
+    <div class="panel"><div class="pad">
+      <ul class="sources">${src}</ul>
+      ${d.dataQualityNote?`<p class="note">${esc(d.dataQualityNote)}</p>`:''}
+    </div>
+    <table><thead><tr><th>Ticker</th><th>Source</th><th>Data date</th><th>Status</th></tr></thead><tbody>${dq}</tbody></table>
+    </div></section>`;
+}
+
+init();
+</script>
+</body>
+</html>

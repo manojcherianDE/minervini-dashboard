@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Send a Telegram message with a tappable button that opens the live Minervini
+# dashboard at its latest run.
+#
+# Setup (once):
+#   1. cp telegram.config.example telegram.config   then fill in the 3 values
+#   2. chmod +x send-to-telegram.sh
+# Run:
+#   ./send-to-telegram.sh
+#
+# Config can also come from environment variables instead of telegram.config.
+
+set -euo pipefail
+cd "$(dirname "$0")"
+
+# --- load config -------------------------------------------------------------
+if [[ -f telegram.config ]]; then
+  # shellcheck disable=SC1091
+  source telegram.config
+fi
+
+: "${TELEGRAM_BOT_TOKEN:?Set TELEGRAM_BOT_TOKEN in telegram.config}"
+: "${TELEGRAM_CHAT_ID:?Set TELEGRAM_CHAT_ID in telegram.config}"
+: "${DASHBOARD_URL:?Set DASHBOARD_URL in telegram.config (public https URL of the dashboard)}"
+
+# --- pull a few facts from the latest run in data/runs.js (best-effort) -------
+latest_date="$(grep -m1 'reportDate:' data/runs.js | sed -E 's/.*"([^"]+)".*/\1/' || true)"
+verdict="$(grep -m1 'verdict:' data/runs.js | sed -E 's/.*"([^"]+)".*/\1/' || true)"
+buy_count="$(grep -c 'result: "PASS"' data/runs.js || true)"
+watch_count="$(grep -c 'result: "WATCHLIST"' data/runs.js || true)"
+
+# --- build the message --------------------------------------------------------
+msg="<b>📈 S&amp;P 500 Minervini Weekly Screen</b>"
+[[ -n "${latest_date}" ]] && msg+=$'\n'"🗓 Latest run: <b>${latest_date}</b>"
+[[ -n "${verdict}"     ]] && msg+=$'\n'"🚦 Market: <b>${verdict}</b>"
+if [[ -n "${buy_count}" || -n "${watch_count}" ]]; then
+  msg+=$'\n'"✅ Buy Now: <b>${buy_count:-0}</b>  ·  👀 Watchlist: <b>${watch_count:-0}</b>"
+fi
+msg+=$'\n\n'"<i>Tap below for the live, refreshable dashboard.</i>"
+msg+=$'\n'"<i>For informational purposes only. Not financial advice.</i>"
+
+# inline keyboard: one URL button that opens the live dashboard (defaults to latest run)
+reply_markup="{\"inline_keyboard\":[[{\"text\":\"🔄 Open latest run\",\"url\":\"${DASHBOARD_URL}\"}]]}"
+
+# --- send ---------------------------------------------------------------------
+resp="$(curl -fsS "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+  -d chat_id="${TELEGRAM_CHAT_ID}" \
+  -d parse_mode="HTML" \
+  -d disable_web_page_preview="true" \
+  --data-urlencode text="${msg}" \
+  --data-urlencode reply_markup="${reply_markup}")"
+
+if grep -q '"ok":true' <<<"$resp"; then
+  echo "✅ Sent to Telegram chat ${TELEGRAM_CHAT_ID}."
+else
+  echo "❌ Telegram API error:"; echo "$resp"; exit 1
+fi
