@@ -54,21 +54,21 @@ facts(){
 case "$MARKET" in
   sp500)
     facts data/runs.js
-    msg="<b>📈 S&amp;P 500 Minervini Weekly Screen</b>"$'\n'"🗓 Latest run: <b>${f_date}</b>"$'\n'"🚦 Market: <b>${f_verdict}</b>"$'\n'"✅ Buy Now: <b>${f_buy:-0}</b>  ·  👀 Watchlist: <b>${f_watch:-0}</b>"
+    msg="<b>📈 S&amp;P 1500 Minervini Weekly Screen</b>"$'\n'"🗓 Latest run: <b>${f_date}</b>"$'\n'"🚦 Market: <b>${f_verdict}</b>"$'\n'"✅ Buy Now: <b>${f_buy:-0}</b>  ·  👀 Watchlist: <b>${f_watch:-0}</b>"
     reply_markup="{\"inline_keyboard\":[[{\"text\":\"🔄 Open latest run\",\"url\":\"${SP_LINK}\"}]]}"
     ;;
   dax)
     facts data/runs_dax.js
-    msg="<b>📈 DAX 40 Minervini Weekly Screen</b>"$'\n'"🗓 Latest run: <b>${f_date}</b>"$'\n'"🚦 Market: <b>${f_verdict}</b>"$'\n'"✅ Buy Now: <b>${f_buy:-0}</b>  ·  👀 Watchlist: <b>${f_watch:-0}</b>"
+    msg="<b>📈 Germany Broad (DAX+MDAX+SDAX) Minervini Weekly Screen</b>"$'\n'"🗓 Latest run: <b>${f_date}</b>"$'\n'"🚦 Market: <b>${f_verdict}</b>"$'\n'"✅ Buy Now: <b>${f_buy:-0}</b>  ·  👀 Watchlist: <b>${f_watch:-0}</b>"
     reply_markup="{\"inline_keyboard\":[[{\"text\":\"🔄 Open latest run\",\"url\":\"${DAX_LINK}\"}]]}"
     ;;
   both)
     msg="<b>📊 Minervini Weekly Screen</b>"
     facts data/runs.js
-    msg+=$'\n\n'"🇺🇸 <b>S&amp;P 500</b> — ${f_date}"$'\n'"🚦 ${f_verdict}  ·  ✅ ${f_buy:-0} Buy  ·  👀 ${f_watch:-0} Watch"
+    msg+=$'\n\n'"🇺🇸 <b>S&amp;P 1500</b> — ${f_date}"$'\n'"🚦 ${f_verdict}  ·  ✅ ${f_buy:-0} Buy  ·  👀 ${f_watch:-0} Watch"
     facts data/runs_dax.js
-    msg+=$'\n\n'"🇩🇪 <b>DAX 40</b> — ${f_date}"$'\n'"🚦 ${f_verdict}  ·  ✅ ${f_buy:-0} Buy  ·  👀 ${f_watch:-0} Watch"
-    reply_markup="{\"inline_keyboard\":[[{\"text\":\"🇺🇸 S&P 500\",\"url\":\"${SP_LINK}\"},{\"text\":\"🇩🇪 DAX 40\",\"url\":\"${DAX_LINK}\"}]]}"
+    msg+=$'\n\n'"🇩🇪 <b>Germany Broad</b> — ${f_date}"$'\n'"🚦 ${f_verdict}  ·  ✅ ${f_buy:-0} Buy  ·  👀 ${f_watch:-0} Watch"
+    reply_markup="{\"inline_keyboard\":[[{\"text\":\"🇺🇸 S&P 1500\",\"url\":\"${SP_LINK}\"},{\"text\":\"🇩🇪 Germany Broad\",\"url\":\"${DAX_LINK}\"}]]}"
     ;;
   *) echo "Unknown market '$MARKET' (use: sp500 | dax | both)" >&2; exit 1;;
 esac

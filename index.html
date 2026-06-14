@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>S&P 500 Minervini Screen — Dashboard</title>
+<title>Minervini Broad Momentum Screen — Dashboard</title>
 <style>
   :root{
     --navy:#1F4E79; --blue:#2E75B6; --green:#1E7E34; --red:#C0392B; --amber:#D68910;
@@ -201,7 +201,7 @@
 <header class="top">
   <div class="wrap">
     <div class="brand">
-      <h1 id="h-title">S&P 500 Minervini Screen</h1>
+      <h1 id="h-title">Minervini Broad Momentum Screen</h1>
       <div class="sub" id="h-frame">Minervini SEPA Framework — Weekly Report</div>
       <div class="frame" id="h-date">—</div>
     </div>
@@ -231,7 +231,7 @@
 
 <footer class="wrap">
   <p class="disclaimer" id="f-disclaimer">For informational purposes only. Not financial advice.</p>
-  <p>Minervini Weekly Screen Dashboard · generated from the scheduled S&P 500 SEPA screen.</p>
+  <p>Minervini Weekly Screen Dashboard · generated from the scheduled S&P 1500 &amp; Germany Broad (DAX+MDAX+SDAX) SEPA screens.</p>
 </footer>
 
 <script src="data/runs.js"></script>
@@ -261,9 +261,9 @@ const MARKETS = [];
 function buildMarkets(){
   MARKETS.length = 0;
   if (Array.isArray(window.SCREEN_RUNS) && window.SCREEN_RUNS.length)
-    MARKETS.push({ key:"sp500", label:"S&P 500", src:"data/runs.js", runs:window.SCREEN_RUNS });
+    MARKETS.push({ key:"sp500", label:"S&P 1500", src:"data/runs.js", runs:window.SCREEN_RUNS });
   if (Array.isArray(window.SCREEN_RUNS_DAX) && window.SCREEN_RUNS_DAX.length)
-    MARKETS.push({ key:"dax", label:"DAX 40", src:"data/runs_dax.js", runs:window.SCREEN_RUNS_DAX });
+    MARKETS.push({ key:"dax", label:"Germany Broad", src:"data/runs_dax.js", runs:window.SCREEN_RUNS_DAX });
 }
 const activeRuns = () => (MARKETS[MARKET] && MARKETS[MARKET].runs) || [];
 
@@ -318,7 +318,7 @@ function render(idx){
   $("#weekSelect").value = idx;
 
   // header
-  $("#h-title").textContent = d.title || "S&P 500 Minervini Screen";
+  $("#h-title").textContent = d.title || "Minervini Broad Momentum Screen";
   $("#h-frame").textContent = d.framework || "";
   $("#h-date").textContent = "Report date · " + (d.reportDate||"");
   const vb = $("#verdictBadge"); vb.className = "verdict-badge " + verdictClass(d.market?.verdict);
@@ -361,7 +361,7 @@ function marketSection(d){
          <h4 style="margin:0 0 12px;font-size:11.5px;letter-spacing:.6px;color:var(--navy);text-transform:uppercase">Market Read</h4>
          <p style="margin:0;font-size:13.5px;color:#3a4757">${esc(m.sectorNote||m.verdictNote||'')}</p>
        </div>`;
-  return `<section><h2 class="sec"><span class="num">1</span>Market Condition — ${esc(m.index||'S&P 500')}</h2>
+  return `<section><h2 class="sec"><span class="num">1</span>Market Condition — ${esc(m.index||'Market')}</h2>
     <div class="market-grid">
       <div class="panel"><table><thead><tr><th>Metric</th><th>Value</th><th>Signal</th></tr></thead><tbody>${rows}</tbody></table></div>
       <div class="panel">${rightPanel}</div>
