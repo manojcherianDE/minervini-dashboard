@@ -42,12 +42,26 @@ SP_LINK="${DASHBOARD_URL%/}/#sp500"
 DAX_LINK="${DASHBOARD_URL%/}/#dax"
 
 # facts <data-file>  → sets globals f_date f_verdict f_buy f_watch (best-effort)
+#
+# IMPORTANT: counts must come from the LATEST run only (the first object in the
+# array), not from the whole file. The old version grepped the entire file, so a
+# week with zero buys still reported the running total of every past week — on
+# 2026-09-14 that would have announced "Buy Now: 31" on a zero-buy week.
+# Accepts both  reportDate:  and  "reportDate":  key styles.
 facts(){
-  local file="$1"
-  f_date="$(grep -m1 'reportDate:' "$file" | sed -E 's/.*"([^"]+)".*/\1/' || true)"
-  f_verdict="$(grep -m1 'verdict:' "$file" | sed -E 's/.*"([^"]+)".*/\1/' || true)"
-  f_buy="$(grep -c 'result: "PASS"' "$file" || true)"
-  f_watch="$(grep -c 'result: "WATCHLIST"' "$file" || true)"
+  local file="$1" block
+  # first run object = from the array opening until the SECOND reportDate key
+  # NB: the S&P file declares window.SCREEN_RUNS, the German one
+  # window.SCREEN_RUNS_DAX — match both, and only the real assignment line.
+  block="$(awk '
+    /^window\.SCREEN_RUNS(_DAX)?[[:space:]]*=[[:space:]]*\[/ { inarr=1; next }
+    inarr && /"?reportDate"?[[:space:]]*:/ { n++; if (n==2) exit }
+    inarr { print }
+  ' "$file")"
+  f_date="$(grep -m1 -E '"?reportDate"?[[:space:]]*:' "$file" | sed -E 's/.*: *"([^"]+)".*/\1/' || true)"
+  f_verdict="$(grep -m1 -E '"?verdict"?[[:space:]]*:' <<<"$block" | sed -E 's/.*: *"([^"]+)".*/\1/' || true)"
+  f_buy="$(grep -c -E '"?result"?[[:space:]]*: *"PASS"' <<<"$block" || true)"
+  f_watch="$(grep -c -E '"?result"?[[:space:]]*: *"WATCHLIST"' <<<"$block" || true)"
 }
 
 # --- build the message + inline keyboard -------------------------------------

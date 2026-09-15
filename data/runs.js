@@ -13,6 +13,1373 @@
 
 window.SCREEN_RUNS = [
   {
+    reportDate: "2026-09-14",
+    title: "S&P 1500 Momentum Screen",
+    framework: "Minervini SEPA — history-based engine v2 (full S&P 1500)",
+    market: {
+      index: "S&P 1500 breadth — 56.4% above 200MA",
+      verdict: "UNDER PRESSURE",
+      verdictNote: "REGIME GATE ACTIVE. Only 56.4% of the 1,498 evaluated names are above their 200DMA (gate needs ≥60%) and just 34.2% are above their 50DMA. The engine found 27 names meeting every BUY NOW condition and 284 meeting every SETUP condition on their own merits, then automatically downgraded all 311 to EXTENDED — WATCH. NOTHING IS ACTIONABLE THIS WEEK. Breadth is derived from the universe itself — no index quote is used. Independent check: ~67% of S&P 500 members were above their 200DMA in early September, so weakness is concentrated in small and mid caps; Raymond James has flagged elevated correction risk over the next one to three months.",
+      metrics: [
+        {
+          metric: "Universe evaluated",
+          value: "1,498 names",
+          signal: "of 1,506 attempted"
+        },
+        {
+          metric: "% above 200-day MA",
+          value: "56.4%",
+          signal: "≥60% = uptrend",
+          good: false
+        },
+        {
+          metric: "% above 50-day MA",
+          value: "34.2%",
+          signal: "Short-term breadth",
+          good: false
+        },
+        {
+          metric: "% in full MA stack",
+          value: "48.5%",
+          signal: "≥45% = healthy",
+          good: true
+        },
+        {
+          metric: "Regime gate",
+          value: "ACTIVE",
+          signal: "311 buys/setups downgraded",
+          good: false
+        }
+      ],
+      sectorAsOf: "Count of GATED would-be BUY NOW names by sector (not daily performance)",
+      sectors: [
+        {
+          sector: "Financial Services",
+          change: 7
+        },
+        {
+          sector: "Healthcare",
+          change: 7
+        },
+        {
+          sector: "Technology",
+          change: 4
+        },
+        {
+          sector: "Consumer Cyclical",
+          change: 3
+        },
+        {
+          sector: "Energy",
+          change: 2
+        },
+        {
+          sector: "Industrials",
+          change: 2
+        },
+        {
+          sector: "Basic Materials",
+          change: 1
+        },
+        {
+          sector: "Real Estate",
+          change: 1
+        }
+      ],
+      sectorNote: "Leadership among the 27 gated would-be buys is concentrated in insurance, healthcare services and energy — defensive and commodity groups. That is what leadership looks like late in a move, and it is itself a caution flag."
+    },
+    dataSources: [
+      "Prices: stockanalysis.com daily OHLCV (5-year range, last 300 bars per name), last bar 2026-09-11",
+      "Yahoo Finance bulk fetch: UNAVAILABLE — host blocked in sandbox, and browser route sits behind a Yahoo consent wall",
+      "Engine: deterministic v2 Trend Template + RS percentile + algorithmic VCP + breadth regime gate",
+      "Fundamentals: FMP income-statement-growth PLAN-GATED — no EPS screen ran this week",
+      "Confirmation: web search on the featured names only (never the basis for a setup)"
+    ],
+    dataQualityNote: "1,498 of 1,506 S&P 1500 names were evaluated from end-of-day prices through 2026-09-11. The price vendor changed this run because Yahoo was unreachable — closes are split-adjusted but not dividend-adjusted, matching previous behaviour, though cross-run comparability deserves mild caution. No fundamental screen was possible. Pivots and volume triggers are mechanical: confirm every chart on TradingView.",
+    dataQuality: [
+      {
+        ticker: "FULL UNIVERSE",
+        source: "stockanalysis.com daily OHLCV",
+        date: "Sep 11, 2026",
+        status: "1,498 EVALUATED"
+      },
+      {
+        ticker: "Yahoo bulk fetch",
+        source: "query1.finance.yahoo.com",
+        date: "N/A",
+        status: "BLOCKED — sandbox + consent wall"
+      },
+      {
+        ticker: "Insufficient history",
+        source: "Engine (<260 bars)",
+        date: "Sep 11, 2026",
+        status: "5 SKIPPED — FDXF, Q, SOLS, VGNT, VSNT"
+      },
+      {
+        ticker: "No data returned",
+        source: "Vendor",
+        date: "N/A",
+        status: "3 SKIPPED — EQR, FDP, SATS"
+      },
+      {
+        ticker: "BUY NOW set",
+        source: "Engine (deterministic)",
+        date: "Sep 11, 2026",
+        status: "0 — REGIME GATE ACTIVE"
+      },
+      {
+        ticker: "Fundamentals",
+        source: "FMP quarterly growth",
+        date: "N/A",
+        status: "PLAN-GATED — no EPS screen"
+      }
+    ],
+    criteria: [
+      {
+        key: "c1",
+        label: "Price > 150MA & 200MA"
+      },
+      {
+        key: "c2",
+        label: "150MA > 200MA"
+      },
+      {
+        key: "c3",
+        label: "200MA Trending Up"
+      },
+      {
+        key: "c4",
+        label: "50 > 150 > 200 (full stack)"
+      },
+      {
+        key: "c5",
+        label: "Price > 50MA"
+      },
+      {
+        key: "c6",
+        label: "Price ≥ 30% Above 52wLow"
+      },
+      {
+        key: "c7",
+        label: "Price Within 25% of 52wHigh"
+      },
+      {
+        key: "c8",
+        label: "RS Rank ≥ 70"
+      }
+    ],
+    summary: [
+      {
+        ticker: "MATX",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "AVTR",
+        flags: [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "ITGR",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "PR",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "SAFT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "BFH",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "LNTH",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "TECH",
+        flags: [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "CGNX",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "ACA",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "MD",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "KNTK",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "PAG",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "SLAB",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "EXEL",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "DV",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "PRSU",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "DT",
+        flags: [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "PAYO",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "WRLD",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "IFF",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "UNIT",
+        flags: [
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "RNR",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "GPC",
+        flags: [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "HSIC",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "EIG",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "GS",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "AMD",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "CORT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "LFST",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "PARR",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "CAKE",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "IRDM",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "NEO",
+        flags: [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "OKTA",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "PTGX",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "AAMI",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "AVNS",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "CRL",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "DELL",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "MRNA",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "MU",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "MXL",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "PBF",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "SNDK",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "STX",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "LITE",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "HPE",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "HZO",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "INTC",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "VLO",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      }
+    ],
+    stocksNote: "0 BUY NOW and 0 SETUP — NEAR BUY this week: the regime gate downgraded all 311 qualifying names (27 would-be BUY NOW, 284 would-be SETUP) to EXTENDED — WATCH. A further 228 names are genuinely extended on their own merits, 347 are building bases and 612 fail outright. Cards below show the five strongest gated would-be BUY NOW names plus the strongest gated SETUP, with levels shown so alerts can be pre-loaded — not acted on. ITGR is included specifically as a warning: a perfect 8/8 algorithmic VCP that is really a KKR takeover pin.",
+    stocks: [
+      {
+        rank: 1,
+        ticker: "MATX",
+        name: "Matson, Inc.",
+        sector: "Industrials",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 11, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 11, 2026)",
+            value: "$230.18",
+            signal: "1.0% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$214.26",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$187.82 / $173.95",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "7.4%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "96",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$232.42 / $86.97",
+            signal: "Pivot at 20-day high"
+          }
+        ],
+        entry: {
+          pivot: "$232.42 (engine buy point)",
+          entryCondition: "Daily close above $232.42 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 400,439 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$214.99 (~7.5% below pivot)",
+          target1: "$278.9 (+20%)",
+          target2: "$302.15 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$232.43 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$220.80 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$214.99 — hard stop"
+          }
+        ],
+        notes: "GATED would-be BUY NOW. VCP CONFIRMED (10-day tightness 6.8%, volume drying). Cleanest technical setup in the whole S&P 1500 this week — blocked only because market breadth fails the regime gate. Analyst consensus ~$224 is BELOW the $230.18 price: the stock has outrun published targets.  |  FUNDAMENTALS: FMP quarterly-growth endpoint PLAN-GATED this run — no fundamental check was possible. Verify EPS/revenue growth yourself.",
+        epsNote: "FMP quarterly-growth endpoint PLAN-GATED this run — no fundamental check was possible. Verify EPS/revenue growth yourself."
+      },
+      {
+        rank: 2,
+        ticker: "AVTR",
+        name: "Avantor, Inc.",
+        sector: "Healthcare",
+        status: "EXTENDED — WATCH",
+        techScore: "6/8",
+        dataDate: "Close, Sep 11, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 11, 2026)",
+            value: "$14.81",
+            signal: "7.0% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$13.0",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$10.08 / $10.44",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "13.9%",
+            signal: "Elevated — size down",
+            good: false
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "93",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$15.93 / $7.27",
+            signal: "Pivot at 20-day high"
+          }
+        ],
+        entry: {
+          pivot: "$15.46 (engine buy point)",
+          entryCondition: "Daily close above $15.46 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 13,148,094 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$14.3 (~7.5% below pivot)",
+          target1: "$18.55 (+20%)",
+          target2: "$20.1 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$15.47 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$14.69 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$14.3 — hard stop"
+          }
+        ],
+        notes: "GATED would-be BUY NOW, but only 6/8 on the Trend Template and +13.9% above the 50DMA — at the top of the acceptable extension band. Median analyst target ~$10.00 vs a $14.81 price: price has outrun estimates, though Stifel ($15) and Jefferies ($13) are catching up. Q2 2026 beat with FY guidance raised.  |  FUNDAMENTALS: FMP PLAN-GATED. Q2 2026 reported a beat: VWR back to organic growth, BMP stabilising, FY26 revenue and EPS guidance raised.",
+        epsNote: "FMP PLAN-GATED. Q2 2026 reported a beat: VWR back to organic growth, BMP stabilising, FY26 revenue and EPS guidance raised."
+      },
+      {
+        rank: 3,
+        ticker: "ITGR",
+        name: "Integer Holdings — DISQUALIFIED",
+        sector: "Healthcare",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 11, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 11, 2026)",
+            value: "$126.0",
+            signal: "0.6% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$113.6",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$96.31 / $91.98",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "10.9%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "92",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$126.8 / $62.0",
+            signal: "Pivot at 20-day high"
+          }
+        ],
+        entry: {
+          pivot: "$126.8 (engine buy point)",
+          entryCondition: "Daily close above $126.8 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,433,957 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$117.29 (~7.5% below pivot)",
+          target1: "$152.16 (+20%)",
+          target2: "$164.84 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$126.81 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$120.46 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$117.29 — hard stop"
+          }
+        ],
+        notes: "DO NOT TRADE. The engine scored a perfect 8/8 with a textbook tight base (1.2% tightness) — but this is a MERGER PIN, not a VCP. Integer agreed to be acquired by KKR at $127/share and the stock is simply sitting under the deal price. Upside is capped; multiple August analyst downgrades were explicitly on the acquisition. A live example of why every algorithmic setup needs human verification.  |  FUNDAMENTALS: Not relevant — the equity is a deal spread, not a momentum vehicle.",
+        epsNote: "Not relevant — the equity is a deal spread, not a momentum vehicle."
+      },
+      {
+        rank: 4,
+        ticker: "PR",
+        name: "Permian Resources",
+        sector: "Energy",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 11, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 11, 2026)",
+            value: "$23.78",
+            signal: "1.7% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$21.44",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$20.22 / $18.81",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "10.9%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "91",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$24.2 / $11.92",
+            signal: "Pivot at 20-day high"
+          }
+        ],
+        entry: {
+          pivot: "$24.2 (engine buy point)",
+          entryCondition: "Daily close above $24.2 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 12,382,356 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$22.39 (~7.5% below pivot)",
+          target1: "$29.04 (+20%)",
+          target2: "$31.46 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$24.21 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$22.99 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$22.39 — hard stop"
+          }
+        ],
+        notes: "GATED would-be BUY NOW. Clean 8/8 with a tight base 1.7% off the 52-week high. The only featured name with genuine headroom: Strong Buy across 19 analysts, average target ~$25.79 (range $22–$30) — roughly 8% room to run. Commodity beta: a crude reversal breaks the thesis regardless of the chart.  |  FUNDAMENTALS: FMP PLAN-GATED. Energy EPS is oil-price dependent — check the strip before sizing.",
+        epsNote: "FMP PLAN-GATED. Energy EPS is oil-price dependent — check the strip before sizing."
+      },
+      {
+        rank: 5,
+        ticker: "SAFT",
+        name: "Safety Insurance Group",
+        sector: "Financial Services",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 11, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 11, 2026)",
+            value: "$103.42",
+            signal: "0.4% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$94.91",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$80.95 / $79.98",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "9.0%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "91",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$103.8 / $67.04",
+            signal: "Pivot at 20-day high"
+          }
+        ],
+        entry: {
+          pivot: "$103.8 (engine buy point)",
+          entryCondition: "Daily close above $103.8 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 320,674 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$96.02 (~7.5% below pivot)",
+          target1: "$124.56 (+20%)",
+          target2: "$134.94 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$103.81 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$98.61 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$96.02 — hard stop"
+          }
+        ],
+        notes: "GATED would-be BUY NOW and the tightest base of the group (0.7% 10-day range, 0.4% off the high) — but LIQUIDITY IS THE PROBLEM. The 50-day average is only ~229k shares, so the 1.4× volume confirmation (~321k shares) is unreliable and slippage is real. Analyst coverage is minimal and published targets (~$70) look stale against a $103 price. Size down or skip.  |  FUNDAMENTALS: FMP PLAN-GATED. No fundamental check possible.",
+        epsNote: "FMP PLAN-GATED. No fundamental check possible."
+      },
+      {
+        rank: 6,
+        ticker: "AMD",
+        name: "Advanced Micro Devices",
+        sector: "Technology",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 11, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 11, 2026)",
+            value: "$516.13",
+            signal: "11.7% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$496.55",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$388.68 / $346.91",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "3.9%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "98",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$584.73 / $149.85",
+            signal: "Pivot at 20-day high"
+          }
+        ],
+        entry: {
+          pivot: "$526.79 (engine buy point)",
+          entryCondition: "Daily close above $526.79 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 33,458,758 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$487.28 (~7.5% below pivot)",
+          target1: "$632.15 (+20%)",
+          target2: "$684.83 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$526.80 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$500.45 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$487.28 — hard stop"
+          }
+        ],
+        notes: "Top gated SETUP — NEAR BUY and the single best combination of leadership and low extension in the screen: RS 98 with price only +3.9% above the 50DMA. Base is still FORMING (11.7% below the 52-week high, 19.6% 10-day range) and needs another contraction. This is the name to watch if the regime gate lifts.  |  FUNDAMENTALS: FMP PLAN-GATED. Not independently re-confirmed this run.",
+        epsNote: "FMP PLAN-GATED. Not independently re-confirmed this run."
+      }
+    ],
+    riskRules: [
+      "REGIME GATE FIRST — the market is not in a confirmed uptrend, so there are no new positions this week regardless of how good an individual chart looks.",
+      "Hard stop ~7.5% below the pivot, placed when the position opens; honour it intraday.",
+      "v2 trend exit is buffered: act only on a WEEKLY close >3% below the 50DMA, never on a daily dip.",
+      "Re-entry cooldown of 4–6 weeks after any stop or exit, and only on a fresh higher base.",
+      "Never add to a loser. Tranches run 50% at the pivot, 30% on a 5–7% advance, 20% on a third confirmation — upward only.",
+      "If a name is already >10% above its 50DMA at entry, start at 25% size instead of 50%.",
+      "Require reward-to-risk of at least 2.5:1 and breakout volume of at least 1.4× the 50-day average.",
+      "Be sceptical of names whose average volume is too thin to produce a reliable volume confirmation (SAFT this week).",
+      "Sell into strength near +20% and +30% rather than waiting for a reversal.",
+      "Treat this as an idea generator, not a buy list — a backtest of this screen lagged buy-and-hold, and no fundamental screen ran this week."
+    ],
+    verification: "Confirm current price, the 50/150/200MA stack, the base and pivot, and a real volume-expansion breakout on TradingView 1D before any trade. Prices are the 2026-09-11 close from an alternate vendor this run. Also search every ticker for pending M&A — ITGR in this report scored a perfect base while under a KKR bid at $127.",
+    disclaimer: "For informational and educational purposes only. Not financial advice."
+  },
+  {
     reportDate: "2026-06-14",
     title: "S&P 1500 Momentum Screen",
     framework: "Minervini SEPA — history-based engine v2 (full S&P 1500)",

@@ -11,6 +11,1435 @@
 
 window.SCREEN_RUNS_DAX = [
   {
+    "reportDate": "2026-09-14",
+    "title": "Germany Broad — DAX+MDAX+SDAX",
+    "framework": "Minervini SEPA Framework (v2, regime-gated) | German Equities — DAX + MDAX + SDAX",
+    "market": {
+      "index": "Germany Broad — DAX+MDAX+SDAX · Breadth UNDER PRESSURE · 43.9% > 200MA",
+      "verdict": "UNDER PRESSURE",
+      "verdictNote": "REGIME GATE ACTIVE — no name can be BUY or SETUP this week. Breadth over the full broad universe: 43.9% above the 200-day MA (an uptrend needs ≥60%), only 36.5% above the 50-day, and 33.1% with the 50/150/200 correctly stacked (needs ≥45%). Both tests fail, so the engine automatically downgraded 28 would-be SETUP — NEAR BUY names to EXTENDED — WATCH (gated_by_market). No index quote is used: the verdict is derived purely from breadth across the universe. Universe = DAX 40 + MDAX + SDAX, 148 names evaluated of 152 requested. Context: the DAX set record highs on 28 Aug and then fell back to ~25,558 by 12 Sep on oil and inflation worries — a classic narrow, top-heavy rally where the index holds up while the average German share sits below its 50-day.",
+      "metrics": [
+        { "metric": "% above 200-day MA", "value": "43.9%", "signal": "Uptrend needs ≥60%", "good": false },
+        { "metric": "% above 50-day MA", "value": "36.5%", "signal": "Short-term momentum is worse than the trend", "good": false },
+        { "metric": "% stacked 50 > 150 > 200", "value": "33.1%", "signal": "Uptrend needs ≥45%", "good": false },
+        { "metric": "Names gated out by the market", "value": "28", "signal": "Would have been SETUP — NEAR BUY" }
+      ],
+      "sectorAsOf": "",
+      "sectors": [],
+      "sectorNote": "Leadership is narrow and partly artificial: two of the three highest-RS names in the universe are takeover pins rather than momentum bases — Nagarro (NA9) under a €81.00 all-cash offer from Persistent, and Delivery Hero (DHER) under a €41.50 offer from Uber. Genuine trend leadership sits in solar/industrial recovery (S92, TKA, DEZ, INH) but those names are all too extended or too far off their highs to buy. 55% of the universe scores below 4/8 on the trend template."
+    },
+    "dataSources": [
+      "Yahoo Finance (.DE / XETRA) — 2 years of daily OHLCV per name, 148 of 152 symbols",
+      "Deterministic v2 engine — 8-criterion trend template, RS percentile vs the 148-name universe, algorithmic VCP, breadth-derived regime gate",
+      "Confirmation research only (offers, guidance, analyst targets, DAX context) — never used to generate the numbers. Verify live on TradingView (XETR)."
+    ],
+    "dataQualityNote": "148/152 tickers returned ≥221 daily bars (97.4%). Engine output was cross-checked against the reference Python engine: evaluate() reproduced every field for NA9 exactly, and the RS percentile ranks matched on all 148 names with zero mismatches. Mechanical screen historically LAGGED buy-and-hold — idea generator, not a buy list.",
+    "dataQuality": [
+      { "ticker": "Universe", "source": "DAX 40 + MDAX 50 + SDAX 62", "date": "Sep 14, 2026", "status": "152 requested, 148 IN REPORT" },
+      { "ticker": "Yahoo 2y history", "source": "Yahoo Finance", "date": "Sep 14, 2026", "status": "148 OK / 4 FAILED" },
+      { "ticker": "1COV, ECV", "source": "Yahoo Finance", "date": "Sep 14, 2026", "status": "NO DATA — delisted after takeover" },
+      { "ticker": "KCO, M8G", "source": "Yahoo Finance", "date": "Sep 14, 2026", "status": "SKIPPED — ticker/listing change" },
+      { "ticker": "Engine v2 + VCP", "source": "engine", "date": "Sep 14, 2026", "status": "COMPUTED + VERIFIED" }
+    ],
+    "criteria": [
+      { "key": "c1", "label": "Price > 200MA" },
+      { "key": "c2", "label": "200MA Trending Up" },
+      { "key": "c3", "label": "Price ≥ 30% Above 52W Low" },
+      { "key": "c4", "label": "Within 25% of 52W High" },
+      { "key": "c5", "label": "50MA > 200MA" },
+      { "key": "c6", "label": "Price > 50MA" },
+      { "key": "c7", "label": "RS ≥ 70 (vs universe)" }
+    ],
+    "summary": [
+      { "ticker": "NA9", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "DRW3", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "DHER", "flags": [1,1,1,1,1,0,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "BAYN", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "1SXP", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "GFT", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "SFQ", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "SDF", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "SZU", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "CBK", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "MLP", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "BFSA", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "EVK", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "DHL", "flags": [1,1,1,1,1,0,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "RWE", "flags": [1,1,1,1,1,0,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "F3C", "flags": [1,1,1,1,1,0,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "BNR", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "NOEJ", "flags": [1,1,1,1,1,0,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "ALV", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "DB1", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "KWS", "flags": [1,1,0,1,1,1,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "SY1", "flags": [1,1,1,1,1,0,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "8TRA", "flags": [1,1,1,1,1,0,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "DBK", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "TLX", "flags": [1,1,0,1,1,1,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "WAC", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "BAS", "flags": [1,1,0,1,1,1,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "MRK", "flags": [1,1,0,1,1,0,1], "score": "5/7", "result": "FAIL" },
+      { "ticker": "S92", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "TKA", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "JEN", "flags": [1,1,1,1,1,0,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "INH", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "SZG", "flags": [1,1,1,1,1,0,1], "score": "6/7", "result": "FAIL" },
+      { "ticker": "DEZ", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "SBS", "flags": [1,1,1,1,1,1,1], "score": "7/7", "result": "FAIL" },
+      { "ticker": "SPG", "flags": [1,0,1,1,1,1,0], "score": "5/7", "result": "FAIL" },
+      { "ticker": "AIXA", "flags": [0,1,1,0,0,0,1], "score": "3/7", "result": "WATCHLIST" },
+      { "ticker": "SMHN", "flags": [0,1,1,0,0,0,1], "score": "3/7", "result": "WATCHLIST" },
+      { "ticker": "WAF", "flags": [0,1,1,0,0,0,1], "score": "3/7", "result": "WATCHLIST" },
+      { "ticker": "IFX", "flags": [0,1,1,0,0,0,1], "score": "3/7", "result": "WATCHLIST" }
+    ],
+    "stocks": [
+      {
+        "rank": 1, "ticker": "NA9", "name": "Nagarro SE (SDAX)", "sector": "",
+        "status": "WATCHLIST — Near Buy",
+        "techScore": "6/8 (7-crit: 7/7)",
+        "dataDate": "Yahoo, Sep 14, 2026",
+        "technical": [
+          { "metric": "Price", "value": "€78.20", "signal": "2.7% from 52W high" },
+          { "metric": "50-Day MA", "value": "€77.45", "signal": "Ext +1.0% vs 50MA", "good": true },
+          { "metric": "200-Day MA", "value": "€61.02", "signal": "Price above 200MA", "good": true },
+          { "metric": "52-Week High", "value": "€80.35", "signal": "Pivot reference" },
+          { "metric": "RS Rank", "value": "98", "signal": "vs German universe", "good": true },
+          { "metric": "VCP", "value": "VCP FORMING", "signal": "Tightness 0.4%, volume drying" }
+        ],
+        "entry": { "pivot": "€78.45", "entryCondition": "Daily close above €78.45 on volume ≥ 77,231 shares (1.4× 50-day avg)", "volumeTrigger": "≥ 77,231 shares — VERIFY ON TRADINGVIEW (XETR)", "stop": "€72.57", "target1": "€94.14", "target2": "€101.99", "rr": "2.67 : 1", "sizing": "DO NOT TRADE — deal pin, upside capped at the €81.00 offer." },
+        "alerts": [ { "type": "BREAKOUT ALERT", "price": "€78.46" }, { "type": "WARNING LEVEL", "price": "€74.53" }, { "type": "STOP ALERT", "price": "€72.57" } ],
+        "notes": "DISQUALIFIED BY DEAL. Persistent Systems (Galaxy Germany Holding SE) has a €81.00 all-cash offer; both boards recommend acceptance, acceptance period ran to 17 Sep 2026, delisting planned, closing expected Q4 2026 / Q1 2027. The 0.4% tightness and drying volume the engine sees is merger arbitrage, not accumulation — roughly 3-4% of deal spread with the upside capped. Skip."
+      },
+      {
+        "rank": 2, "ticker": "DRW3", "name": "Drägerwerk AG & Co. KGaA Vz. (SDAX)", "sector": "",
+        "status": "WATCHLIST — Near Buy",
+        "techScore": "8/8 (7-crit: 7/7)",
+        "dataDate": "Yahoo, Sep 14, 2026",
+        "technical": [
+          { "metric": "Price", "value": "€112.40", "signal": "3.9% from 52W high" },
+          { "metric": "50-Day MA", "value": "€103.29", "signal": "Ext +8.8% vs 50MA", "good": true },
+          { "metric": "200-Day MA", "value": "€89.61", "signal": "Price above 200MA", "good": true },
+          { "metric": "52-Week High", "value": "€117.00", "signal": "Pivot reference" },
+          { "metric": "RS Rank", "value": "96", "signal": "vs German universe", "good": true },
+          { "metric": "VCP", "value": "VCP FORMING", "signal": "8.0→5.1→3.7% contractions, volume drying" }
+        ],
+        "entry": { "pivot": "€117.00", "entryCondition": "Daily close above €117.00 on volume ≥ 28,933 shares (1.4× 50-day avg)", "volumeTrigger": "≥ 28,933 shares — VERIFY ON TRADINGVIEW (XETR)", "stop": "€108.22", "target1": "€140.40", "target2": "€152.10", "rr": "2.67 : 1", "sizing": "€10k: 50% at pivot · 30% +5–7% higher · 20% from a higher base. Never add to a loser." },
+        "alerts": [ { "type": "BREAKOUT ALERT", "price": "€117.01" }, { "type": "WARNING LEVEL", "price": "€111.15" }, { "type": "STOP ALERT", "price": "€108.22" } ],
+        "notes": "Cleanest technical structure in the universe: 8/8 trend, shrinking contractions, 6.6% ten-day tightness, volume 5% below base. Fundamental flag — FY26 guidance is only +1–5% revenue and a 5.0–7.5% EBIT margin, nowhere near the ≥25% EPS standard, and analyst targets cluster in the high-€80s to low-€90s, i.e. the share has outrun consensus. Thin liquidity (~20k shares/day)."
+      },
+      {
+        "rank": 3, "ticker": "DHER", "name": "Delivery Hero SE (MDAX)", "sector": "",
+        "status": "WATCHLIST — Near Buy",
+        "techScore": "7/8 (7-crit: 6/7)",
+        "dataDate": "Yahoo, Sep 14, 2026",
+        "technical": [
+          { "metric": "Price", "value": "€36.69", "signal": "7.9% from 52W high" },
+          { "metric": "50-Day MA", "value": "€37.22", "signal": "Ext -1.4% vs 50MA", "good": false },
+          { "metric": "200-Day MA", "value": "€27.61", "signal": "Price above 200MA", "good": true },
+          { "metric": "52-Week High", "value": "€39.83", "signal": "Pivot reference" },
+          { "metric": "RS Rank", "value": "95", "signal": "vs German universe", "good": true },
+          { "metric": "VCP", "value": "VCP FORMING", "signal": "Tightness 2.3%, volume drying" }
+        ],
+        "entry": { "pivot": "€37.19", "entryCondition": "Daily close above €37.19 on volume ≥ 947,808 shares (1.4× 50-day avg)", "volumeTrigger": "≥ 947,808 shares — VERIFY ON TRADINGVIEW (XETR)", "stop": "€34.40", "target1": "€44.63", "target2": "€48.35", "rr": "2.67 : 1", "sizing": "DO NOT TRADE — deal situation, not a momentum base." },
+        "alerts": [ { "type": "BREAKOUT ALERT", "price": "€37.20" }, { "type": "WARNING LEVEL", "price": "€35.33" }, { "type": "STOP ALERT", "price": "€34.40" } ],
+        "notes": "DISQUALIFIED BY DEAL. Uber has a €41.50 per share offer outstanding with an acceptance period to 5 Nov 2026; the stock trades ~11.6% below it, which is exactly why the chart looks like a tight base. Operationally strong (FY26 guidance raised to +9–11% GMV, +17–19% revenue, €960m–1.0bn adj. EBITDA) but the price now tracks deal probability, not momentum."
+      },
+      {
+        "rank": 4, "ticker": "BAYN", "name": "Bayer AG (DAX)", "sector": "",
+        "status": "WATCHLIST — Near Buy",
+        "techScore": "8/8 (7-crit: 7/7)",
+        "dataDate": "Yahoo, Sep 14, 2026",
+        "technical": [
+          { "metric": "Price", "value": "€49.33", "signal": "8.5% from 52W high" },
+          { "metric": "50-Day MA", "value": "€48.61", "signal": "Ext +1.5% vs 50MA", "good": true },
+          { "metric": "200-Day MA", "value": "€41.87", "signal": "Price above 200MA", "good": true },
+          { "metric": "52-Week High", "value": "€53.92", "signal": "Pivot reference" },
+          { "metric": "RS Rank", "value": "94", "signal": "vs German universe", "good": true },
+          { "metric": "VCP", "value": "VCP FORMING", "signal": "15.6→12.7→6.5→4.1%, volume NOT drying" }
+        ],
+        "entry": { "pivot": "€50.32", "entryCondition": "Daily close above €50.32 on volume ≥ 2,882,764 shares (1.4× 50-day avg)", "volumeTrigger": "≥ 2,882,764 shares — VERIFY ON TRADINGVIEW (XETR)", "stop": "€46.55", "target1": "€60.38", "target2": "€65.42", "rr": "2.67 : 1", "sizing": "€10k: 50% at pivot · 30% +5–7% higher · 20% from a higher base. Not before the court date." },
+        "alerts": [ { "type": "BREAKOUT ALERT", "price": "€50.33" }, { "type": "WARNING LEVEL", "price": "€47.80" }, { "type": "STOP ALERT", "price": "€46.55" } ],
+        "notes": "Textbook contraction sequence and 8/8 on the trend template, but volume is not drying (today ~1.5× average). BINARY EVENT: the US glyphosate settlement hearing was set for 14 Sep 2026 — the same date as this data. Consensus sits near €53 (range roughly €46–70), so modest room. Do not pre-position into a court date; let it pass, then judge the base."
+      },
+      {
+        "rank": 5, "ticker": "1SXP", "name": "Schott Pharma AG & Co. KGaA (SDAX)", "sector": "",
+        "status": "WATCHLIST — Near Buy",
+        "techScore": "8/8 (7-crit: 7/7)",
+        "dataDate": "Yahoo, Sep 14, 2026",
+        "technical": [
+          { "metric": "Price", "value": "€22.60", "signal": "4.8% from 52W high" },
+          { "metric": "50-Day MA", "value": "€21.77", "signal": "Ext +3.8% vs 50MA", "good": true },
+          { "metric": "200-Day MA", "value": "€17.03", "signal": "Price above 200MA", "good": true },
+          { "metric": "52-Week High", "value": "€23.75", "signal": "Pivot = 52W high" },
+          { "metric": "RS Rank", "value": "93", "signal": "vs German universe", "good": true },
+          { "metric": "VCP", "value": "VCP FORMING", "signal": "Tightness 4.6%, volume 24% below base" }
+        ],
+        "entry": { "pivot": "€23.75", "entryCondition": "Daily close above €23.75 on volume ≥ 105,727 shares (1.4× 50-day avg)", "volumeTrigger": "≥ 105,727 shares — VERIFY ON TRADINGVIEW (XETR)", "stop": "€21.97", "target1": "€28.50", "target2": "€30.88", "rr": "2.67 : 1", "sizing": "€10k: 50% at pivot · 30% +5–7% higher · 20% from a higher base. Never add to a loser." },
+        "alerts": [ { "type": "BREAKOUT ALERT", "price": "€23.76" }, { "type": "WARNING LEVEL", "price": "€22.56" }, { "type": "STOP ALERT", "price": "€21.97" } ],
+        "notes": "One of the better-looking small caps: 8/8 trend, tight 4.6% range, volume drying, pivot equal to the 52-week high so the trigger is unambiguous. Pharma packaging — steady growth rather than explosive; verify the latest quarter against the ≥25% EPS standard before acting. Would be a SETUP if the market were in gear."
+      },
+      {
+        "rank": 6, "ticker": "CBK", "name": "Commerzbank AG (DAX)", "sector": "",
+        "status": "WATCHLIST — Near Buy",
+        "techScore": "8/8 (7-crit: 7/7)",
+        "dataDate": "Yahoo, Sep 14, 2026",
+        "technical": [
+          { "metric": "Price", "value": "€42.67", "signal": "1.2% from 52W high" },
+          { "metric": "50-Day MA", "value": "€39.18", "signal": "Ext +8.9% vs 50MA", "good": true },
+          { "metric": "200-Day MA", "value": "€35.94", "signal": "Price above 200MA", "good": true },
+          { "metric": "52-Week High", "value": "€43.20", "signal": "Pivot reference" },
+          { "metric": "RS Rank", "value": "87", "signal": "vs German universe", "good": true },
+          { "metric": "VCP", "value": "VCP FORMING", "signal": "Shallow even contractions, volume elevated" }
+        ],
+        "entry": { "pivot": "€43.20", "entryCondition": "Daily close above €43.20 on volume ≥ 3,173,661 shares (1.4× 50-day avg)", "volumeTrigger": "≥ 3,173,661 shares — VERIFY ON TRADINGVIEW (XETR)", "stop": "€39.96", "target1": "€51.84", "target2": "€56.16", "rr": "2.67 : 1", "sizing": "€10k: extension already 8.9% — 50% at pivot, then add only on strength." },
+        "alerts": [ { "type": "BREAKOUT ALERT", "price": "€43.21" }, { "type": "WARNING LEVEL", "price": "€41.04" }, { "type": "STOP ALERT", "price": "€39.96" } ],
+        "notes": "Fresh 52-week high at €43.12 on 8 Sep and 8/8 on the trend template — the highest-quality large-cap trend here. But OUTRUN ESTIMATES: JPMorgan lifted its target only to €39 (Neutral) in early September, so the share trades ~9% above it, and government stake-sale headlines are a live supply overhang on any breakout."
+      },
+      {
+        "rank": 7, "ticker": "GFT", "name": "GFT Technologies SE (SDAX)", "sector": "",
+        "status": "WATCHLIST — Near Buy",
+        "techScore": "8/8 (7-crit: 7/7)",
+        "dataDate": "Yahoo, Sep 14, 2026",
+        "technical": [
+          { "metric": "Price", "value": "€25.90", "signal": "4.4% from 52W high" },
+          { "metric": "50-Day MA", "value": "€22.80", "signal": "Ext +13.6% vs 50MA", "good": false },
+          { "metric": "200-Day MA", "value": "€20.14", "signal": "Price above 200MA", "good": true },
+          { "metric": "52-Week High", "value": "€27.10", "signal": "Pivot reference" },
+          { "metric": "RS Rank", "value": "92", "signal": "vs German universe", "good": true },
+          { "metric": "VCP", "value": "VCP FORMING", "signal": "Last contraction WIDENED to 10.3%" }
+        ],
+        "entry": { "pivot": "€27.10", "entryCondition": "Daily close above €27.10 on volume ≥ 96,916 shares (1.4× 50-day avg)", "volumeTrigger": "≥ 96,916 shares — VERIFY ON TRADINGVIEW (XETR)", "stop": "€25.07", "target1": "€32.52", "target2": "€35.23", "rr": "2.67 : 1", "sizing": "Extension >10% — start at 25%, not 50%." },
+        "alerts": [ { "type": "BREAKOUT ALERT", "price": "€27.11" }, { "type": "WARNING LEVEL", "price": "€25.75" }, { "type": "STOP ALERT", "price": "€25.07" } ],
+        "notes": "8/8 trend and a strong recovery off €13.86, but the base is not finished: the last contraction widened (3.7% then 10.3%), volume is not drying and extension is 13.6%, right at the limit. IT services for banks — recovery, not ≥25% growth."
+      },
+      {
+        "rank": 8, "ticker": "SFQ", "name": "SAF-Holland SE (SDAX)", "sector": "",
+        "status": "WATCHLIST — Near Buy",
+        "techScore": "8/8 (7-crit: 7/7)",
+        "dataDate": "Yahoo, Sep 14, 2026",
+        "technical": [
+          { "metric": "Price", "value": "€22.15", "signal": "3.7% from 52W high" },
+          { "metric": "50-Day MA", "value": "€21.38", "signal": "Ext +3.6% vs 50MA", "good": true },
+          { "metric": "200-Day MA", "value": "€18.72", "signal": "Price above 200MA", "good": true },
+          { "metric": "52-Week High", "value": "€23.00", "signal": "Pivot reference" },
+          { "metric": "RS Rank", "value": "89", "signal": "vs German universe", "good": true },
+          { "metric": "VCP", "value": "VCP FORMING", "signal": "Volume 48% ABOVE base — churn" }
+        ],
+        "entry": { "pivot": "€23.00", "entryCondition": "Daily close above €23.00 on volume ≥ 102,150 shares (1.4× 50-day avg)", "volumeTrigger": "≥ 102,150 shares — VERIFY ON TRADINGVIEW (XETR)", "stop": "€21.28", "target1": "€27.60", "target2": "€29.90", "rr": "2.67 : 1", "sizing": "€10k: 50% at pivot · 30% +5–7% higher · 20% from a higher base." },
+        "alerts": [ { "type": "BREAKOUT ALERT", "price": "€23.01" }, { "type": "WARNING LEVEL", "price": "€21.85" }, { "type": "STOP ALERT", "price": "€21.28" } ],
+        "notes": "8/8 trend and close to the high, but the final contraction widened to 7.4% and ten-day volume runs ~48% above the base — churn rather than the quiet dry-up the method wants. Cyclical truck and trailer components into a weak European commercial-vehicle cycle. Needs another two to three quiet weeks."
+      },
+      {
+        "rank": 9, "ticker": "S92", "name": "SMA Solar Technology AG (SDAX) — teaching case", "sector": "",
+        "status": "WATCHLIST",
+        "techScore": "8/8 (7-crit: 7/7)",
+        "dataDate": "Yahoo, Sep 14, 2026",
+        "technical": [
+          { "metric": "Price", "value": "€57.65", "signal": "18.5% from 52W high" },
+          { "metric": "50-Day MA", "value": "€56.87", "signal": "Ext +1.4% vs 50MA", "good": true },
+          { "metric": "200-Day MA", "value": "€47.38", "signal": "Price above 200MA", "good": true },
+          { "metric": "52-Week High", "value": "€70.70", "signal": "Pivot far overhead" },
+          { "metric": "RS Rank", "value": "99", "signal": "Strongest in the universe", "good": true },
+          { "metric": "VCP", "value": "VCP NOT YET", "signal": "16.9% ten-day range — correcting" }
+        ],
+        "entry": { "pivot": "€63.95", "entryCondition": "No valid trigger — the base does not exist yet", "volumeTrigger": "n/a", "stop": "€59.15", "target1": "€76.74", "target2": "€83.14", "rr": "2.66 : 1", "sizing": "No position — wait for the range to tighten below ~12%." },
+        "alerts": [ { "type": "BREAKOUT ALERT", "price": "€63.96" }, { "type": "WARNING LEVEL", "price": "€60.75" }, { "type": "STOP ALERT", "price": "€59.15" } ],
+        "notes": "WHY NOT ACTIONABLE: highest relative strength in the universe (RS 99, more than 3× off the €18.46 low) and a perfect trend, but 18.5% below the high with a 16.9% ten-day range. That is a correction, not a base. Best candidate to graduate if breadth recovers."
+      },
+      {
+        "rank": 10, "ticker": "TKA", "name": "thyssenkrupp AG (MDAX) — teaching case", "sector": "",
+        "status": "WATCHLIST",
+        "techScore": "8/8 (7-crit: 7/7)",
+        "dataDate": "Yahoo, Sep 14, 2026",
+        "technical": [
+          { "metric": "Price", "value": "€15.01", "signal": "4.4% from 52W high" },
+          { "metric": "50-Day MA", "value": "€13.03", "signal": "Ext +15.2% vs 50MA — too far", "good": false },
+          { "metric": "200-Day MA", "value": "€10.74", "signal": "Price above 200MA", "good": true },
+          { "metric": "52-Week High", "value": "€15.70", "signal": "Pivot reference" },
+          { "metric": "RS Rank", "value": "98", "signal": "vs German universe", "good": true },
+          { "metric": "VCP", "value": "VCP NOT YET", "signal": "15.4% range, contractions not shrinking" }
+        ],
+        "entry": { "pivot": "€15.70", "entryCondition": "No entry — extension 15.2% exceeds the 14% limit", "volumeTrigger": "n/a", "stop": "€14.52", "target1": "€18.84", "target2": "€20.41", "rr": "2.66 : 1", "sizing": "No position — wait for a pullback to the 50-day or a real base." },
+        "alerts": [ { "type": "BREAKOUT ALERT", "price": "€15.71" }, { "type": "WARNING LEVEL", "price": "€14.92" }, { "type": "STOP ALERT", "price": "€14.52" } ],
+        "notes": "WHY NOT ACTIONABLE: the Infineon lesson in a German wrapper. RS 98, 8/8 trend, doubled off the low — and completely unbuyable, because entering 15.2% above the 50-day puts any sane stop more than 10% away. Great trends and good entries are different questions."
+      }
+    ],
+    "riskManagement": [
+      "REGIME GATE: no new buying while breadth is below 60% above the 200-day and 45% stacked. This week that means zero new positions.",
+      "Risk ≤1.25% of capital per trade; size from entry-to-stop distance.",
+      "Never buy more than ~14% above the 50-day; extension is a risk measure, not an opinion.",
+      "Hard stop ~7.5% below pivot; exit if hit intraday.",
+      "Trend exit only on a WEEKLY close >3% below the 50-day MA (buffered — daily noise does not count).",
+      "Re-entry cooldown: no re-buy for 4–6 weeks after a stop, only on a fresh higher base.",
+      "Never average down; add only to winners at planned tranches (50% / 30% / 20%).",
+      "Check for takeover situations before trusting a base — NA9 and DHER both look tight only because they are pinned to cash offers.",
+      "Watch liquidity in SDAX names; several trade under 100,000 shares a day. Size for the exit, not the entry.",
+      "Sell into strength near +20% / +30%. This mechanical screen has historically LAGGED buy-and-hold — idea generator, not auto-buy."
+    ],
+    "verification": "Every pivot, base and volume figure is engine-computed from Yahoo end-of-day data and was cross-checked against the reference Python engine (identical output on NA9; RS ranks matched on all 148 names). Before any order, confirm the pattern and pivot on a live TradingView chart (XETR), check earnings, ex-dividend, court and offer-acceptance dates, and re-check that the broader market has reconfirmed an uptrend.",
+    "disclaimer": "For informational purposes only. Not financial advice."
+  },
+
+    {
+      "reportDate": "2026-07-15",
+      "title": "Germany Broad — DAX+MDAX+SDAX",
+      "framework": "Minervini SEPA Framework (v2, regime-gated) | German Equities — SNAPSHOT (degraded) run",
+      "market": {
+        "index": "Germany Broad — DAX+MDAX+SDAX · Breadth UNDER PRESSURE · 62.5% > 200MA",
+        "verdict": "UNDER PRESSURE",
+        "verdictNote": "DEGRADED RUN: the 2-year daily-history feed (Yahoo) was unreachable (sandbox egress fully blocked), web_fetch is provenance-locked and FMP historical charts are plan-gated, so the deterministic 8-criterion engine and the algorithmic VCP could NOT run. Breadth here is a live-quote snapshot: 62.5% of names above their 200-day MA (uptrend needs ≥60%) but only 35.0% fully stacked (needs ≥45%), so the regime gate is ACTIVE. No name can be BUY/SETUP — VCP is uncomputable and the market is not in a confirmed uptrend. Universe: de_universe.txt, 40 DAX names (intended DAX+MDAX+SDAX ~160).",
+        "metrics": [
+          {
+            "metric": "% above 200-day MA",
+            "value": "62.5%",
+            "signal": "Uptrend needs ≥60%",
+            "good": true
+          },
+          {
+            "metric": "% above 50-day MA",
+            "value": "65.0%",
+            "signal": "Short-term momentum",
+            "good": true
+          },
+          {
+            "metric": "% stacked 50 > 200 (snapshot)",
+            "value": "35.0%",
+            "signal": "Uptrend needs ≥45%",
+            "good": false
+          },
+          {
+            "metric": "Engine mode",
+            "value": "SNAPSHOT",
+            "signal": "No 2y history → no VCP, no true RS, no 150MA"
+          }
+        ],
+        "sectorAsOf": "",
+        "sectors": [],
+        "sectorNote": "Web-confirmed: DAX 40 hit an all-time high ~25,900 on 6 Jul 2026, then pulled back to ~25,147 (14 Jul) and ~24,860 (16 Jul) on oil/US–Iran tension and profit-taking. Prior leader Rheinmetall is ~38% off its high (F126 frigate cancellation). Leadership is narrow; the tape reads UNDER PRESSURE. Prices FMP XETRA live snapshot, Jul 15, 2026."
+      },
+      "dataSources": [
+        "FMP live XETRA quotes (.DE) — price, 50/200-day MA, 52-week high/low (real-time snapshot)",
+        "Intended Yahoo 2-year daily history + deterministic v2 engine + algorithmic VCP — UNAVAILABLE this run (network blocked / plan-gated)",
+        "Market context web-confirmed (DAX level, Rheinmetall correction). Verify live on TradingView (XETR)."
+      ],
+      "dataQualityNote": "DEGRADED SNAPSHOT: 40/40 quotes fetched, 0 failed, but the 2-year history engine and VCP could not run. Rankings are a rough trend-quality sort only. Mechanical screen historically lagged buy-and-hold — idea generator, not a buy list.",
+      "dataQuality": [
+        {
+          "ticker": "Universe",
+          "source": "de_universe.txt",
+          "date": "Jul 15, 2026",
+          "status": "40 DAX names (not full ~160)"
+        },
+        {
+          "ticker": "Yahoo 2y history",
+          "source": "Yahoo Finance",
+          "date": "Jul 15, 2026",
+          "status": "FAILED — egress blocked (403)"
+        },
+        {
+          "ticker": "FMP historical",
+          "source": "FMP",
+          "date": "Jul 15, 2026",
+          "status": "BLOCKED — plan-gated"
+        },
+        {
+          "ticker": "FMP live quotes",
+          "source": "FMP XETRA",
+          "date": "Jul 15, 2026",
+          "status": "40/40 IN REPORT"
+        },
+        {
+          "ticker": "VCP / RS / 150MA",
+          "source": "engine",
+          "date": "Jul 15, 2026",
+          "status": "NOT COMPUTED (no history)"
+        }
+      ],
+      "criteria": [
+        {
+          "key": "c1",
+          "label": "Price > 200MA"
+        },
+        {
+          "key": "c2",
+          "label": "200MA Trending Up"
+        },
+        {
+          "key": "c3",
+          "label": "Price ≥ 30% Above 52W Low"
+        },
+        {
+          "key": "c4",
+          "label": "Within 25% of 52W High"
+        },
+        {
+          "key": "c5",
+          "label": "50MA > 200MA"
+        },
+        {
+          "key": "c6",
+          "label": "Price > 50MA"
+        },
+        {
+          "key": "c7",
+          "label": "RS ≥ 70 (vs universe)"
+        }
+      ],
+      "summary": [
+        {
+          "ticker": "IFX",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          "score": "5/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "BAYN",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "6/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "DHL",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "6/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "ZAL",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "6/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "SY1",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "6/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "MRK",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "6/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "ADS",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "6/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "BNR",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "6/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "DB1",
+          "flags": [
+            1,
+            null,
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "5/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "CBK",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "6/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "ALV",
+          "flags": [
+            1,
+            null,
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "5/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "RWE",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "score": "6/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "EOAN",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "score": "5/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "CON",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "score": "5/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "SIE",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "score": "4/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "DTG",
+          "flags": [
+            1,
+            null,
+            0,
+            1,
+            1,
+            1,
+            0
+          ],
+          "score": "4/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "DBK",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            0,
+            1,
+            0
+          ],
+          "score": "4/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "SRT3",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            0,
+            1,
+            0
+          ],
+          "score": "4/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "ENR",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "score": "4/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "FME",
+          "flags": [
+            1,
+            null,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "score": "3/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "HEN3",
+          "flags": [
+            1,
+            null,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "score": "3/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "AIR",
+          "flags": [
+            1,
+            null,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "score": "3/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "P911",
+          "flags": [
+            1,
+            null,
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          "score": "3/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "BAS",
+          "flags": [
+            1,
+            null,
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          "score": "3/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "MTX",
+          "flags": [
+            1,
+            null,
+            1,
+            1,
+            0,
+            1,
+            0
+          ],
+          "score": "4/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "QIA",
+          "flags": [
+            0,
+            null,
+            1,
+            1,
+            0,
+            1,
+            0
+          ],
+          "score": "3/6",
+          "result": "WATCHLIST"
+        },
+        {
+          "ticker": "1COV",
+          "flags": [
+            0,
+            null,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "score": "1/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "HNR1",
+          "flags": [
+            0,
+            null,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "score": "2/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "MUV2",
+          "flags": [
+            0,
+            null,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "score": "2/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "DTE",
+          "flags": [
+            0,
+            null,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "score": "1/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "FRE",
+          "flags": [
+            0,
+            null,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "score": "2/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "BEI",
+          "flags": [
+            0,
+            null,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "score": "1/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "HEI",
+          "flags": [
+            0,
+            null,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "score": "0/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "SHL",
+          "flags": [
+            0,
+            null,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "score": "1/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "MBG",
+          "flags": [
+            0,
+            null,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "score": "0/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "PAH3",
+          "flags": [
+            0,
+            null,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "score": "0/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "VOW3",
+          "flags": [
+            0,
+            null,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "score": "0/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "SAP",
+          "flags": [
+            0,
+            null,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "score": "0/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "BMW",
+          "flags": [
+            0,
+            null,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "score": "0/6",
+          "result": "FAIL"
+        },
+        {
+          "ticker": "RHM",
+          "flags": [
+            0,
+            null,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "score": "0/6",
+          "result": "FAIL"
+        }
+      ],
+      "stocks": [
+        {
+          "rank": 1,
+          "ticker": "IFX",
+          "name": "Infineon Technologies AG",
+          "sector": "",
+          "status": "EXTENDED — WATCH (snapshot)",
+          "techScore": "5/6 (7-crit; c2 N/A)",
+          "dataDate": "FMP XETRA snapshot, Jul 15, 2026",
+          "technical": [
+            {
+              "metric": "Price",
+              "value": "€67.31",
+              "signal": "24.2% from 52W high"
+            },
+            {
+              "metric": "50-Day MA",
+              "value": "€74.81",
+              "signal": "Ext -10.0% vs 50MA",
+              "good": false
+            },
+            {
+              "metric": "200-Day MA",
+              "value": "€48.63",
+              "signal": "Price above 200MA",
+              "good": true
+            },
+            {
+              "metric": "52-Week High / Low",
+              "value": "€88.83 / €30.82",
+              "signal": "Range reference"
+            },
+            {
+              "metric": "RS Rank (proxy)",
+              "value": "99",
+              "signal": "vs German universe (snapshot proxy)",
+              "good": true
+            },
+            {
+              "metric": "VCP",
+              "value": "NOT COMPUTED",
+              "signal": "No 2y history this run"
+            }
+          ],
+          "entry": {
+            "pivot": "N/A",
+            "entryCondition": "Not derivable — the 2-year price history needed for the VCP base and pivot was unavailable this run.",
+            "volumeTrigger": "N/A",
+            "stop": "N/A",
+            "target1": "N/A",
+            "target2": "N/A",
+            "rr": "N/A",
+            "sizing": "No position — market UNDER PRESSURE and no validated base. Watch only."
+          },
+          "alerts": [
+            {
+              "type": "NOTE",
+              "price": "Re-run with full history to compute pivot/stop/targets"
+            }
+          ],
+          "notes": "Strong trend snapshot (price above 50/200-day MAs, near 52-week high) but this is NOT a buy: VCP/base structure could not be validated and the market regime gate is active."
+        },
+        {
+          "rank": 2,
+          "ticker": "BAYN",
+          "name": "Bayer AG",
+          "sector": "",
+          "status": "EXTENDED — WATCH (snapshot)",
+          "techScore": "6/6 (7-crit; c2 N/A)",
+          "dataDate": "FMP XETRA snapshot, Jul 15, 2026",
+          "technical": [
+            {
+              "metric": "Price",
+              "value": "€47.71",
+              "signal": "11.5% from 52W high"
+            },
+            {
+              "metric": "50-Day MA",
+              "value": "€40.71",
+              "signal": "Ext +17.2% vs 50MA",
+              "good": true
+            },
+            {
+              "metric": "200-Day MA",
+              "value": "€37.80",
+              "signal": "Price above 200MA",
+              "good": true
+            },
+            {
+              "metric": "52-Week High / Low",
+              "value": "€53.92 / €24.80",
+              "signal": "Range reference"
+            },
+            {
+              "metric": "RS Rank (proxy)",
+              "value": "96",
+              "signal": "vs German universe (snapshot proxy)",
+              "good": true
+            },
+            {
+              "metric": "VCP",
+              "value": "NOT COMPUTED",
+              "signal": "No 2y history this run"
+            }
+          ],
+          "entry": {
+            "pivot": "N/A",
+            "entryCondition": "Not derivable — the 2-year price history needed for the VCP base and pivot was unavailable this run.",
+            "volumeTrigger": "N/A",
+            "stop": "N/A",
+            "target1": "N/A",
+            "target2": "N/A",
+            "rr": "N/A",
+            "sizing": "No position — market UNDER PRESSURE and no validated base. Watch only."
+          },
+          "alerts": [
+            {
+              "type": "NOTE",
+              "price": "Re-run with full history to compute pivot/stop/targets"
+            }
+          ],
+          "notes": "Strong trend snapshot (price above 50/200-day MAs, near 52-week high) but this is NOT a buy: VCP/base structure could not be validated and the market regime gate is active."
+        },
+        {
+          "rank": 3,
+          "ticker": "DHL",
+          "name": "DHL Group",
+          "sector": "",
+          "status": "EXTENDED — WATCH (snapshot)",
+          "techScore": "6/6 (7-crit; c2 N/A)",
+          "dataDate": "FMP XETRA snapshot, Jul 15, 2026",
+          "technical": [
+            {
+              "metric": "Price",
+              "value": "€57.72",
+              "signal": "0.0% from 52W high"
+            },
+            {
+              "metric": "50-Day MA",
+              "value": "€51.51",
+              "signal": "Ext +12.0% vs 50MA",
+              "good": true
+            },
+            {
+              "metric": "200-Day MA",
+              "value": "€47.21",
+              "signal": "Price above 200MA",
+              "good": true
+            },
+            {
+              "metric": "52-Week High / Low",
+              "value": "€57.72 / €37.14",
+              "signal": "Range reference"
+            },
+            {
+              "metric": "RS Rank (proxy)",
+              "value": "94",
+              "signal": "vs German universe (snapshot proxy)",
+              "good": true
+            },
+            {
+              "metric": "VCP",
+              "value": "NOT COMPUTED",
+              "signal": "No 2y history this run"
+            }
+          ],
+          "entry": {
+            "pivot": "N/A",
+            "entryCondition": "Not derivable — the 2-year price history needed for the VCP base and pivot was unavailable this run.",
+            "volumeTrigger": "N/A",
+            "stop": "N/A",
+            "target1": "N/A",
+            "target2": "N/A",
+            "rr": "N/A",
+            "sizing": "No position — market UNDER PRESSURE and no validated base. Watch only."
+          },
+          "alerts": [
+            {
+              "type": "NOTE",
+              "price": "Re-run with full history to compute pivot/stop/targets"
+            }
+          ],
+          "notes": "Strong trend snapshot (price above 50/200-day MAs, near 52-week high) but this is NOT a buy: VCP/base structure could not be validated and the market regime gate is active."
+        },
+        {
+          "rank": 4,
+          "ticker": "ZAL",
+          "name": "Zalando SE",
+          "sector": "",
+          "status": "EXTENDED — WATCH (snapshot)",
+          "techScore": "6/6 (7-crit; c2 N/A)",
+          "dataDate": "FMP XETRA snapshot, Jul 15, 2026",
+          "technical": [
+            {
+              "metric": "Price",
+              "value": "€27.84",
+              "signal": "2.0% from 52W high"
+            },
+            {
+              "metric": "50-Day MA",
+              "value": "€23.65",
+              "signal": "Ext +17.7% vs 50MA",
+              "good": true
+            },
+            {
+              "metric": "200-Day MA",
+              "value": "€23.27",
+              "signal": "Price above 200MA",
+              "good": true
+            },
+            {
+              "metric": "52-Week High / Low",
+              "value": "€28.40 / €18.61",
+              "signal": "Range reference"
+            },
+            {
+              "metric": "RS Rank (proxy)",
+              "value": "91",
+              "signal": "vs German universe (snapshot proxy)",
+              "good": true
+            },
+            {
+              "metric": "VCP",
+              "value": "NOT COMPUTED",
+              "signal": "No 2y history this run"
+            }
+          ],
+          "entry": {
+            "pivot": "N/A",
+            "entryCondition": "Not derivable — the 2-year price history needed for the VCP base and pivot was unavailable this run.",
+            "volumeTrigger": "N/A",
+            "stop": "N/A",
+            "target1": "N/A",
+            "target2": "N/A",
+            "rr": "N/A",
+            "sizing": "No position — market UNDER PRESSURE and no validated base. Watch only."
+          },
+          "alerts": [
+            {
+              "type": "NOTE",
+              "price": "Re-run with full history to compute pivot/stop/targets"
+            }
+          ],
+          "notes": "Strong trend snapshot (price above 50/200-day MAs, near 52-week high) but this is NOT a buy: VCP/base structure could not be validated and the market regime gate is active."
+        },
+        {
+          "rank": 5,
+          "ticker": "SY1",
+          "name": "Symrise AG",
+          "sector": "",
+          "status": "EXTENDED — WATCH (snapshot)",
+          "techScore": "6/6 (7-crit; c2 N/A)",
+          "dataDate": "FMP XETRA snapshot, Jul 15, 2026",
+          "technical": [
+            {
+              "metric": "Price",
+              "value": "€87.76",
+              "signal": "5.1% from 52W high"
+            },
+            {
+              "metric": "50-Day MA",
+              "value": "€81.85",
+              "signal": "Ext +7.2% vs 50MA",
+              "good": true
+            },
+            {
+              "metric": "200-Day MA",
+              "value": "€75.00",
+              "signal": "Price above 200MA",
+              "good": true
+            },
+            {
+              "metric": "52-Week High / Low",
+              "value": "€92.46 / €64.70",
+              "signal": "Range reference"
+            },
+            {
+              "metric": "RS Rank (proxy)",
+              "value": "89",
+              "signal": "vs German universe (snapshot proxy)",
+              "good": true
+            },
+            {
+              "metric": "VCP",
+              "value": "NOT COMPUTED",
+              "signal": "No 2y history this run"
+            }
+          ],
+          "entry": {
+            "pivot": "N/A",
+            "entryCondition": "Not derivable — the 2-year price history needed for the VCP base and pivot was unavailable this run.",
+            "volumeTrigger": "N/A",
+            "stop": "N/A",
+            "target1": "N/A",
+            "target2": "N/A",
+            "rr": "N/A",
+            "sizing": "No position — market UNDER PRESSURE and no validated base. Watch only."
+          },
+          "alerts": [
+            {
+              "type": "NOTE",
+              "price": "Re-run with full history to compute pivot/stop/targets"
+            }
+          ],
+          "notes": "Strong trend snapshot (price above 50/200-day MAs, near 52-week high) but this is NOT a buy: VCP/base structure could not be validated and the market regime gate is active."
+        },
+        {
+          "rank": 6,
+          "ticker": "MRK",
+          "name": "Merck KGaA",
+          "sector": "",
+          "status": "EXTENDED — WATCH (snapshot)",
+          "techScore": "6/6 (7-crit; c2 N/A)",
+          "dataDate": "FMP XETRA snapshot, Jul 15, 2026",
+          "technical": [
+            {
+              "metric": "Price",
+              "value": "€140.10",
+              "signal": "5.8% from 52W high"
+            },
+            {
+              "metric": "50-Day MA",
+              "value": "€132.42",
+              "signal": "Ext +5.8% vs 50MA",
+              "good": true
+            },
+            {
+              "metric": "200-Day MA",
+              "value": "€121.21",
+              "signal": "Price above 200MA",
+              "good": true
+            },
+            {
+              "metric": "52-Week High / Low",
+              "value": "€148.65 / €100.70",
+              "signal": "Range reference"
+            },
+            {
+              "metric": "RS Rank (proxy)",
+              "value": "86",
+              "signal": "vs German universe (snapshot proxy)",
+              "good": true
+            },
+            {
+              "metric": "VCP",
+              "value": "NOT COMPUTED",
+              "signal": "No 2y history this run"
+            }
+          ],
+          "entry": {
+            "pivot": "N/A",
+            "entryCondition": "Not derivable — the 2-year price history needed for the VCP base and pivot was unavailable this run.",
+            "volumeTrigger": "N/A",
+            "stop": "N/A",
+            "target1": "N/A",
+            "target2": "N/A",
+            "rr": "N/A",
+            "sizing": "No position — market UNDER PRESSURE and no validated base. Watch only."
+          },
+          "alerts": [
+            {
+              "type": "NOTE",
+              "price": "Re-run with full history to compute pivot/stop/targets"
+            }
+          ],
+          "notes": "Strong trend snapshot (price above 50/200-day MAs, near 52-week high) but this is NOT a buy: VCP/base structure could not be validated and the market regime gate is active."
+        },
+        {
+          "rank": 7,
+          "ticker": "ADS",
+          "name": "adidas AG",
+          "sector": "",
+          "status": "EXTENDED — WATCH (snapshot)",
+          "techScore": "6/6 (7-crit; c2 N/A)",
+          "dataDate": "FMP XETRA snapshot, Jul 15, 2026",
+          "technical": [
+            {
+              "metric": "Price",
+              "value": "€182.90",
+              "signal": "13.0% from 52W high"
+            },
+            {
+              "metric": "50-Day MA",
+              "value": "€166.91",
+              "signal": "Ext +9.6% vs 50MA",
+              "good": true
+            },
+            {
+              "metric": "200-Day MA",
+              "value": "€158.75",
+              "signal": "Price above 200MA",
+              "good": true
+            },
+            {
+              "metric": "52-Week High / Low",
+              "value": "€210.20 / €129.95",
+              "signal": "Range reference"
+            },
+            {
+              "metric": "RS Rank (proxy)",
+              "value": "84",
+              "signal": "vs German universe (snapshot proxy)",
+              "good": true
+            },
+            {
+              "metric": "VCP",
+              "value": "NOT COMPUTED",
+              "signal": "No 2y history this run"
+            }
+          ],
+          "entry": {
+            "pivot": "N/A",
+            "entryCondition": "Not derivable — the 2-year price history needed for the VCP base and pivot was unavailable this run.",
+            "volumeTrigger": "N/A",
+            "stop": "N/A",
+            "target1": "N/A",
+            "target2": "N/A",
+            "rr": "N/A",
+            "sizing": "No position — market UNDER PRESSURE and no validated base. Watch only."
+          },
+          "alerts": [
+            {
+              "type": "NOTE",
+              "price": "Re-run with full history to compute pivot/stop/targets"
+            }
+          ],
+          "notes": "Strong trend snapshot (price above 50/200-day MAs, near 52-week high) but this is NOT a buy: VCP/base structure could not be validated and the market regime gate is active."
+        },
+        {
+          "rank": 8,
+          "ticker": "BNR",
+          "name": "Brenntag SE",
+          "sector": "",
+          "status": "EXTENDED — WATCH (snapshot)",
+          "techScore": "6/6 (7-crit; c2 N/A)",
+          "dataDate": "FMP XETRA snapshot, Jul 15, 2026",
+          "technical": [
+            {
+              "metric": "Price",
+              "value": "€59.10",
+              "signal": "7.3% from 52W high"
+            },
+            {
+              "metric": "50-Day MA",
+              "value": "€56.93",
+              "signal": "Ext +3.8% vs 50MA",
+              "good": true
+            },
+            {
+              "metric": "200-Day MA",
+              "value": "€53.12",
+              "signal": "Price above 200MA",
+              "good": true
+            },
+            {
+              "metric": "52-Week High / Low",
+              "value": "€63.76 / €43.72",
+              "signal": "Range reference"
+            },
+            {
+              "metric": "RS Rank (proxy)",
+              "value": "81",
+              "signal": "vs German universe (snapshot proxy)",
+              "good": true
+            },
+            {
+              "metric": "VCP",
+              "value": "NOT COMPUTED",
+              "signal": "No 2y history this run"
+            }
+          ],
+          "entry": {
+            "pivot": "N/A",
+            "entryCondition": "Not derivable — the 2-year price history needed for the VCP base and pivot was unavailable this run.",
+            "volumeTrigger": "N/A",
+            "stop": "N/A",
+            "target1": "N/A",
+            "target2": "N/A",
+            "rr": "N/A",
+            "sizing": "No position — market UNDER PRESSURE and no validated base. Watch only."
+          },
+          "alerts": [
+            {
+              "type": "NOTE",
+              "price": "Re-run with full history to compute pivot/stop/targets"
+            }
+          ],
+          "notes": "Strong trend snapshot (price above 50/200-day MAs, near 52-week high) but this is NOT a buy: VCP/base structure could not be validated and the market regime gate is active."
+        }
+      ],
+      "disclaimer": "For informational purposes only. Not financial advice."
+    },
+  {
     "reportDate": "2026-06-15",
     "title": "Germany Broad — DAX+MDAX+SDAX",
     "framework": "Minervini SEPA Framework (v2, regime-gated) | German Equities",
