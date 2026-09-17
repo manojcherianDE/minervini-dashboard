@@ -190,7 +190,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "ITGR",
@@ -205,7 +205,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "DISQUALIFIED — M&A"
+        result: "DISQUALIFIED"
       },
       {
         ticker: "SAFT",
@@ -220,7 +220,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "DISQUALIFIED — M&A"
+        result: "DISQUALIFIED"
       },
       {
         ticker: "BFH",
@@ -235,7 +235,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "LNTH",
@@ -250,7 +250,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "7/8",
-        result: "DISQUALIFIED — M&A"
+        result: "DISQUALIFIED"
       },
       {
         ticker: "TECH",
@@ -265,7 +265,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "6/8",
-        result: "DISQUALIFIED — M&A"
+        result: "DISQUALIFIED"
       },
       {
         ticker: "WST",
@@ -280,7 +280,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "PAG",
@@ -295,7 +295,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "BNY",
@@ -310,7 +310,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "7/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "MD",
@@ -325,7 +325,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "7/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "SHC",
@@ -340,7 +340,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "6/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "AIZ",
@@ -355,7 +355,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "IFF",
@@ -370,7 +370,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "PRSU",
@@ -385,7 +385,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "7/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "PLMR",
@@ -400,7 +400,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "6/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "ABBV",
@@ -415,7 +415,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "DCOM",
@@ -430,7 +430,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "GILD",
@@ -445,7 +445,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "WRLD",
@@ -460,7 +460,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "7/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "EIG",
@@ -475,7 +475,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "STBA",
@@ -490,7 +490,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "7/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "GL",
@@ -505,7 +505,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "7/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "HAFC",
@@ -520,7 +520,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "HSIC",
@@ -535,7 +535,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "7/8",
-        result: "WATCHLIST (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "AMD",
@@ -550,7 +550,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "LFST",
@@ -565,7 +565,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "PARR",
@@ -580,7 +580,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "CORT",
@@ -595,7 +595,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "IRDM",
@@ -610,7 +610,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "7/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "MAN",
@@ -625,7 +625,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "AVNS",
@@ -640,7 +640,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "CAKE",
@@ -655,7 +655,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "7/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "CRL",
@@ -670,7 +670,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "ECPG",
@@ -685,7 +685,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "MATX",
@@ -700,7 +700,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       },
       {
         ticker: "NEOG",
@@ -715,7 +715,7 @@ window.SCREEN_RUNS = [
           1
         ],
         score: "8/8",
-        result: "SETUP (gated)"
+        result: "WATCHLIST"
       }
     ],
     stocksNote: "0 BUY NOW and 0 SETUP — NEAR BUY this week: the regime gate downgraded all 284 qualifying names (24 would-be BUY NOW, 260 would-be SETUP) to EXTENDED — WATCH. A further 201 names are genuinely extended on their own merits, 355 are building bases and 658 fail outright. The first four cards below are DISQUALIFIED takeover pins, shown deliberately so the failure mode is visible: a stock frozen under a fixed cash bid produces the tightest possible base and a flawless algorithmic VCP. The remaining cards are the four would-be BUY NOW names that survived the M&A check, then the five strongest would-be SETUPs, with levels shown so alerts can be pre-loaded — not acted on.",
@@ -976,28 +976,28 @@ window.SCREEN_RUNS = [
         ],
         eps: [
           {
-            metric: "Latest quarter",
-            value: "EPS 18.1%",
-            signal: "Revenue 13.8%",
-            good: false
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+18.1%",
+            pass: false,
+            revenue: "Rev +13.8%"
           },
           {
-            metric: "Prior quarter",
-            value: "EPS 56.1%",
-            signal: "Revenue 21.1%",
-            good: true
+            quarter: "Q1 2026",
+            growth: "+56.1%",
+            pass: true,
+            revenue: "Rev +21.1%"
           },
           {
-            metric: "Two quarters ago",
-            value: "EPS 2.1%",
-            signal: "Revenue 7.5%",
-            good: false
+            quarter: "Q4 2025",
+            growth: "+2.1%",
+            pass: false,
+            revenue: "Rev +7.5%"
           },
           {
-            metric: "Three quarters ago",
-            value: "EPS 3.8%",
-            signal: "Revenue 7.7%",
-            good: false
+            quarter: "Q3 2025",
+            growth: "+3.8%",
+            pass: false,
+            revenue: "Rev +7.7%"
           }
         ],
         entry: {
@@ -1083,28 +1083,28 @@ window.SCREEN_RUNS = [
         ],
         eps: [
           {
-            metric: "Latest quarter",
-            value: "EPS -1.7%",
-            signal: "Revenue 6.0%",
-            good: false
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "-1.7%",
+            pass: false,
+            revenue: "Rev +6.0%"
           },
           {
-            metric: "Prior quarter",
-            value: "EPS -7.8%",
-            signal: "Revenue -1.1%",
-            good: false
+            quarter: "Q1 2026",
+            growth: "-7.8%",
+            pass: false,
+            revenue: "Rev -1.1%"
           },
           {
-            metric: "Two quarters ago",
-            value: "EPS -19.1%",
-            signal: "Revenue -3.1%",
-            good: false
+            quarter: "Q4 2025",
+            growth: "-19.1%",
+            pass: false,
+            revenue: "Rev -3.1%"
           },
           {
-            metric: "Three quarters ago",
-            value: "EPS -4.7%",
-            signal: "Revenue 1.4%",
-            good: false
+            quarter: "Q3 2025",
+            growth: "-4.7%",
+            pass: false,
+            revenue: "Rev +1.4%"
           }
         ],
         entry: {
@@ -1190,28 +1190,28 @@ window.SCREEN_RUNS = [
         ],
         eps: [
           {
-            metric: "Latest quarter",
-            value: "EPS 21.2%",
-            signal: "Revenue 3.8%",
-            good: false
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+21.2%",
+            pass: false,
+            revenue: "Rev +3.8%"
           },
           {
-            metric: "Prior quarter",
-            value: "EPS 49.3%",
-            signal: "Revenue 6.1%",
-            good: true
+            quarter: "Q1 2026",
+            growth: "+49.3%",
+            pass: true,
+            revenue: "Rev +6.1%"
           },
           {
-            metric: "Two quarters ago",
-            value: "EPS 734.9%",
-            signal: "Revenue 18.5%",
-            good: true
+            quarter: "Q4 2025",
+            growth: "+734.9%",
+            pass: true,
+            revenue: "Rev +18.5%"
           },
           {
-            metric: "Three quarters ago",
-            value: "EPS 9703.9%",
-            signal: "Revenue 9.4%",
-            good: true
+            quarter: "Q3 2025",
+            growth: "+9703.9%",
+            pass: true,
+            revenue: "Rev +9.4%"
           }
         ],
         entry: {
@@ -1297,28 +1297,28 @@ window.SCREEN_RUNS = [
         ],
         eps: [
           {
-            metric: "Latest quarter",
-            value: "EPS n/a",
-            signal: "Revenue 2.3%",
-            good: false
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +2.3%"
           },
           {
-            metric: "Prior quarter",
-            value: "EPS n/a",
-            signal: "Revenue 99.9%",
-            good: false
+            quarter: "Q1 2026",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +99.9%"
           },
           {
-            metric: "Two quarters ago",
-            value: "EPS n/a",
-            signal: "Revenue 1.8%",
-            good: false
+            quarter: "Q4 2025",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +1.8%"
           },
           {
-            metric: "Three quarters ago",
-            value: "EPS 321.3%",
-            signal: "Revenue -7.7%",
-            good: true
+            quarter: "Q3 2025",
+            growth: "+321.3%",
+            pass: true,
+            revenue: "Rev -7.7%"
           }
         ],
         entry: {
@@ -1404,28 +1404,28 @@ window.SCREEN_RUNS = [
         ],
         eps: [
           {
-            metric: "Latest quarter",
-            value: "EPS 159.5%",
-            signal: "Revenue 50.1%",
-            good: true
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+159.5%",
+            pass: true,
+            revenue: "Rev +50.1%"
           },
           {
-            metric: "Prior quarter",
-            value: "EPS 91.2%",
-            signal: "Revenue 37.9%",
-            good: true
+            quarter: "Q1 2026",
+            growth: "+91.2%",
+            pass: true,
+            revenue: "Rev +37.9%"
           },
           {
-            metric: "Two quarters ago",
-            value: "EPS 217.1%",
-            signal: "Revenue 34.1%",
-            good: true
+            quarter: "Q4 2025",
+            growth: "+217.1%",
+            pass: true,
+            revenue: "Rev +34.1%"
           },
           {
-            metric: "Three quarters ago",
-            value: "EPS 60.3%",
-            signal: "Revenue 35.6%",
-            good: true
+            quarter: "Q3 2025",
+            growth: "+60.3%",
+            pass: true,
+            revenue: "Rev +35.6%"
           }
         ],
         entry: {
@@ -1511,28 +1511,28 @@ window.SCREEN_RUNS = [
         ],
         eps: [
           {
-            metric: "Latest quarter",
-            value: "EPS 699.1%",
-            signal: "Revenue 56.8%",
-            good: true
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+699.1%",
+            pass: true,
+            revenue: "Rev +56.8%"
           },
           {
-            metric: "Prior quarter",
-            value: "EPS n/a",
-            signal: "Revenue 4.5%",
-            good: false
+            quarter: "Q1 2026",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +4.5%"
           },
           {
-            metric: "Two quarters ago",
-            value: "EPS n/a",
-            signal: "Revenue -1.0%",
-            good: false
+            quarter: "Q4 2025",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -1.0%"
           },
           {
-            metric: "Three quarters ago",
-            value: "EPS 3869.2%",
-            signal: "Revenue -6.1%",
-            good: true
+            quarter: "Q3 2025",
+            growth: "+3869.2%",
+            pass: true,
+            revenue: "Rev -6.1%"
           }
         ],
         entry: {
@@ -1618,28 +1618,28 @@ window.SCREEN_RUNS = [
         ],
         eps: [
           {
-            metric: "Latest quarter",
-            value: "EPS 24.1%",
-            signal: "Revenue 31.7%",
-            good: false
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+24.1%",
+            pass: false,
+            revenue: "Rev +31.7%"
           },
           {
-            metric: "Prior quarter",
-            value: "EPS n/a",
-            signal: "Revenue 4.9%",
-            good: false
+            quarter: "Q1 2026",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +4.9%"
           },
           {
-            metric: "Two quarters ago",
-            value: "EPS -21.6%",
-            signal: "Revenue 11.1%",
-            good: false
+            quarter: "Q4 2025",
+            growth: "-21.6%",
+            pass: false,
+            revenue: "Rev +11.1%"
           },
           {
-            metric: "Three quarters ago",
-            value: "EPS -61.0%",
-            signal: "Revenue 13.8%",
-            good: false
+            quarter: "Q3 2025",
+            growth: "-61.0%",
+            pass: false,
+            revenue: "Rev +13.8%"
           }
         ],
         entry: {
@@ -1725,28 +1725,28 @@ window.SCREEN_RUNS = [
         ],
         eps: [
           {
-            metric: "Latest quarter",
-            value: "EPS 46.2%",
-            signal: "Revenue 16.7%",
-            good: true
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+46.2%",
+            pass: true,
+            revenue: "Rev +16.7%"
           },
           {
-            metric: "Prior quarter",
-            value: "EPS -15.1%",
-            signal: "Revenue -3.1%",
-            good: false
+            quarter: "Q1 2026",
+            growth: "-15.1%",
+            pass: false,
+            revenue: "Rev -3.1%"
           },
           {
-            metric: "Two quarters ago",
-            value: "EPS 21.2%",
-            signal: "Revenue -4.3%",
-            good: false
+            quarter: "Q4 2025",
+            growth: "+21.2%",
+            pass: false,
+            revenue: "Rev -4.3%"
           },
           {
-            metric: "Three quarters ago",
-            value: "EPS -28.0%",
-            signal: "Revenue -8.5%",
-            good: false
+            quarter: "Q3 2025",
+            growth: "-28.0%",
+            pass: false,
+            revenue: "Rev -8.5%"
           }
         ],
         entry: {
@@ -1832,28 +1832,28 @@ window.SCREEN_RUNS = [
         ],
         eps: [
           {
-            metric: "Latest quarter",
-            value: "EPS n/a",
-            signal: "Revenue 26.1%",
-            good: false
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +26.1%"
           },
           {
-            metric: "Prior quarter",
-            value: "EPS 1927.5%",
-            signal: "Revenue 21.2%",
-            good: true
+            quarter: "Q1 2026",
+            growth: "+1927.5%",
+            pass: true,
+            revenue: "Rev +21.2%"
           },
           {
-            metric: "Two quarters ago",
-            value: "EPS n/a",
-            signal: "Revenue 17.4%",
-            good: false
+            quarter: "Q4 2025",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +17.4%"
           },
           {
-            metric: "Three quarters ago",
-            value: "EPS n/a",
-            signal: "Revenue 16.3%",
-            good: false
+            quarter: "Q3 2025",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +16.3%"
           }
         ],
         entry: {
@@ -1905,7 +1905,7 @@ window.SCREEN_RUNS = [
     verification: "Confirm current price, the 50/150/200MA stack, the base and pivot, and a real volume-expansion breakout on TradingView 1D before any trade. Prices are the 2026-09-16 close. Search EVERY ticker for pending M&A before acting — this week ITGR (KKR, $127), SAFT (Mapfre, $105), TECH (Merck KGaA, $73) and LNTH (Curium, $102.50 plus a CVR) all scored near-perfect algorithmic VCPs purely because they are frozen under announced cash bids.",
     disclaimer: "For informational and educational purposes only. Not financial advice."
   },
-  {
+    {
     reportDate: "2026-09-14",
     title: "S&P 1500 Momentum Screen",
     framework: "Minervini SEPA — history-based engine v2 (full S&P 1500)",
