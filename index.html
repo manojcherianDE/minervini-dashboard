@@ -93,6 +93,12 @@
   .sbar .track::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:1px; background:#c8d0dc}
   .sbar .pct{text-align:right; font-weight:700; font-variant-numeric:tabular-nums}
   .sbar .pct.pos{color:var(--green)} .sbar .pct.neg{color:var(--red)}
+  /* count mode: these bars are a COUNT of names, not a % move. No centre line,
+     bar grows from the left, neutral navy — green/red would imply gain/loss. */
+  .sbar.count{grid-template-columns:140px 1fr 74px}
+  .sbar .fill.cnt{background:linear-gradient(90deg,#2E75B6,#1F4E79); left:0}
+  .sbar .pct.cnt{color:var(--navy)}
+  .sbar.count .track::before{display:none}
 
   /* ---------- Framework explainer ---------- */
   .layers{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
@@ -343,17 +349,28 @@ function render(idx){
 function marketSection(d){
   const m=d.market||{};
   const rows=(m.metrics||[]).map(x=>`<tr><td>${esc(x.metric)}</td><td class="val">${esc(x.value)}</td><td>${esc(x.signal)}</td></tr>`).join("");
+  // The sector panel carries one of two different things depending on the run:
+  //   - a genuine daily % move per sector (the older NASDAQ-sourced runs), or
+  //   - a COUNT of names per sector (the Minervini screens, which count how many
+  //     buys/setups landed in each sector — those must not render as "+7.00%").
+  // Honour an explicit market.sectorUnit ("count" | "percent"); otherwise infer
+  // it from sectorAsOf, so historical runs render correctly with no data edits.
+  const isCount = (m.sectorUnit||'').toLowerCase()==='count'
+                  || (!m.sectorUnit && /count of/i.test(m.sectorAsOf||''));
   const max=Math.max(1,...(m.sectors||[]).map(s=>Math.abs(s.change)));
   const bars=(m.sectors||[]).map(s=>{
-    const pos=s.change>=0, w=(Math.abs(s.change)/max)*50;
-    return `<div class="sbar"><span class="lab">${esc(s.sector)}</span>
-      <span class="track"><span class="fill ${pos?'pos':'neg'}" style="width:${w}%"></span></span>
-      <span class="pct ${pos?'pos':'neg'}">${pos?'+':''}${s.change.toFixed(2)}%</span></div>`;
+    const pos=s.change>=0, w=(Math.abs(s.change)/max)*(isCount?100:50);
+    const cls=isCount?'cnt':(pos?'pos':'neg');
+    const val=isCount ? `${s.change} ${Math.abs(s.change)===1?'name':'names'}`
+                      : `${pos?'+':''}${s.change.toFixed(2)}%`;
+    return `<div class="sbar${isCount?' count':''}"><span class="lab">${esc(s.sector)}</span>
+      <span class="track"><span class="fill ${cls}" style="width:${w}%"></span></span>
+      <span class="pct ${cls}">${esc(val)}</span></div>`;
   }).join("");
   const hasSectors = m.sectors && m.sectors.length;
   const rightPanel = hasSectors
     ? `<div class="pad">
-         <h4 style="margin:0 0 12px;font-size:11.5px;letter-spacing:.6px;color:var(--navy);text-transform:uppercase">Sector Performance · ${esc(m.sectorAsOf||'')}</h4>
+         <h4 style="margin:0 0 12px;font-size:11.5px;letter-spacing:.6px;color:var(--navy);text-transform:uppercase">${isCount?'Sector Leadership':'Sector Performance'} · ${esc(m.sectorAsOf||'')}</h4>
          <div class="sectorbars">${bars}</div>
          ${m.sectorNote?`<p class="note">${esc(m.sectorNote)}</p>`:''}
        </div>`
