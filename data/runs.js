@@ -13,6 +13,1899 @@
 
 window.SCREEN_RUNS = [
   {
+    reportDate: "2026-09-17",
+    title: "S&P 1500 Momentum Screen",
+    framework: "Minervini SEPA — history-based engine v3 (full S&P 1500, 1,498 names evaluated)",
+    market: {
+      index: "S&P 1500 breadth — 50.0% above 200MA",
+      verdict: "UNDER PRESSURE",
+      verdictNote: "REGIME GATE ACTIVE — the gate downgraded ALL would-be buys to EXTENDED — WATCH, so nothing is actionable this week. Only 50.0% of the 1,498 evaluated S&P 1500 names are above their 200DMA (the gate needs at least 60%) and just 28.4% are above their 50DMA, although 47.1% still hold a full 50>150>200 stack. That combination — long-term structure intact, short-term trend broken across nearly three-quarters of the market — describes a broad, shallow pullback. Before the gate, 24 names met every BUY NOW condition and 260 met every SETUP condition on their own merits; after the gate, 0 and 0. Breadth is derived from the universe itself, no index quote is used. Universe is the full S&P 1500 (large, mid and small cap). THE WEEK’S MOST IMPORTANT FINDING: four of the six tightest “perfect” bases — ITGR, SAFT, TECH and LNTH — are announced cash acquisitions, not VCPs. All four are disqualified below.",
+      metrics: [
+        {
+          metric: "Universe evaluated",
+          value: "1,498 names",
+          signal: "of 1,506 attempted"
+        },
+        {
+          metric: "% above 200-day MA",
+          value: "50.0%",
+          signal: "≥60% = uptrend",
+          good: false
+        },
+        {
+          metric: "% above 50-day MA",
+          value: "28.4%",
+          signal: "Short-term breadth",
+          good: false
+        },
+        {
+          metric: "% in full MA stack",
+          value: "47.1%",
+          signal: "≥45% = healthy",
+          good: true
+        },
+        {
+          metric: "Regime gate",
+          value: "ACTIVE",
+          signal: "284 buys/setups downgraded",
+          good: false
+        },
+        {
+          metric: "Disqualified for M&A",
+          value: "4 of 24",
+          signal: "ITGR, SAFT, TECH, LNTH",
+          good: false
+        }
+      ],
+      sectorAsOf: "Count of GATED would-be BUY NOW names by sector (not daily performance)",
+      sectors: [
+        {
+          sector: "Financial Services",
+          change: 8
+        },
+        {
+          sector: "Healthcare",
+          change: 7
+        },
+        {
+          sector: "Consumer Cyclical",
+          change: 3
+        },
+        {
+          sector: "Industrials",
+          change: 2
+        },
+        {
+          sector: "Basic Materials",
+          change: 2
+        },
+        {
+          sector: "Technology",
+          change: 1
+        },
+        {
+          sector: "Consumer Defensive",
+          change: 1
+        }
+      ],
+      sectorNote: "The would-be buy list is dominated by regional banks, insurers and healthcare services — defensive groups — with almost no technology. Combined with the fact that the highest-RS technology names are either 20–50% extended (DELL, MRNA) or 25–46% below their highs (MU, SNDK, INTC, MXL), this looks like late-cycle leadership rotation rather than a healthy broad advance."
+    },
+    dataSources: [
+      "Prices: stockanalysis.com daily OHLCV via the in-app browser (5-year range, last 300 bars per name), last bar 2026-09-16",
+      "Engine: deterministic v3 Trend Template + RS percentile + algorithmic VCP + breadth regime gate, executed in-browser",
+      "Fundamentals: stockanalysis.com quarterly financials (EPS Growth / Revenue Growth YoY) — the EPS screen RAN this week, unlike 2026-09-14",
+      "Transfer: gzip+base64 payload, SHA-256 verified before decode (f7eef3fda44aa520)",
+      "Confirmation: web search on featured names only, including a mandatory pending-M&A check (never the basis for a setup)"
+    ],
+    dataQualityNote: "1,498 of 1,506 S&P 1500 names were evaluated from end-of-day prices through 2026-09-16; 20 names carry a one-day-stale bar. Closes are split-adjusted but not dividend-adjusted, consistent with prior runs. The fundamental screen DID run this week — EPS and revenue growth came from the browser rather than the plan-gated FMP endpoint. Pivots and volume triggers are mechanical: confirm every chart on TradingView, and run the M&A check first.",
+    dataQuality: [
+      {
+        ticker: "FULL UNIVERSE",
+        source: "stockanalysis.com daily OHLCV",
+        date: "Sep 16, 2026",
+        status: "1,498 EVALUATED"
+      },
+      {
+        ticker: "Stale bars",
+        source: "Vendor (one day behind)",
+        date: "Sep 15, 2026",
+        status: "20 NAMES — immaterial"
+      },
+      {
+        ticker: "Insufficient history",
+        source: "Engine (<260 bars)",
+        date: "Sep 16, 2026",
+        status: "5 SKIPPED — FDXF, Q, SOLS, VGNT, VSNT"
+      },
+      {
+        ticker: "No data returned",
+        source: "Vendor (HTTP 400)",
+        date: "N/A",
+        status: "3 SKIPPED — EQR, FDP, SATS"
+      },
+      {
+        ticker: "BUY NOW set",
+        source: "Engine (deterministic)",
+        date: "Sep 16, 2026",
+        status: "0 — REGIME GATE ACTIVE"
+      },
+      {
+        ticker: "Fundamentals",
+        source: "stockanalysis.com quarterly",
+        date: "Sep 16, 2026",
+        status: "35 NAMES SCREENED — endpoint working"
+      },
+      {
+        ticker: "M&A screen",
+        source: "Web search, featured names",
+        date: "Sep 17, 2026",
+        status: "4 DISQUALIFIED"
+      }
+    ],
+    criteria: [
+      {
+        key: "c1",
+        label: "Price > 150MA & 200MA"
+      },
+      {
+        key: "c2",
+        label: "150MA > 200MA"
+      },
+      {
+        key: "c3",
+        label: "200MA Trending Up"
+      },
+      {
+        key: "c4",
+        label: "50 > 150 > 200 (full stack)"
+      },
+      {
+        key: "c5",
+        label: "Price > 50MA"
+      },
+      {
+        key: "c6",
+        label: "Price ≥ 30% Above 52wLow"
+      },
+      {
+        key: "c7",
+        label: "Price Within 25% of 52wHigh"
+      },
+      {
+        key: "c8",
+        label: "RS Rank ≥ 70"
+      }
+    ],
+    summary: [
+      {
+        ticker: "AMN",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "ITGR",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "DISQUALIFIED — M&A"
+      },
+      {
+        ticker: "SAFT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "DISQUALIFIED — M&A"
+      },
+      {
+        ticker: "BFH",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "LNTH",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "DISQUALIFIED — M&A"
+      },
+      {
+        ticker: "TECH",
+        flags: [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "DISQUALIFIED — M&A"
+      },
+      {
+        ticker: "WST",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "PAG",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "BNY",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "MD",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "SHC",
+        flags: [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "AIZ",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "IFF",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "PRSU",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "PLMR",
+        flags: [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "ABBV",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "DCOM",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "GILD",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "WRLD",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "EIG",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "STBA",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "GL",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "HAFC",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "HSIC",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST (gated)"
+      },
+      {
+        ticker: "AMD",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "LFST",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "PARR",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "CORT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "IRDM",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "MAN",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "AVNS",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "CAKE",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "CRL",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "ECPG",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "MATX",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "SETUP (gated)"
+      },
+      {
+        ticker: "NEOG",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "SETUP (gated)"
+      }
+    ],
+    stocksNote: "0 BUY NOW and 0 SETUP — NEAR BUY this week: the regime gate downgraded all 284 qualifying names (24 would-be BUY NOW, 260 would-be SETUP) to EXTENDED — WATCH. A further 201 names are genuinely extended on their own merits, 355 are building bases and 658 fail outright. The first four cards below are DISQUALIFIED takeover pins, shown deliberately so the failure mode is visible: a stock frozen under a fixed cash bid produces the tightest possible base and a flawless algorithmic VCP. The remaining cards are the four would-be BUY NOW names that survived the M&A check, then the five strongest would-be SETUPs, with levels shown so alerts can be pre-loaded — not acted on.",
+    stocks: [
+      {
+        rank: 1,
+        ticker: "ITGR",
+        name: "ITGR — DISQUALIFIED (announced acquisition)",
+        sector: "M&A spread — do not trade",
+        status: "DISQUALIFIED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$126.11",
+            signal: "0.5% below 52w high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "1.2%",
+            signal: "Artificially tight — deal pin",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "FALSE POSITIVE",
+            good: false
+          },
+          {
+            metric: "RS rank",
+            value: "93",
+            signal: "Meaningless under a fixed cash bid",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "N/A — DO NOT TRADE",
+          entryCondition: "DISQUALIFIED: announced cash acquisition",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "NO POSITION"
+        },
+        alerts: [
+          {
+            type: "DO NOT TRADE",
+            price: "Announced acquisition — merger spread, not a VCP"
+          }
+        ],
+        notes: "DEAL: KKR, $127.00/sh cash, announced 3 Aug 2026, ~$5.7bn EV, expected to close by year-end 2026.  |  WHY IT IS NOT A VCP: Price $126.11 vs $127 deal; 1.2% 10-day range and 0.5% from the 52w high is the shape of a merger spread, not a VCP."
+      },
+      {
+        rank: 2,
+        ticker: "SAFT",
+        name: "SAFT — DISQUALIFIED (announced acquisition)",
+        sector: "M&A spread — do not trade",
+        status: "DISQUALIFIED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$103.55",
+            signal: "0.2% below 52w high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "0.6%",
+            signal: "Artificially tight — deal pin",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "FALSE POSITIVE",
+            good: false
+          },
+          {
+            metric: "RS rank",
+            value: "92",
+            signal: "Meaningless under a fixed cash bid",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "N/A — DO NOT TRADE",
+          entryCondition: "DISQUALIFIED: announced cash acquisition",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "NO POSITION"
+        },
+        alerts: [
+          {
+            type: "DO NOT TRADE",
+            price: "Announced acquisition — merger spread, not a VCP"
+          }
+        ],
+        notes: "DEAL: Mapfre S.A., $105.00/sh cash, announced 23 Jul 2026, ~$1.54bn, expected close Q1 2027.  |  WHY IT IS NOT A VCP: Price $103.55 vs $105 deal; 0.6% 10-day range. Textbook takeover pin."
+      },
+      {
+        rank: 3,
+        ticker: "TECH",
+        name: "TECH — DISQUALIFIED (announced acquisition)",
+        sector: "M&A spread — do not trade",
+        status: "DISQUALIFIED",
+        techScore: "6/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$72.33",
+            signal: "0.4% below 52w high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "0.7%",
+            signal: "Artificially tight — deal pin",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "FALSE POSITIVE",
+            good: false
+          },
+          {
+            metric: "RS rank",
+            value: "89",
+            signal: "Meaningless under a fixed cash bid",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "N/A — DO NOT TRADE",
+          entryCondition: "DISQUALIFIED: announced cash acquisition",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "NO POSITION"
+        },
+        alerts: [
+          {
+            type: "DO NOT TRADE",
+            price: "Announced acquisition — merger spread, not a VCP"
+          }
+        ],
+        notes: "DEAL: Merck KGaA, $73.00/sh cash, announced 25 Jun 2026, ~$11.3bn, expected close late 2026 / early 2027.  |  WHY IT IS NOT A VCP: Price $72.33 vs $73 deal; 0.7% 10-day range, 0.4% from the high."
+      },
+      {
+        rank: 4,
+        ticker: "LNTH",
+        name: "LNTH — DISQUALIFIED (announced acquisition)",
+        sector: "M&A spread — do not trade",
+        status: "DISQUALIFIED",
+        techScore: "7/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$100.54",
+            signal: "10.1% below 52w high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "0.9%",
+            signal: "Artificially tight — deal pin",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "FALSE POSITIVE",
+            good: false
+          },
+          {
+            metric: "RS rank",
+            value: "89",
+            signal: "Meaningless under a fixed cash bid",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "N/A — DO NOT TRADE",
+          entryCondition: "DISQUALIFIED: announced cash acquisition",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "NO POSITION"
+        },
+        alerts: [
+          {
+            type: "DO NOT TRADE",
+            price: "Announced acquisition — merger spread, not a VCP"
+          }
+        ],
+        notes: "DEAL: Curium US, $102.50/sh cash plus a non-tradeable CVR of up to $12.00/sh, announced 3 Aug 2026, ~$8bn, expected close H1 2027.  |  WHY IT IS NOT A VCP: Price $100.54 vs $102.50 cash; 0.9% 10-day range. Spread, not a base."
+      },
+      {
+        rank: 5,
+        ticker: "WST",
+        name: "West Pharmaceutical Services",
+        sector: "Life-science packaging & delivery",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$362.01",
+            signal: "6.2% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$348.89",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$307.65 / $296.57",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "3.8%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "87",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$386.00 / $223.83",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "11.7%",
+            signal: "Volume drying",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            metric: "Latest quarter",
+            value: "EPS 18.1%",
+            signal: "Revenue 13.8%",
+            good: false
+          },
+          {
+            metric: "Prior quarter",
+            value: "EPS 56.1%",
+            signal: "Revenue 21.1%",
+            good: true
+          },
+          {
+            metric: "Two quarters ago",
+            value: "EPS 2.1%",
+            signal: "Revenue 7.5%",
+            good: false
+          },
+          {
+            metric: "Three quarters ago",
+            value: "EPS 3.8%",
+            signal: "Revenue 7.7%",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "$370.67 (engine buy point)",
+          entryCondition: "Daily close above $370.67 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 869,915 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$342.87 (~7.5% below pivot)",
+          target1: "$444.80 (+20%)",
+          target2: "$481.87 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$370.68 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$352.14 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$342.87 — hard stop"
+          },
+          {
+            type: "TREND EXIT (v2)",
+            price: "$338.42 — weekly close >3% below 50DMA"
+          }
+        ],
+        notes: "The cleanest would-be BUY NOW in the list: a genuine 8/8 trend, real base (15.7 → 7.4 → 7.9 → 4.0% contractions), volume drying, only 3.8% extended. EPS growth +18.1% in Q2 is short of the 25% bar, so the fundamental screen scores FAIL even though revenue is +13.8%.  |  ANALYST: Consensus ~$350 (23 analysts); Evercore ISI $390, Barclays $325. Price $362.01 sits at/just above the mean — modest room to run, not a wide gap.  |  M&A CHECK: No pending bid. Sold a Tempe, AZ device plant to AbbVie for ~$110m, completed 1 Jul 2026 — an asset sale, not a takeover.  |  FUNDAMENTALS: FAIL (Q2 2026): latest EPS growth 18.1%, revenue growth 13.8%.",
+        epsNote: "FAIL (Q2 2026): latest EPS growth 18.1%, revenue growth 13.8%."
+      },
+      {
+        rank: 6,
+        ticker: "PAG",
+        name: "Penske Automotive Group",
+        sector: "Auto retail",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$214.15",
+            signal: "5.7% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$213.08",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$180.14 / $176.01",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "0.5%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "85",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$227.00 / $140.12",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "3.5%",
+            signal: "Volume drying",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            metric: "Latest quarter",
+            value: "EPS -1.7%",
+            signal: "Revenue 6.0%",
+            good: false
+          },
+          {
+            metric: "Prior quarter",
+            value: "EPS -7.8%",
+            signal: "Revenue -1.1%",
+            good: false
+          },
+          {
+            metric: "Two quarters ago",
+            value: "EPS -19.1%",
+            signal: "Revenue -3.1%",
+            good: false
+          },
+          {
+            metric: "Three quarters ago",
+            value: "EPS -4.7%",
+            signal: "Revenue 1.4%",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "$221.04 (engine buy point)",
+          entryCondition: "Daily close above $221.04 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 572,450 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$204.46 (~7.5% below pivot)",
+          target1: "$265.25 (+20%)",
+          target2: "$287.35 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$221.05 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$209.99 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$204.46 — hard stop"
+          },
+          {
+            type: "TREND EXIT (v2)",
+            price: "$206.69 — weekly close >3% below 50DMA"
+          }
+        ],
+        notes: "Tight, orderly base (6.8 → 5.3 → 2.3 → 2.5%), sitting right on the 50DMA (+0.5% extended), volume drying. But EPS has fallen four quarters running (-1.7% latest) — this is a multiple-expansion move, not an earnings move. Minervini would want the earnings.  |  ANALYST: Mean target ~$184–197 (8 analysts, Strong Buy); recent hikes BofA $238, Barclays $220. Price $214.15 is above the mean but below the recent high targets — mixed.  |  M&A CHECK: No pending acquisition found.  |  FUNDAMENTALS: FAIL (Q2 2026): latest EPS growth -1.7%, revenue growth 6.0%.",
+        epsNote: "FAIL (Q2 2026): latest EPS growth -1.7%, revenue growth 6.0%."
+      },
+      {
+        rank: 7,
+        ticker: "BFH",
+        name: "Bread Financial Holdings",
+        sector: "Consumer credit",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$107.85",
+            signal: "5.8% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$105.89",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$91.81 / $87.37",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "1.8%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "90",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$114.53 / $53.83",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "7.9%",
+            signal: "Volume drying",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            metric: "Latest quarter",
+            value: "EPS 21.2%",
+            signal: "Revenue 3.8%",
+            good: false
+          },
+          {
+            metric: "Prior quarter",
+            value: "EPS 49.3%",
+            signal: "Revenue 6.1%",
+            good: true
+          },
+          {
+            metric: "Two quarters ago",
+            value: "EPS 734.9%",
+            signal: "Revenue 18.5%",
+            good: true
+          },
+          {
+            metric: "Three quarters ago",
+            value: "EPS 9703.9%",
+            signal: "Revenue 9.4%",
+            good: true
+          }
+        ],
+        entry: {
+          pivot: "$112.09 (engine buy point)",
+          entryCondition: "Daily close above $112.09 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 762,509 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$103.68 (~7.5% below pivot)",
+          target1: "$134.51 (+20%)",
+          target2: "$145.72 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$112.10 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$106.49 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$103.68 — hard stop"
+          },
+          {
+            type: "TREND EXIT (v2)",
+            price: "$102.71 — weekly close >3% below 50DMA"
+          }
+        ],
+        notes: "Only 1.8% above the 50DMA with a clean 11.7 → 12.0 → 7.7 → 6.1% contraction sequence. EPS +21.2% is just under the 25% bar; the prior quarters' four-digit growth rates are base effects off a depressed 2025, not a clean acceleration.  |  ANALYST: Targets diverge sharply by source: S&P Global mean ~$115, TipRanks 13-analyst mean ~$68.67 (high $98, low $50). Price $107.85. Treat the upside as unresolved.  |  M&A CHECK: No pending acquisition found.  |  FUNDAMENTALS: FAIL (Q2 2026): latest EPS growth 21.2%, revenue growth 3.8%.",
+        epsNote: "FAIL (Q2 2026): latest EPS growth 21.2%, revenue growth 3.8%."
+      },
+      {
+        rank: 8,
+        ticker: "AMN",
+        name: "AMN Healthcare Services",
+        sector: "Healthcare staffing",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$34.92",
+            signal: "6.2% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$33.85",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$27.20 / $24.81",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "3.2%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "96",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$37.22 / $14.97",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "11.0%",
+            signal: "Volume drying",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            metric: "Latest quarter",
+            value: "EPS n/a",
+            signal: "Revenue 2.3%",
+            good: false
+          },
+          {
+            metric: "Prior quarter",
+            value: "EPS n/a",
+            signal: "Revenue 99.9%",
+            good: false
+          },
+          {
+            metric: "Two quarters ago",
+            value: "EPS n/a",
+            signal: "Revenue 1.8%",
+            good: false
+          },
+          {
+            metric: "Three quarters ago",
+            value: "EPS 321.3%",
+            signal: "Revenue -7.7%",
+            good: true
+          }
+        ],
+        entry: {
+          pivot: "$35.91 (engine buy point)",
+          entryCondition: "Daily close above $35.91 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 970,393 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$33.22 (~7.5% below pivot)",
+          target1: "$43.09 (+20%)",
+          target2: "$46.68 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$35.92 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$34.11 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$33.22 — hard stop"
+          },
+          {
+            type: "TREND EXIT (v2)",
+            price: "$32.83 — weekly close >3% below 50DMA"
+          }
+        ],
+        notes: "Highest RS in the would-be-buy group (96) and a perfect 8/8, but it is a recovery move off a $14.97 low with FY2025 revenue down 8.5% and a loss. Base is wider than the others (11.0% tightness). Momentum without an earnings engine.  |  ANALYST: Consensus rating Hold, 12-month mean target $29.86 vs price $34.92 — the stock has OUTRUN estimates by ~17%. This is the opposite of room to run.  |  M&A CHECK: No pending bid; AMN itself acquired Jaide Health (terms undisclosed).  |  FUNDAMENTALS: FAIL (Q2 2026): latest EPS growth n/a, revenue growth 2.3%.",
+        epsNote: "FAIL (Q2 2026): latest EPS growth n/a, revenue growth 2.3%."
+      },
+      {
+        rank: 9,
+        ticker: "AMD",
+        name: "Advanced Micro Devices",
+        sector: "Semiconductors",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$512.50",
+            signal: "12.4% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$495.03",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$394.50 / $351.29",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "3.5%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "98",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$584.73 / $149.85",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "19.7%",
+            signal: "Volume drying",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            metric: "Latest quarter",
+            value: "EPS 159.5%",
+            signal: "Revenue 50.1%",
+            good: true
+          },
+          {
+            metric: "Prior quarter",
+            value: "EPS 91.2%",
+            signal: "Revenue 37.9%",
+            good: true
+          },
+          {
+            metric: "Two quarters ago",
+            value: "EPS 217.1%",
+            signal: "Revenue 34.1%",
+            good: true
+          },
+          {
+            metric: "Three quarters ago",
+            value: "EPS 60.3%",
+            signal: "Revenue 35.6%",
+            good: true
+          }
+        ],
+        entry: {
+          pivot: "$527.25 (engine buy point)",
+          entryCondition: "Daily close above $527.25 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 32,766,010 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$487.71 (~7.5% below pivot)",
+          target1: "$632.70 (+20%)",
+          target2: "$685.43 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$527.26 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$500.89 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$487.71 — hard stop"
+          },
+          {
+            type: "TREND EXIT (v2)",
+            price: "$480.18 — weekly close >3% below 50DMA"
+          }
+        ],
+        notes: "The best fundamental profile in the whole screen after MU: EPS +159% and revenue +50% in Q2 2026, data-centre driven. RS 98, 8/8 trend, only 3.5% extended. The base is still wide (19.7% tightness, 12.4% below the high), so VCP is FORMING, not CONFIRMED.  |  ANALYST: Moderate Buy, mean ~$565 (range $565–660); Piper Sandler $600, Stifel $635. Price $512.50 — roughly 10% of headroom to the mean.  |  M&A CHECK: No pending acquisition.  |  FUNDAMENTALS: PASS (Q2 2026): latest EPS growth 159.5%, revenue growth 50.1%.",
+        epsNote: "PASS (Q2 2026): latest EPS growth 159.5%, revenue growth 50.1%."
+      },
+      {
+        rank: 10,
+        ticker: "PARR",
+        name: "Par Pacific Holdings",
+        sector: "Refining",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$84.90",
+            signal: "2.4% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$77.79",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$63.53 / $57.37",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "9.1%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "98",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$87.03 / $33.21",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "11.0%",
+            signal: "Volume drying",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            metric: "Latest quarter",
+            value: "EPS 699.1%",
+            signal: "Revenue 56.8%",
+            good: true
+          },
+          {
+            metric: "Prior quarter",
+            value: "EPS n/a",
+            signal: "Revenue 4.5%",
+            good: false
+          },
+          {
+            metric: "Two quarters ago",
+            value: "EPS n/a",
+            signal: "Revenue -1.0%",
+            good: false
+          },
+          {
+            metric: "Three quarters ago",
+            value: "EPS 3869.2%",
+            signal: "Revenue -6.1%",
+            good: true
+          }
+        ],
+        entry: {
+          pivot: "$86.97 (engine buy point)",
+          entryCondition: "Daily close above $86.97 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,356,779 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$80.45 (~7.5% below pivot)",
+          target1: "$104.36 (+20%)",
+          target2: "$113.06 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$86.98 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$82.62 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$80.45 — hard stop"
+          },
+          {
+            type: "TREND EXIT (v2)",
+            price: "$75.46 — weekly close >3% below 50DMA"
+          }
+        ],
+        notes: "RS 98, 8/8, 2.4% from the high with volume drying. EPS +699% on a refining-margin cycle — treat with caution: cyclical peak earnings are exactly when the Minervini screen looks best and the forward risk is highest. Contractions are still wide (21 → 21 → 25.3 → 13.9%).  |  ANALYST: Not separately confirmed this run; refining margins are the swing factor.  |  M&A CHECK: No pending acquisition.  |  FUNDAMENTALS: PASS (Q2 2026): latest EPS growth 699.1%, revenue growth 56.8%.",
+        epsNote: "PASS (Q2 2026): latest EPS growth 699.1%, revenue growth 56.8%."
+      },
+      {
+        rank: 11,
+        ticker: "CORT",
+        name: "Corcept Therapeutics",
+        sector: "Biopharma",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$111.81",
+            signal: "11.5% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$107.38",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$71.30 / $68.07",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "4.1%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "97",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$126.38 / $28.66",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "8.9%",
+            signal: "Volume drying",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            metric: "Latest quarter",
+            value: "EPS 24.1%",
+            signal: "Revenue 31.7%",
+            good: false
+          },
+          {
+            metric: "Prior quarter",
+            value: "EPS n/a",
+            signal: "Revenue 4.9%",
+            good: false
+          },
+          {
+            metric: "Two quarters ago",
+            value: "EPS -21.6%",
+            signal: "Revenue 11.1%",
+            good: false
+          },
+          {
+            metric: "Three quarters ago",
+            value: "EPS -61.0%",
+            signal: "Revenue 13.8%",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "$126.38 (engine buy point)",
+          entryCondition: "Daily close above $126.38 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,486,132 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$116.90 (~7.5% below pivot)",
+          target1: "$151.66 (+20%)",
+          target2: "$164.29 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$126.39 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$120.06 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$116.90 — hard stop"
+          },
+          {
+            type: "TREND EXIT (v2)",
+            price: "$104.16 — weekly close >3% below 50DMA"
+          }
+        ],
+        notes: "RS 97, 8/8, revenue +31.7%. But the pivot at $126.38 is 13% above the current $111.81 and near_pivot is false — the engine flags this one as not actually close to a buy point. A long way from actionable.  |  ANALYST: Not separately confirmed this run.  |  M&A CHECK: No pending acquisition.  |  FUNDAMENTALS: REV PASS (Q2 2026): latest EPS growth 24.1%, revenue growth 31.7%.",
+        epsNote: "REV PASS (Q2 2026): latest EPS growth 24.1%, revenue growth 31.7%."
+      },
+      {
+        rank: 12,
+        ticker: "MATX",
+        name: "Matson",
+        sector: "Ocean transport",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$235.62",
+            signal: "2.2% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$216.35",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$189.32 / $175.88",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "8.9%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "96",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$240.87 / $86.97",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "10.7%",
+            signal: "Volume NOT drying",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            metric: "Latest quarter",
+            value: "EPS 46.2%",
+            signal: "Revenue 16.7%",
+            good: true
+          },
+          {
+            metric: "Prior quarter",
+            value: "EPS -15.1%",
+            signal: "Revenue -3.1%",
+            good: false
+          },
+          {
+            metric: "Two quarters ago",
+            value: "EPS 21.2%",
+            signal: "Revenue -4.3%",
+            good: false
+          },
+          {
+            metric: "Three quarters ago",
+            value: "EPS -28.0%",
+            signal: "Revenue -8.5%",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "$240.87 (engine buy point)",
+          entryCondition: "Daily close above $240.87 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 401,531 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$222.80 (~7.5% below pivot)",
+          target1: "$289.04 (+20%)",
+          target2: "$313.13 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$240.88 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$228.83 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$222.80 — hard stop"
+          },
+          {
+            type: "TREND EXIT (v2)",
+            price: "$209.86 — weekly close >3% below 50DMA"
+          }
+        ],
+        notes: "EPS +46.2%, revenue +16.7%, FY2026 guidance raised on Transpacific strength. 8/8, 2.2% from the high. Volume is NOT drying (10-day above the 50-day average), which is why this is FORMING rather than CONFIRMED.  |  ANALYST: Mean targets $224–265 across sources (3 analysts, Strong Buy); JPMorgan initiated Overweight at $230. Price $235.62 — headroom is thin and coverage is sparse.  |  M&A CHECK: No pending acquisition.  |  FUNDAMENTALS: PASS (Q2 2026): latest EPS growth 46.2%, revenue growth 16.7%.  |  LIQUIDITY WARNING: 50-day average volume only 286,808 shares — the 1.4x volume trigger is unreliable; size down or skip.",
+        epsNote: "PASS (Q2 2026): latest EPS growth 46.2%, revenue growth 16.7%."
+      },
+      {
+        rank: 13,
+        ticker: "LFST",
+        name: "LifeStance Health Group",
+        sector: "Behavioural health",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 16, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 16, 2026)",
+            value: "$12.79",
+            signal: "5.7% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$11.76",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$8.96 / $8.46",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "8.7%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "98",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$13.56 / $4.77",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "9.5%",
+            signal: "Volume NOT drying",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            metric: "Latest quarter",
+            value: "EPS n/a",
+            signal: "Revenue 26.1%",
+            good: false
+          },
+          {
+            metric: "Prior quarter",
+            value: "EPS 1927.5%",
+            signal: "Revenue 21.2%",
+            good: true
+          },
+          {
+            metric: "Two quarters ago",
+            value: "EPS n/a",
+            signal: "Revenue 17.4%",
+            good: false
+          },
+          {
+            metric: "Three quarters ago",
+            value: "EPS n/a",
+            signal: "Revenue 16.3%",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "$13.56 (engine buy point)",
+          entryCondition: "Daily close above $13.56 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 5,724,460 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$12.54 (~7.5% below pivot)",
+          target1: "$16.27 (+20%)",
+          target2: "$17.63 (+30%)",
+          rr: "2.66:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$13.57 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$12.88 — 5% below pivot"
+          },
+          {
+            type: "STOP ALERT",
+            price: "$12.54 — hard stop"
+          },
+          {
+            type: "TREND EXIT (v2)",
+            price: "$11.41 — weekly close >3% below 50DMA"
+          }
+        ],
+        notes: "RS 98 and revenue +26.1%, but 8.7% extended, volume expanding into the base, and a $12.54 stop on a $12.79 stock — a 2% price move stops you out. Thin risk budget.  |  ANALYST: Not separately confirmed this run.  |  M&A CHECK: No pending acquisition.  |  FUNDAMENTALS: REV PASS (Q2 2026): latest EPS growth n/a, revenue growth 26.1%.",
+        epsNote: "REV PASS (Q2 2026): latest EPS growth n/a, revenue growth 26.1%."
+      }
+    ],
+    riskRules: [
+      "REGIME GATE FIRST — the market is not in a confirmed uptrend, so there are no new positions this week regardless of how good an individual chart looks.",
+      "RUN THE M&A CHECK BEFORE ANYTHING ELSE — four of this week’s six tightest bases are announced cash deals. A tight, low-volume base pinned just under a round number is a merger spread until proven otherwise.",
+      "Hard stop ~7.5% below the pivot, placed when the position opens; honour it intraday.",
+      "v2 trend exit is buffered: act only on a WEEKLY close >3% below the 50DMA, never on a daily dip.",
+      "Re-entry cooldown of 4–6 weeks after any stop or exit, and only on a fresh higher base.",
+      "Never add to a loser. Tranches run 50% at the pivot, 30% on a 5–7% advance, 20% on a third confirmation — upward only.",
+      "If a name is already >10% above its 50DMA at entry, start at 25% size instead of 50% (LFST, MATX, PARR this week).",
+      "Require reward-to-risk of at least 2.5:1 — but note the engine’s fixed geometry returns 2.67:1 for every name, so R:R is not a differentiator. Discriminate on base quality and earnings instead.",
+      "Be sceptical of thin volume: below ~300,000 shares of 50-day average the 1.4× trigger is unreliable (EIG, DCOM, HAFC, PRSU, MATX this week).",
+      "Demand both trend AND earnings — a perfect 8/8 chart on falling EPS (AMN, PAG this week) is a multiple-expansion trade, not a Minervini trade.",
+      "Sell into strength near +20% and +30% rather than waiting for a reversal.",
+      "Treat this as an idea generator, not a buy list — a backtest of this screen lagged buy-and-hold."
+    ],
+    verification: "Confirm current price, the 50/150/200MA stack, the base and pivot, and a real volume-expansion breakout on TradingView 1D before any trade. Prices are the 2026-09-16 close. Search EVERY ticker for pending M&A before acting — this week ITGR (KKR, $127), SAFT (Mapfre, $105), TECH (Merck KGaA, $73) and LNTH (Curium, $102.50 plus a CVR) all scored near-perfect algorithmic VCPs purely because they are frozen under announced cash bids.",
+    disclaimer: "For informational and educational purposes only. Not financial advice."
+  },
+  {
     reportDate: "2026-09-14",
     title: "S&P 1500 Momentum Screen",
     framework: "Minervini SEPA — history-based engine v2 (full S&P 1500)",
