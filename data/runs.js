@@ -13,6 +13,4112 @@
 
 window.SCREEN_RUNS = [
   {
+    reportDate: "2026-09-21",
+    title: "S&P 1500 Momentum Screen",
+    framework: "Minervini SEPA — history-based engine v3 (full S&P 1500, 1,498 names evaluated)",
+    market: {
+      index: "S&P 1500 breadth — 48.9% above 200MA",
+      verdict: "UNDER PRESSURE",
+      verdictNote: "REGIME GATE ACTIVE — the gate downgraded ALL would-be buys to EXTENDED — WATCH, so nothing is actionable this week. Only 48.9% of the 1,498 evaluated S&P 1500 names are above their 200DMA (the gate needs at least 60%) and just 25.8% are above their 50DMA, although 46% still hold a full 50>150>200 stack. That combination — long-term structure largely intact, short-term participation collapsed across roughly three-quarters of the market — describes a broad pullback inside an intact uptrend, not a bear market. But it is emphatically not a place to add risk. Before the gate, 15 names met every BUY NOW condition and 276 met every SETUP condition on their own merits; after the gate, 0 and 0. Breadth is derived from the universe itself, no index quote is used. Universe is the full S&P 1500 (large, mid and small cap). THE WEEK'S MOST IMPORTANT FINDINGS: (1) four of the fifteen would-be buys — ITGR, SAFT, LNTH and PAG — are announced acquisitions, not VCPs, and are disqualified below; (2) AVNS scored 8/8 with a forming base while no longer being a listed security — its acquisition closed on 27 July 2026 and its price history is frozen. A staleness filter is needed in the engine.",
+      metrics: [
+        {
+          metric: "Universe evaluated",
+          value: "1,498 names",
+          signal: "of 1,506 attempted"
+        },
+        {
+          metric: "% above 200-day MA",
+          value: "48.9%",
+          signal: "≥60% = uptrend",
+          good: false
+        },
+        {
+          metric: "% above 50-day MA",
+          value: "25.8%",
+          signal: "Short-term breadth — very weak",
+          good: false
+        },
+        {
+          metric: "% in full MA stack",
+          value: "46%",
+          signal: "≥45% = healthy",
+          good: true
+        },
+        {
+          metric: "Would-be BUY NOW (pre-gate)",
+          value: "15",
+          signal: "All downgraded by the gate",
+          good: false
+        },
+        {
+          metric: "Would-be SETUP (pre-gate)",
+          value: "276",
+          signal: "All downgraded by the gate",
+          good: false
+        },
+        {
+          metric: "Actionable buys this week",
+          value: "0",
+          signal: "REGIME GATE ACTIVE",
+          good: false
+        },
+        {
+          metric: "Disqualified on M&A check",
+          value: "4 of 15",
+          signal: "ITGR, SAFT, LNTH, PAG",
+          good: false
+        }
+      ],
+      sectorAsOf: "Count of GATED would-be BUY NOW names by sector, after M&A disqualification (not daily performance)",
+      sectors: [
+        {
+          sector: "Healthcare",
+          change: 3
+        },
+        {
+          sector: "Technology",
+          change: 2
+        },
+        {
+          sector: "Industrials",
+          change: 2
+        },
+        {
+          sector: "Consumer Defensive",
+          change: 2
+        },
+        {
+          sector: "Basic Materials",
+          change: 1
+        },
+        {
+          sector: "Financial Services",
+          change: 1
+        }
+      ],
+      sectorNote: "The clean would-be buy list is led by healthcare services and industrials with only two technology names, and the highest-RS technology leaders are all unusable — DELL is 22.8% above its 50DMA, MRNA is 56.9% above, and MU, INTC and LITE sit 19–24% below their highs. Defensive and materials leadership with technology either parabolic or still repairing is late-cycle rotation, not a healthy broad advance."
+    },
+    dataSources: [
+      "Prices: stockanalysis.com daily OHLCV via the in-app browser (5-year range, last 300 bars per name), last bar 2026-09-18",
+      "Engine: deterministic v3 Trend Template + RS percentile + algorithmic VCP + breadth regime gate, executed in-browser",
+      "Fundamentals: stockanalysis.com quarterly financials (EPS Growth / Revenue Growth YoY) — the EPS screen RAN this week",
+      "Analyst targets: stockanalysis.com forecast pages, fetched in-browser for every featured name",
+      "Transfer: gzip+base64 payload in 15 chunks, SHA-256 verified before decode (05962e4528ba026d)",
+      "Confirmation: web search on featured names only, including a mandatory pending-M&A check (never the basis for a setup)"
+    ],
+    dataQualityNote: "1,498 of 1,506 S&P 1500 names were evaluated from end-of-day prices through 2026-09-18. Closes are split-adjusted but not dividend-adjusted, consistent with prior runs. The fundamental screen DID run — EPS, revenue and analyst targets all came through the browser rather than the plan-gated FMP endpoint. IMPORTANT: 20 names carry stale price history, some badly so (CWEN-A last traded in the data on 2026-04-30), and at least one, AVNS, is a completed delisting the engine scored as an 8/8 setup. Pivots and volume triggers are mechanical: confirm every chart on TradingView, and run the M&A check first.",
+    dataQuality: [
+      {
+        ticker: "FULL UNIVERSE",
+        source: "stockanalysis.com daily OHLCV",
+        date: "Sep 18, 2026",
+        status: "1,498 EVALUATED"
+      },
+      {
+        ticker: "Stale bars",
+        source: "Vendor / delistings",
+        date: "Apr 30 – Sep 01, 2026",
+        status: "20 NAMES — MATERIAL, see note"
+      },
+      {
+        ticker: "AVNS",
+        source: "Delisted 27 Jul 2026 (AIP, $25.00)",
+        date: "Jul 24, 2026",
+        status: "EXCLUDED — scored 8/8 in error"
+      },
+      {
+        ticker: "Insufficient history",
+        source: "Engine (<260 bars)",
+        date: "Sep 18, 2026",
+        status: "5 SKIPPED — FDXF, Q, SOLS, VGNT, VSNT"
+      },
+      {
+        ticker: "No data returned",
+        source: "Vendor (HTTP 400)",
+        date: "N/A",
+        status: "3 SKIPPED — EQR, FDP, SATS"
+      },
+      {
+        ticker: "BUY NOW set",
+        source: "Engine (deterministic)",
+        date: "Sep 18, 2026",
+        status: "0 — REGIME GATE ACTIVE"
+      },
+      {
+        ticker: "Fundamentals",
+        source: "stockanalysis.com quarterly",
+        date: "Sep 18, 2026",
+        status: "33 NAMES SCREENED — endpoint working"
+      },
+      {
+        ticker: "M&A screen",
+        source: "Web search, featured names",
+        date: "Sep 21, 2026",
+        status: "4 DISQUALIFIED"
+      }
+    ],
+    criteria: [
+      {
+        key: "c1",
+        label: "Price > 150MA & 200MA"
+      },
+      {
+        key: "c2",
+        label: "150MA > 200MA"
+      },
+      {
+        key: "c3",
+        label: "200MA Trending Up"
+      },
+      {
+        key: "c4",
+        label: "50 > 150 > 200 (full stack)"
+      },
+      {
+        key: "c5",
+        label: "Price > 50MA"
+      },
+      {
+        key: "c6",
+        label: "Price ≥ 30% Above 52wLow"
+      },
+      {
+        key: "c7",
+        label: "Price Within 25% of 52wHigh"
+      },
+      {
+        key: "c8",
+        label: "RS Rank ≥ 70"
+      }
+    ],
+    summary: [
+      {
+        ticker: "ITGR",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "DISQUALIFIED"
+      },
+      {
+        ticker: "SAFT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "DISQUALIFIED"
+      },
+      {
+        ticker: "LNTH",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "DISQUALIFIED"
+      },
+      {
+        ticker: "PAG",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "DISQUALIFIED"
+      },
+      {
+        ticker: "AMN",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "MTRN",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "ANET",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "DXPE",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "SHC",
+        flags: [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "CAT",
+        flags: [
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "6/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "IPAR",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "ROG",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "EHC",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "PSMT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "GL",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "AMD",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "VSTS",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "XNCR",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "CORT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "IRDM",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "LFST",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "MAN",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "PARR",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "CRL",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "NSIT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "TWLO",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "AAMI",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "DELL",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXTENDED"
+      },
+      {
+        ticker: "INTC",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXTENDED"
+      },
+      {
+        ticker: "LITE",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXTENDED"
+      },
+      {
+        ticker: "MRNA",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXTENDED"
+      },
+      {
+        ticker: "MU",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXTENDED"
+      }
+    ],
+    stocksNote: "Nothing below is actionable — the regime gate blocks every entry this week. The four DISQUALIFIED cards come first because they are the most useful lesson in the run: all four scored as would-be BUY NOW with textbook-tight bases purely because they are frozen under announced cash bids. Then come the eleven clean would-be buys (VCP CONFIRMED), the twelve strongest would-be setups (VCP FORMING), and finally the five highest-RS extended leaders, which were never gated — they simply have no base. Levels are pre-computed so no arithmetic is needed if and when breadth repairs.",
+    stocks: [
+      {
+        rank: 1,
+        ticker: "ITGR",
+        name: "ITGR — DISQUALIFIED (announced acquisition)",
+        sector: "M&A spread — do not trade",
+        status: "DISQUALIFIED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$126.28",
+            signal: "0.4% below 52w high"
+          },
+          {
+            metric: "Announced deal price",
+            value: "$127.00",
+            signal: "Cash bid — price is pinned",
+            good: false
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "0.8%",
+            signal: "Artificially tight — deal pin",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "FALSE POSITIVE",
+            good: false
+          },
+          {
+            metric: "RS rank",
+            value: "93",
+            signal: "Meaningless under a fixed cash bid",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "N/A — DO NOT TRADE",
+          entryCondition: "DISQUALIFIED: announced cash acquisition",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "NO POSITION"
+        },
+        alerts: [
+          {
+            type: "DO NOT TRADE",
+            price: "Announced acquisition — merger spread, not a VCP"
+          }
+        ],
+        notes: "DEAL: Pending KKR take-private at $127.00/sh (announced 2026-08-03, definitive agreement, expected to close by year-end). 0.8% base pinned just under the deal price = merger spread, not a VCP.  |  WHY IT IS NOT A VCP: a 0.8% ten-day range this close to a fixed cash bid is deal certainty, not accumulation."
+      },
+      {
+        rank: 2,
+        ticker: "SAFT",
+        name: "SAFT — DISQUALIFIED (announced acquisition)",
+        sector: "M&A spread — do not trade",
+        status: "DISQUALIFIED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$103.51",
+            signal: "0.3% below 52w high"
+          },
+          {
+            metric: "Announced deal price",
+            value: "$105.00",
+            signal: "Cash bid — price is pinned",
+            good: false
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "0.6%",
+            signal: "Artificially tight — deal pin",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "FALSE POSITIVE",
+            good: false
+          },
+          {
+            metric: "RS rank",
+            value: "92",
+            signal: "Meaningless under a fixed cash bid",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "N/A — DO NOT TRADE",
+          entryCondition: "DISQUALIFIED: announced cash acquisition",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "NO POSITION"
+        },
+        alerts: [
+          {
+            type: "DO NOT TRADE",
+            price: "Announced acquisition — merger spread, not a VCP"
+          }
+        ],
+        notes: "DEAL: Pending Mapfre acquisition at $105.00/sh cash (announced 2026-07-23, $1.54bn). 0.6% base = merger spread.  |  WHY IT IS NOT A VCP: a 0.6% ten-day range this close to a fixed cash bid is deal certainty, not accumulation."
+      },
+      {
+        rank: 3,
+        ticker: "LNTH",
+        name: "LNTH — DISQUALIFIED (announced acquisition)",
+        sector: "M&A spread — do not trade",
+        status: "DISQUALIFIED",
+        techScore: "7/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$100.55",
+            signal: "10.1% below 52w high"
+          },
+          {
+            metric: "Announced deal price",
+            value: "$102.50",
+            signal: "Cash bid — price is pinned",
+            good: false
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "0.9%",
+            signal: "Artificially tight — deal pin",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "FALSE POSITIVE",
+            good: false
+          },
+          {
+            metric: "RS rank",
+            value: "90",
+            signal: "Meaningless under a fixed cash bid",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "N/A — DO NOT TRADE",
+          entryCondition: "DISQUALIFIED: announced cash acquisition",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "NO POSITION"
+        },
+        alerts: [
+          {
+            type: "DO NOT TRADE",
+            price: "Announced acquisition — merger spread, not a VCP"
+          }
+        ],
+        notes: "DEAL: Pending Curium merger at $102.50/sh cash plus CVRs up to $12 (announced 2026-08-03, $8bn). 0.9% base = merger spread.  |  WHY IT IS NOT A VCP: a 0.9% ten-day range this close to a fixed cash bid is deal certainty, not accumulation."
+      },
+      {
+        rank: 4,
+        ticker: "PAG",
+        name: "PAG — DISQUALIFIED (announced acquisition)",
+        sector: "M&A spread — do not trade",
+        status: "DISQUALIFIED",
+        techScore: "7/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$212.61",
+            signal: "6.3% below 52w high"
+          },
+          {
+            metric: "Announced deal price",
+            value: "$210.00",
+            signal: "Cash bid — price is pinned",
+            good: false
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "4.6%",
+            signal: "Artificially tight — deal pin",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "FALSE POSITIVE",
+            good: false
+          },
+          {
+            metric: "RS rank",
+            value: "85",
+            signal: "Meaningless under a fixed cash bid",
+            good: false
+          }
+        ],
+        entry: {
+          pivot: "N/A — DO NOT TRADE",
+          entryCondition: "DISQUALIFIED: announced cash acquisition",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "NO POSITION"
+        },
+        alerts: [
+          {
+            type: "DO NOT TRADE",
+            price: "Announced acquisition — merger spread, not a VCP"
+          }
+        ],
+        notes: "DEAL: Pending Penske/Mitsui take-private at $210/sh (reported July 2026, ~$3.8bn). Trading above the offer on bump expectations. Deal situation, not a momentum setup.  |  WHY IT IS NOT A VCP: a 4.6% ten-day range this close to a fixed cash bid is deal certainty, not accumulation."
+      },
+      {
+        rank: 5,
+        ticker: "AMN",
+        name: "AMN Healthcare Services",
+        sector: "Healthcare",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$34.26",
+            signal: "8% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$33.95",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$27.42 / $24.98",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "0.9%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "96",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "8.9%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$37.22 / $14.97",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "682,058",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +2.29%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +99.9%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +1.84%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+321.32%",
+            pass: true,
+            revenue: "Rev -7.71%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $36.14 versus the $34.26 close implies +5.5% limited room.",
+        entry: {
+          pivot: "$35.56 (engine buy point)",
+          entryCondition: "Daily close above $35.56 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 954,881 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$32.89 (~7.5% below pivot)",
+          target1: "$42.67 (+20%)",
+          target2: "$46.23 (+30%)",
+          rr: "2.66:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$35.57 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$33.78 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$32.89 — exit intraday if hit"
+          }
+        ],
+        notes: "Highest RS of the clean group at 96 with a full 8/8 trend score and only 0.9% extension — the tightest risk entry here. But EPS growth reads FAIL and consensus sits at $36.14, barely 5% above the price, so the fundamental leg is missing. Healthcare staffing is cyclical and the stock is up sharply year-to-date.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $36.14 versus the $34.26 close implies +5.5% limited room.  |  V2 EXIT: hard stop $32.89; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 6,
+        ticker: "MTRN",
+        name: "Materion Corp",
+        sector: "Basic Materials",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$251.53",
+            signal: "17.4% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$247.88",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$211.17 / $192.3",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "1.5%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "95",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "11.2%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$304.58 / $109.61",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "316,479",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+52.08%",
+            pass: true,
+            revenue: "Rev +42.22%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+8.24%",
+            pass: false,
+            revenue: "Rev +30.81%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +12.11%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+14.02%",
+            pass: false,
+            revenue: "Rev +1.85%"
+          }
+        ],
+        epsNote: "EPS screen verdict: PASS. Analyst consensus $303.75 versus the $251.53 close implies +20.8% of room to run.",
+        entry: {
+          pivot: "$261.24 (engine buy point)",
+          entryCondition: "Daily close above $261.24 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 443,071 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$241.65 (~7.5% below pivot)",
+          target1: "$313.49 (+20%)",
+          target2: "$339.61 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$261.25 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$248.18 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$241.65 — exit intraday if hit"
+          }
+        ],
+        notes: "8/8, RS 95, 1.5% extension and a PASS on EPS (+52% latest). Consensus $303.75 leaves roughly 21% of room — the best fundamental-plus-technical combination in the group. Note it sits 17.4% below its 52-week high, so this is a recovery base rather than a high-tight flag, and 316k average volume is thin.  |  FUNDAMENTALS: EPS screen verdict: PASS. Analyst consensus $303.75 versus the $251.53 close implies +20.8% of room to run.  |  V2 EXIT: hard stop $241.65; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 7,
+        ticker: "ANET",
+        name: "Arista Networks",
+        sector: "Technology",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$199.39",
+            signal: "7.2% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$187.53",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$162.62 / $155.11",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "6.3%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "90",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "10.1%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$214.89 / $114.52",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "6,582,275",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+35.71%",
+            pass: true,
+            revenue: "Rev +37.69%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+25%",
+            pass: true,
+            revenue: "Rev +35.13%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+19.06%",
+            pass: false,
+            revenue: "Rev +28.88%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+15.52%",
+            pass: false,
+            revenue: "Rev +27.47%"
+          }
+        ],
+        epsNote: "EPS screen verdict: STRONG PASS. EPS growth is ACCELERATING across the last three quarters. Analyst consensus $241.04 versus the $199.39 close implies +20.9% of room to run.",
+        entry: {
+          pivot: "$206.13 (engine buy point)",
+          entryCondition: "Daily close above $206.13 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 9,215,185 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$190.67 (~7.5% below pivot)",
+          target1: "$247.36 (+20%)",
+          target2: "$267.97 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$206.14 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$195.82 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$190.67 — exit intraday if hit"
+          }
+        ],
+        notes: "STRONG PASS fundamentals — EPS accelerating 15.5% → 19.1% → 25% → 35.7% with revenue compounding near 38%. Deepest liquidity of any name here at 6.6m shares. Consensus $241 gives about 21% room. The cleanest institutional-quality name on the list.  |  FUNDAMENTALS: EPS screen verdict: STRONG PASS. EPS growth is ACCELERATING across the last three quarters. Analyst consensus $241.04 versus the $199.39 close implies +20.9% of room to run.  |  V2 EXIT: hard stop $190.67; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 8,
+        ticker: "DXPE",
+        name: "DXP Enterprises",
+        sector: "Industrials",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$185.26",
+            signal: "10.9% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$179.76",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$161.51 / $150.86",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "3.1%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "90",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "7.1%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$208 / $84.04",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "123,646",
+            signal: "TOO THIN — trigger unreliable",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+22.99%",
+            pass: false,
+            revenue: "Rev +15.6%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "-1.98%",
+            pass: false,
+            revenue: "Rev +9.46%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+7.59%",
+            pass: false,
+            revenue: "Rev +11.99%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+2.91%",
+            pass: false,
+            revenue: "Rev +8.63%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $200.00 versus the $185.26 close implies +8.0% limited room.",
+        entry: {
+          pivot: "$193.99 (engine buy point)",
+          entryCondition: "Daily close above $193.99 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 173,104 shares (1.4× 50-day avg) — THIN, UNRELIABLE — VERIFY ON TRADINGVIEW",
+          stop: "$179.44 (~7.5% below pivot)",
+          target1: "$232.79 (+20%)",
+          target2: "$252.19 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$194.00 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$184.29 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$179.44 — exit intraday if hit"
+          }
+        ],
+        notes: "8/8 and only 3.1% extended, but average volume is 124k shares. The volume trigger is close to meaningless at that liquidity and slippage will eat the edge. Watch-only unless position size is very small.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $200.00 versus the $185.26 close implies +8.0% limited room.  |  V2 EXIT: hard stop $179.44; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 9,
+        ticker: "SHC",
+        name: "Sotera Health",
+        sector: "Healthcare",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "6/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$18.73",
+            signal: "5.6% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$18.5",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$16.6 / $16.91",
+            signal: "Stack incomplete",
+            good: false
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "1.2%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "78",
+            signal: "Passes 70 threshold",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "9.1%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$19.85 / $13.09",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "2,685,430",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+569.49%",
+            pass: true,
+            revenue: "Rev +9.19%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +10.03%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+175.36%",
+            pass: true,
+            revenue: "Rev +4.56%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+183.33%",
+            pass: true,
+            revenue: "Rev +9.05%"
+          }
+        ],
+        epsNote: "EPS screen verdict: PASS. Analyst consensus $22.72 versus the $18.73 close implies +21.3% of room to run.",
+        entry: {
+          pivot: "$19.73 (engine buy point)",
+          entryCondition: "Daily close above $19.73 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 3,759,602 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$18.25 (~7.5% below pivot)",
+          target1: "$23.68 (+20%)",
+          target2: "$25.65 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$19.74 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$18.74 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$18.25 — exit intraday if hit"
+          }
+        ],
+        notes: "PASS on EPS off a low base (+569% latest, which flatters the comparison). Consensus $22.72 implies roughly 21% room. Trend score is the weakest of the clean group at 6/8.  |  FUNDAMENTALS: EPS screen verdict: PASS. Analyst consensus $22.72 versus the $18.73 close implies +21.3% of room to run.  |  V2 EXIT: hard stop $18.25; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 10,
+        ticker: "CAT",
+        name: "Caterpillar Inc.",
+        sector: "Industrials",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "6/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$808.99",
+            signal: "24.6% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$840.14",
+            signal: "Price BELOW 50MA",
+            good: false
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$835.44 / $784.11",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "-3.7%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "77",
+            signal: "Passes 70 threshold",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "7.5%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$1073.46 / $448.87",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "2,607,862",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+68.18%",
+            pass: true,
+            revenue: "Rev +23.98%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+30.24%",
+            pass: true,
+            revenue: "Rev +22.22%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "-11.41%",
+            pass: false,
+            revenue: "Rev +18%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "-3.56%",
+            pass: false,
+            revenue: "Rev +9.51%"
+          }
+        ],
+        epsNote: "EPS screen verdict: STRONG PASS. EPS growth is ACCELERATING across the last three quarters. Analyst consensus $975.61 versus the $808.99 close implies +20.6% of room to run.",
+        entry: {
+          pivot: "$834.45 (engine buy point)",
+          entryCondition: "Daily close above $834.45 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 3,651,007 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$771.87 (~7.5% below pivot)",
+          target1: "$1001.34 (+20%)",
+          target2: "$1084.79 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$834.46 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$792.73 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$771.87 — exit intraday if hit"
+          }
+        ],
+        notes: "STRONG PASS with accelerating EPS and 24% revenue growth, and consensus $975.61 leaves about 21% room. The problem is technical: 24.6% below its 52-week high and 3.7% BELOW the 50-day MA. The VCP flag reflects a wide large-cap base, not a Minervini pivot.  |  FUNDAMENTALS: EPS screen verdict: STRONG PASS. EPS growth is ACCELERATING across the last three quarters. Analyst consensus $975.61 versus the $808.99 close implies +20.6% of room to run.  |  V2 EXIT: hard stop $771.87; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 11,
+        ticker: "IPAR",
+        name: "Interparfums",
+        sector: "Consumer Defensive",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "7/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$112.51",
+            signal: "13% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$118.28",
+            signal: "Price BELOW 50MA",
+            good: false
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$103.49 / $100.06",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "-4.9%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "76",
+            signal: "Passes 70 threshold",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "8.1%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$129.29 / $77.21",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "245,948",
+            signal: "TOO THIN — trigger unreliable",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "-4.04%",
+            pass: false,
+            revenue: "Rev +2.13%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+2.27%",
+            pass: false,
+            revenue: "Rev +1.79%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+15.94%",
+            pass: false,
+            revenue: "Rev +6.83%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+6.18%",
+            pass: false,
+            revenue: "Rev +1.17%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $126.67 versus the $112.51 close implies +12.6% limited room.",
+        entry: {
+          pivot: "$119.05 (engine buy point)",
+          entryCondition: "Daily close above $119.05 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 344,327 shares (1.4× 50-day avg) — THIN, UNRELIABLE — VERIFY ON TRADINGVIEW",
+          stop: "$110.12 (~7.5% below pivot)",
+          target1: "$142.86 (+20%)",
+          target2: "$154.77 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$119.06 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$113.10 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$110.12 — exit intraday if hit"
+          }
+        ],
+        notes: "Fails on fundamentals (EPS −4%) and trades 4.9% below its 50DMA. Consensus $126.67 gives about 13% room. Weakest case among the clean names.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $126.67 versus the $112.51 close implies +12.6% limited room.  |  V2 EXIT: hard stop $110.12; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 12,
+        ticker: "ROG",
+        name: "Rogers Corp",
+        sector: "Technology",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "7/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$129.77",
+            signal: "23.2% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$130.73",
+            signal: "Price BELOW 50MA",
+            good: false
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$128.7 / $120.51",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "-0.7%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "73",
+            signal: "Passes 70 threshold",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "9.6%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$169 / $75.14",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "218,701",
+            signal: "TOO THIN — trigger unreliable",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +6.9%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +5.25%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +4.84%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "-17.41%",
+            pass: false,
+            revenue: "Rev +2.71%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $173.33 versus the $129.77 close implies +33.6% of room to run.",
+        entry: {
+          pivot: "$136.75 (engine buy point)",
+          entryCondition: "Daily close above $136.75 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 306,181 shares (1.4× 50-day avg) — THIN, UNRELIABLE — VERIFY ON TRADINGVIEW",
+          stop: "$126.49 (~7.5% below pivot)",
+          target1: "$164.1 (+20%)",
+          target2: "$177.78 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$136.76 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$129.91 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$126.49 — exit intraday if hit"
+          }
+        ],
+        notes: "No EPS data and 23.2% below its 52-week high. Consensus $173.33 implies 34% room but that reflects how far the stock has fallen, not momentum. Thin at 219k shares.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $173.33 versus the $129.77 close implies +33.6% of room to run.  |  V2 EXIT: hard stop $126.49; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 13,
+        ticker: "EHC",
+        name: "Encompass Health",
+        sector: "Healthcare",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$121.75",
+            signal: "4.9% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$118.22",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$108.6 / $107.58",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "3%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "72",
+            signal: "Passes 70 threshold",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "4.9%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$127.99 / $92.77",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "887,194",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+10.79%",
+            pass: false,
+            revenue: "Rev +9.58%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+30.3%",
+            pass: true,
+            revenue: "Rev +9.01%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+21.2%",
+            pass: false,
+            revenue: "Rev +9.94%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+16.68%",
+            pass: false,
+            revenue: "Rev +9.36%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $148.17 versus the $121.75 close implies +21.7% of room to run.",
+        entry: {
+          pivot: "$124.78 (engine buy point)",
+          entryCondition: "Daily close above $124.78 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,242,072 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$115.42 (~7.5% below pivot)",
+          target1: "$149.74 (+20%)",
+          target2: "$162.21 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$124.79 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$118.54 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$115.42 — exit intraday if hit"
+          }
+        ],
+        notes: "8/8 trend score and only 4.9% below its high, but EPS growth of 10.8% misses the 25% bar. Consensus $148.17 gives the largest headroom of the clean group at roughly 22%.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $148.17 versus the $121.75 close implies +21.7% of room to run.  |  V2 EXIT: hard stop $115.42; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 14,
+        ticker: "PSMT",
+        name: "PriceSmart",
+        sector: "Consumer Defensive",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "7/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$168.66",
+            signal: "15.6% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$179.46",
+            signal: "Price BELOW 50MA",
+            good: false
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$168.37 / $160.1",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "-6%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "71",
+            signal: "Passes 70 threshold",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "7.4%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$199.84 / $111.68",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "242,787",
+            signal: "TOO THIN — trigger unreliable",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q3 2026 (Most Recent)",
+            growth: "+12.27%",
+            pass: false,
+            revenue: "Rev +12.49%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+11.6%",
+            pass: false,
+            revenue: "Rev +9.65%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+6.61%",
+            pass: false,
+            revenue: "Rev +9.92%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+7.89%",
+            pass: false,
+            revenue: "Rev +8.56%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. EPS growth is ACCELERATING across the last three quarters. Analyst consensus $166.00 versus the $168.66 close implies -1.6% — price has OUTRUN estimates.",
+        entry: {
+          pivot: "$178.7 (engine buy point)",
+          entryCondition: "Daily close above $178.7 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 339,902 shares (1.4× 50-day avg) — THIN, UNRELIABLE — VERIFY ON TRADINGVIEW",
+          stop: "$165.3 (~7.5% below pivot)",
+          target1: "$214.44 (+20%)",
+          target2: "$232.31 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$178.71 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$169.76 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$165.3 — exit intraday if hit"
+          }
+        ],
+        notes: "Sits 6% below its 50DMA and consensus $166 is BELOW the current $168.66 — price has outrun estimates. EPS growth of 12.3% fails the test.  |  FUNDAMENTALS: EPS screen verdict: FAIL. EPS growth is ACCELERATING across the last three quarters. Analyst consensus $166.00 versus the $168.66 close implies -1.6% — price has OUTRUN estimates.  |  V2 EXIT: hard stop $165.3; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 15,
+        ticker: "GL",
+        name: "Globe Life",
+        sector: "Financial Services",
+        status: "WOULD-BE BUY NOW — GATED",
+        techScore: "7/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$173.42",
+            signal: "9.5% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$177.3",
+            signal: "Price BELOW 50MA",
+            good: false
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$161.08 / $155.74",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "-2.2%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "70",
+            signal: "Passes 70 threshold",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "5.1%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP CONFIRMED",
+            signal: "Gated by market",
+            good: true
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$191.55 / $127.85",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "529,820",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+19.67%",
+            pass: false,
+            revenue: "Rev +8%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+12.63%",
+            pass: false,
+            revenue: "Rev +5.35%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+9.46%",
+            pass: false,
+            revenue: "Rev +3.64%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+37.5%",
+            pass: true,
+            revenue: "Rev +3.96%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. EPS growth is ACCELERATING across the last three quarters. Analyst consensus $193.91 versus the $173.42 close implies +11.8% limited room.",
+        entry: {
+          pivot: "$177 (engine buy point)",
+          entryCondition: "Daily close above $177 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 741,748 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$163.73 (~7.5% below pivot)",
+          target1: "$212.4 (+20%)",
+          target2: "$230.1 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$177.01 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$168.15 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$163.73 — exit intraday if hit"
+          }
+        ],
+        notes: "EPS growth 19.7% just misses 25%, though the sequence is rising. Consensus $193.91 leaves about 12% room. Insurance is a defensive pocket, which partly explains why it screens well in weak breadth.  |  FUNDAMENTALS: EPS screen verdict: FAIL. EPS growth is ACCELERATING across the last three quarters. Analyst consensus $193.91 versus the $173.42 close implies +11.8% limited room.  |  V2 EXIT: hard stop $163.73; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 16,
+        ticker: "AMD",
+        name: "Advanced Micro Devices",
+        sector: "Technology",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$559.82",
+            signal: "4.3% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$495.85",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$399.07 / $354.62",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "12.9%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "98",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "22.3%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$584.73 / $149.85",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "23,577,589",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+159.49%",
+            pass: true,
+            revenue: "Rev +50.11%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+91.17%",
+            pass: true,
+            revenue: "Rev +37.85%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+217.14%",
+            pass: true,
+            revenue: "Rev +34.11%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+60.27%",
+            pass: true,
+            revenue: "Rev +35.59%"
+          }
+        ],
+        epsNote: "EPS screen verdict: PASS. Analyst consensus $616.51 versus the $559.82 close implies +10.1% limited room.",
+        entry: {
+          pivot: "$559.91 (engine buy point)",
+          entryCondition: "Daily close above $559.91 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 33,008,625 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$517.92 (~7.5% below pivot)",
+          target1: "$671.89 (+20%)",
+          target2: "$727.88 (+30%)",
+          rr: "2.67:1",
+          sizing: "25% at pivot (already >10% above 50DMA) | scale only on strength — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$559.92 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$531.91 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$517.92 — exit intraday if hit"
+          }
+        ],
+        notes: "RS 98 and a PASS on EPS (+159%), but extension is 12.9% and 10-bar tightness is 22.3% — a wide, volatile base rather than a true contraction. Consensus $616.51 gives about 10% room. Enormous liquidity.  |  FUNDAMENTALS: EPS screen verdict: PASS. Analyst consensus $616.51 versus the $559.82 close implies +10.1% limited room.  |  V2 EXIT: hard stop $517.92; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 17,
+        ticker: "VSTS",
+        name: "Vestis Corp",
+        sector: "Industrials",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "7/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$13.82",
+            signal: "18.2% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$13.95",
+            signal: "Price BELOW 50MA",
+            good: false
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$11.47 / $10.33",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "-0.9%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "98",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "10.4%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$16.9 / $4.02",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "1,421,950",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q3 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -1.8%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -0.87%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -2.98%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +4.05%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $13.00 versus the $13.82 close implies -5.9% — price has OUTRUN estimates.",
+        entry: {
+          pivot: "$14.09 (engine buy point)",
+          entryCondition: "Daily close above $14.09 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,990,730 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$13.03 (~7.5% below pivot)",
+          target1: "$16.91 (+20%)",
+          target2: "$18.32 (+30%)",
+          rr: "2.66:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$14.10 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$13.39 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$13.03 — exit intraday if hit"
+          }
+        ],
+        notes: "RS 98 but every fundamental line is negative and there is no EPS data. Consensus $13 is below the $13.82 price. A momentum bounce in a broken business.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $13.00 versus the $13.82 close implies -5.9% — price has OUTRUN estimates.  |  V2 EXIT: hard stop $13.03; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 18,
+        ticker: "XNCR",
+        name: "Xencor",
+        sector: "Healthcare",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$24.72",
+            signal: "19.2% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$22.66",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$15.88 / $15.5",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "9.1%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "98",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "14.6%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$30.61 / $9.45",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "1,290,726",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +17.46%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -86.2%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -46.51%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +18%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $30.75 versus the $24.72 close implies +24.4% of room to run.",
+        entry: {
+          pivot: "$30.61 (engine buy point)",
+          entryCondition: "Daily close above $30.61 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,807,016 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$28.31 (~7.5% below pivot)",
+          target1: "$36.73 (+20%)",
+          target2: "$39.79 (+30%)",
+          rr: "2.66:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$30.62 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$29.08 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$28.31 — exit intraday if hit"
+          }
+        ],
+        notes: "No EPS data and erratic revenue. 19.2% below its high. Consensus $30.75 implies 24% room. Speculative biotech — size accordingly.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $30.75 versus the $24.72 close implies +24.4% of room to run.  |  V2 EXIT: hard stop $28.31; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 19,
+        ticker: "CORT",
+        name: "Corcept Therapeutics",
+        sector: "Healthcare",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$110.29",
+            signal: "12.7% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$108.16",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$72.27 / $68.4",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "2%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "97",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "8.9%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$126.38 / $28.66",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "1,398,815",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+24.14%",
+            pass: false,
+            revenue: "Rev +31.74%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +4.89%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "-21.56%",
+            pass: false,
+            revenue: "Rev +11.13%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "-60.98%",
+            pass: false,
+            revenue: "Rev +13.75%"
+          }
+        ],
+        epsNote: "EPS screen verdict: REV PASS. Analyst consensus $141.00 versus the $110.29 close implies +27.8% of room to run.",
+        entry: {
+          pivot: "$126.38 (engine buy point)",
+          entryCondition: "Daily close above $126.38 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,958,341 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$116.9 (~7.5% below pivot)",
+          target1: "$151.66 (+20%)",
+          target2: "$164.29 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$126.39 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$120.06 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$116.9 — exit intraday if hit"
+          }
+        ],
+        notes: "REV PASS with 31.7% revenue growth and only 2% extension. Consensus $141 gives roughly 28% room, the widest in the setup group.  |  FUNDAMENTALS: EPS screen verdict: REV PASS. Analyst consensus $141.00 versus the $110.29 close implies +27.8% of room to run.  |  V2 EXIT: hard stop $116.9; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 20,
+        ticker: "IRDM",
+        name: "Iridium Communications",
+        sector: "Technology",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "7/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$46.77",
+            signal: "18.2% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$47.74",
+            signal: "Price BELOW 50MA",
+            good: false
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$41.01 / $35.46",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "-2%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "97",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "5.1%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$57.18 / $15.65",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "1,185,869",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "-55%",
+            pass: false,
+            revenue: "Rev +3.84%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "-25.93%",
+            pass: false,
+            revenue: "Rev +1.94%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "-24.16%",
+            pass: false,
+            revenue: "Rev -0.02%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+68.13%",
+            pass: true,
+            revenue: "Rev +6.66%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $42.00 versus the $46.77 close implies -10.2% — price has OUTRUN estimates.",
+        entry: {
+          pivot: "$49.11 (engine buy point)",
+          entryCondition: "Daily close above $49.11 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,660,217 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$45.43 (~7.5% below pivot)",
+          target1: "$58.93 (+20%)",
+          target2: "$63.84 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$49.12 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$46.65 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$45.43 — exit intraday if hit"
+          }
+        ],
+        notes: "EPS growth −55% and consensus $42 sits below the $46.77 price. Technically clean at 5.1% tightness, fundamentally poor.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $42.00 versus the $46.77 close implies -10.2% — price has OUTRUN estimates.  |  V2 EXIT: hard stop $45.43; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 21,
+        ticker: "LFST",
+        name: "LifeStance Health",
+        sector: "Healthcare",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$12.57",
+            signal: "7.3% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$11.84",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$9.03 / $8.52",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "6.1%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "97",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "10%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$13.56 / $4.77",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "4,451,342",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +26.08%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+1927.45%",
+            pass: true,
+            revenue: "Rev +21.18%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +17.42%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +16.34%"
+          }
+        ],
+        epsNote: "EPS screen verdict: REV PASS. Analyst consensus $14.20 versus the $12.57 close implies +13.0% limited room.",
+        entry: {
+          pivot: "$13.56 (engine buy point)",
+          entryCondition: "Daily close above $13.56 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 6,231,879 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$12.54 (~7.5% below pivot)",
+          target1: "$16.27 (+20%)",
+          target2: "$17.63 (+30%)",
+          rr: "2.66:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$13.57 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$12.88 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$12.54 — exit intraday if hit"
+          }
+        ],
+        notes: "REV PASS (+26%). 8/8 trend, 7.3% below high, decent 4.5m share liquidity. Consensus $14.20 implies about 13% room.  |  FUNDAMENTALS: EPS screen verdict: REV PASS. Analyst consensus $14.20 versus the $12.57 close implies +13.0% limited room.  |  V2 EXIT: hard stop $12.54; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 22,
+        ticker: "MAN",
+        name: "ManpowerGroup",
+        sector: "Industrials",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$57.64",
+            signal: "9.8% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$55.66",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$38.64 / $36.67",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "3.6%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "97",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "12.8%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$63.88 / $25.15",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "1,138,792",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +7.54%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "-58.21%",
+            pass: false,
+            revenue: "Rev +10.27%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+33.75%",
+            pass: true,
+            revenue: "Rev +7.12%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "-19.15%",
+            pass: false,
+            revenue: "Rev +2.3%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $57.33 versus the $57.64 close implies -0.5% — price has OUTRUN estimates.",
+        entry: {
+          pivot: "$63.88 (engine buy point)",
+          entryCondition: "Daily close above $63.88 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,594,309 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$59.09 (~7.5% below pivot)",
+          target1: "$76.66 (+20%)",
+          target2: "$83.04 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$63.89 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$60.69 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$59.09 — exit intraday if hit"
+          }
+        ],
+        notes: "Staffing cyclical with no usable EPS line. Consensus $57.33 is fractionally below the $57.64 price — fully valued on estimates.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $57.33 versus the $57.64 close implies -0.5% — price has OUTRUN estimates.  |  V2 EXIT: hard stop $59.09; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 23,
+        ticker: "PARR",
+        name: "Par Pacific Holdings",
+        sector: "Energy",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$84.37",
+            signal: "3.8% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$78.52",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$64.11 / $57.76",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "7.4%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "97",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "12%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$87.72 / $33.21",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "977,184",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+699.14%",
+            pass: true,
+            revenue: "Rev +56.8%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +4.51%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -1.04%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+3869.23%",
+            pass: true,
+            revenue: "Rev -6.11%"
+          }
+        ],
+        epsNote: "EPS screen verdict: PASS. Analyst consensus $86.57 versus the $84.37 close implies +2.6% limited room.",
+        entry: {
+          pivot: "$87.72 (engine buy point)",
+          entryCondition: "Daily close above $87.72 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,368,058 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$81.14 (~7.5% below pivot)",
+          target1: "$105.26 (+20%)",
+          target2: "$114.04 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$87.73 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$83.33 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$81.14 — exit intraday if hit"
+          }
+        ],
+        notes: "PASS on EPS off a distorted base (+699%). Refining margins drive this; consensus $86.57 gives only 2.6% room, so estimates have caught up.  |  FUNDAMENTALS: EPS screen verdict: PASS. Analyst consensus $86.57 versus the $84.37 close implies +2.6% limited room.  |  V2 EXIT: hard stop $81.14; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 24,
+        ticker: "CRL",
+        name: "Charles River Laboratories",
+        sector: "Healthcare",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$278.06",
+            signal: "8.3% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$263.5",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$205.84 / $204.92",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "5.5%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "96",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "9.1%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$303.31 / $144.26",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "900,605",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -2.72%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +1.19%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -0.83%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "-17.29%",
+            pass: false,
+            revenue: "Rev -0.49%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $282.43 versus the $278.06 close implies +1.6% limited room.",
+        entry: {
+          pivot: "$303.31 (engine buy point)",
+          entryCondition: "Daily close above $303.31 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 1,260,847 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$280.56 (~7.5% below pivot)",
+          target1: "$363.97 (+20%)",
+          target2: "$394.3 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$303.32 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$288.14 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$280.56 — exit intraday if hit"
+          }
+        ],
+        notes: "FAIL on fundamentals with revenue shrinking 2.7%. Consensus $282.43 is only 1.6% above the price. Poor risk-reward despite an 8/8 trend score.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $282.43 versus the $278.06 close implies +1.6% limited room.  |  V2 EXIT: hard stop $280.56; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 25,
+        ticker: "NSIT",
+        name: "Insight Enterprises",
+        sector: "Technology",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$154.91",
+            signal: "8.1% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$142.26",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$106.56 / $100.94",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "8.9%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "96",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "11%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$168.5 / $63.62",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "377,174",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+76.03%",
+            pass: true,
+            revenue: "Rev +14.73%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+340.91%",
+            pass: true,
+            revenue: "Rev +1.16%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+66.48%",
+            pass: true,
+            revenue: "Rev -1.18%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+6.58%",
+            pass: false,
+            revenue: "Rev -4.03%"
+          }
+        ],
+        epsNote: "EPS screen verdict: PASS. Analyst consensus $163.75 versus the $154.91 close implies +5.7% limited room.",
+        entry: {
+          pivot: "$168.5 (engine buy point)",
+          entryCondition: "Daily close above $168.5 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 528,044 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$155.86 (~7.5% below pivot)",
+          target1: "$202.2 (+20%)",
+          target2: "$219.05 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$168.51 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$160.07 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$155.86 — exit intraday if hit"
+          }
+        ],
+        notes: "PASS on EPS (+76%) with 14.7% revenue growth and consensus $163.75 giving roughly 6% room. Average volume 377k is on the thin side.  |  FUNDAMENTALS: EPS screen verdict: PASS. Analyst consensus $163.75 versus the $154.91 close implies +5.7% limited room.  |  V2 EXIT: hard stop $155.86; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 26,
+        ticker: "TWLO",
+        name: "Twilio Inc.",
+        sector: "Technology",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$243.84",
+            signal: "5.6% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$220.44",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$181.17 / $168.23",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "10.6%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "96",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "12.4%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$258.35 / $98.44",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "2,112,399",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+4671.46%",
+            pass: true,
+            revenue: "Rev +22.03%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+375%",
+            pass: true,
+            revenue: "Rev +20%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +14.32%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +14.71%"
+          }
+        ],
+        epsNote: "EPS screen verdict: PASS. Analyst consensus $260.18 versus the $243.84 close implies +6.7% limited room.",
+        entry: {
+          pivot: "$249.45 (engine buy point)",
+          entryCondition: "Daily close above $249.45 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 2,957,359 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$230.74 (~7.5% below pivot)",
+          target1: "$299.34 (+20%)",
+          target2: "$324.28 (+30%)",
+          rr: "2.67:1",
+          sizing: "25% at pivot (already >10% above 50DMA) | scale only on strength — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$249.46 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$236.98 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$230.74 — exit intraday if hit"
+          }
+        ],
+        notes: "PASS on EPS with 22% revenue growth and consensus $260.18 leaving about 7% room. Extension of 10.6% is at the upper end of acceptable, so start smaller.  |  FUNDAMENTALS: EPS screen verdict: PASS. Analyst consensus $260.18 versus the $243.84 close implies +6.7% limited room.  |  V2 EXIT: hard stop $230.74; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 27,
+        ticker: "AAMI",
+        name: "Acadian Asset Management",
+        sector: "Financial Services",
+        status: "WOULD-BE SETUP — GATED",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$90.74",
+            signal: "7.9% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$88.78",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$72.69 / $67.12",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "2.2%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "95",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "10.6%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP FORMING",
+            signal: "Gated by market",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$98.52 / $41.47",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "412,233",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "+171.43%",
+            pass: true,
+            revenue: "Rev +45.29%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+26.4%",
+            pass: true,
+            revenue: "Rev +39.28%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "-14.85%",
+            pass: false,
+            revenue: "Rev +2.62%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "-6.67%",
+            pass: false,
+            revenue: "Rev +17.14%"
+          }
+        ],
+        epsNote: "EPS screen verdict: STRONG PASS. EPS growth is ACCELERATING across the last three quarters. Analyst consensus $86.33 versus the $90.74 close implies -4.9% — price has OUTRUN estimates.",
+        entry: {
+          pivot: "$98.52 (engine buy point)",
+          entryCondition: "Daily close above $98.52 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 577,126 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$91.13 (~7.5% below pivot)",
+          target1: "$118.22 (+20%)",
+          target2: "$128.08 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$98.53 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$93.59 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$91.13 — exit intraday if hit"
+          }
+        ],
+        notes: "Replaces AVNS in this list after AVNS was found to be delisted. STRONG PASS fundamentals — EPS +171% and accelerating, revenue +45%. But consensus $86.33 is BELOW the $90.74 price, and average volume is 412k. Asset managers screen well when breadth is narrow.  |  FUNDAMENTALS: EPS screen verdict: STRONG PASS. EPS growth is ACCELERATING across the last three quarters. Analyst consensus $86.33 versus the $90.74 close implies -4.9% — price has OUTRUN estimates.  |  V2 EXIT: hard stop $91.13; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 28,
+        ticker: "DELL",
+        name: "Dell Technologies",
+        sector: "Technology",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$568.06",
+            signal: "4.6% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$462.74",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$321.84 / $272.48",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "22.8%",
+            signal: "TOO EXTENDED",
+            good: false
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "99",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "17.6%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP NOT YET",
+            signal: "No pivot yet",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$595.51 / $110.22",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "7,734,197",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2027 (Most Recent)",
+            growth: "+272.94%",
+            pass: true,
+            revenue: "Rev +57.75%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "+282.48%",
+            pass: true,
+            revenue: "Rev +87.53%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "+57.26%",
+            pass: true,
+            revenue: "Rev +39.48%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "+39.02%",
+            pass: true,
+            revenue: "Rev +10.83%"
+          }
+        ],
+        epsNote: "EPS screen verdict: PASS. Analyst consensus $570.48 versus the $568.06 close implies +0.4% limited room.",
+        entry: {
+          pivot: "$595.51 (engine buy point)",
+          entryCondition: "Daily close above $595.51 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 10,827,876 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$550.85 (~7.5% below pivot)",
+          target1: "$714.61 (+20%)",
+          target2: "$774.16 (+30%)",
+          rr: "2.67:1",
+          sizing: "25% at pivot (already >10% above 50DMA) | scale only on strength — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$595.52 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$565.73 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$550.85 — exit intraday if hit"
+          }
+        ],
+        notes: "RS 99 but 22.8% above its 50-day MA — far beyond the 14% ceiling. PASS fundamentals with EPS +273%. Consensus $570.48 is essentially at the $568.06 price. Wait for a base.  |  FUNDAMENTALS: EPS screen verdict: PASS. Analyst consensus $570.48 versus the $568.06 close implies +0.4% limited room.  |  V2 EXIT: hard stop $550.85; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 29,
+        ticker: "INTC",
+        name: "Intel Corp",
+        sector: "Technology",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$108.6",
+            signal: "23.7% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$97.09",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$88.46 / $77.16",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "11.9%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "99",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "21.2%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP NOT YET",
+            signal: "No pivot yet",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$142.35 / $28.73",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "107,374,731",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +25.42%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +7.18%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -4.11%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +2.78%"
+          }
+        ],
+        epsNote: "EPS screen verdict: REV PASS. Analyst consensus $116.37 versus the $108.6 close implies +7.2% limited room.",
+        entry: {
+          pivot: "$111.37 (engine buy point)",
+          entryCondition: "Daily close above $111.37 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 150,324,623 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$103.02 (~7.5% below pivot)",
+          target1: "$133.64 (+20%)",
+          target2: "$144.78 (+30%)",
+          rr: "2.67:1",
+          sizing: "25% at pivot (already >10% above 50DMA) | scale only on strength — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$111.38 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$105.80 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$103.02 — exit intraday if hit"
+          }
+        ],
+        notes: "RS 99, 11.9% extended, 23.7% below its high. REV PASS (+25.4%) with no EPS line. Consensus $116.37 gives about 7% room. A turnaround story, not a Minervini setup.  |  FUNDAMENTALS: EPS screen verdict: REV PASS. Analyst consensus $116.37 versus the $108.6 close implies +7.2% limited room.  |  V2 EXIT: hard stop $103.02; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 30,
+        ticker: "LITE",
+        name: "Lumentum Holdings",
+        sector: "Technology",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$930.91",
+            signal: "14.3% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$841.77",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$823.17 / $713.73",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "10.6%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "99",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "23.4%",
+            signal: "Volume not drying",
+            good: false
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP NOT YET",
+            signal: "No pivot yet",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$1085.68 / $144.52",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "4,703,431",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q4 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +109.34%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +90.12%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +65.46%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +58.45%"
+          }
+        ],
+        epsNote: "EPS screen verdict: REV PASS. Analyst consensus $1149.00 versus the $930.91 close implies +23.4% of room to run.",
+        entry: {
+          pivot: "$1026.76 (engine buy point)",
+          entryCondition: "Daily close above $1026.76 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 6,584,803 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$949.75 (~7.5% below pivot)",
+          target1: "$1232.11 (+20%)",
+          target2: "$1334.79 (+30%)",
+          rr: "2.67:1",
+          sizing: "25% at pivot (already >10% above 50DMA) | scale only on strength — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$1026.77 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$975.42 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$949.75 — exit intraday if hit"
+          }
+        ],
+        notes: "RS 99 with revenue compounding 109%. Consensus $1,149 implies 23% room, the widest of the extended group. Extension of 10.6% is actually within range — the blocker is VCP NOT YET, so a base forming here is worth watching closely.  |  FUNDAMENTALS: EPS screen verdict: REV PASS. Analyst consensus $1149.00 versus the $930.91 close implies +23.4% of room to run.  |  V2 EXIT: hard stop $949.75; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 31,
+        ticker: "MRNA",
+        name: "Moderna",
+        sector: "Healthcare",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$154.04",
+            signal: "12.8% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$98.17",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$68.21 / $60.25",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "56.9%",
+            signal: "TOO EXTENDED",
+            good: false
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "99",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "24.2%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP NOT YET",
+            signal: "No pivot yet",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$176.66 / $22.28",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "17,851,610",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026 (Most Recent)",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +2.11%"
+          },
+          {
+            quarter: "Prior quarter",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev +260.19%"
+          },
+          {
+            quarter: "2 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -29.81%"
+          },
+          {
+            quarter: "3 quarters ago",
+            growth: "n/a",
+            pass: false,
+            revenue: "Rev -45.43%"
+          }
+        ],
+        epsNote: "EPS screen verdict: FAIL. Analyst consensus $119.56 versus the $154.04 close implies -22.4% — price has OUTRUN estimates.",
+        entry: {
+          pivot: "$161.96 (engine buy point)",
+          entryCondition: "Daily close above $161.96 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 24,992,254 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$149.81 (~7.5% below pivot)",
+          target1: "$194.35 (+20%)",
+          target2: "$210.55 (+30%)",
+          rr: "2.67:1",
+          sizing: "25% at pivot (already >10% above 50DMA) | scale only on strength — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$161.97 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$153.86 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$149.81 — exit intraday if hit"
+          }
+        ],
+        notes: "RS 99 and 56.9% above its 50-day MA. That is a parabolic move, not a setup. Fundamentals FAIL and consensus $119.56 is 22% BELOW the price. The clearest 'do not touch' on the list.  |  FUNDAMENTALS: EPS screen verdict: FAIL. Analyst consensus $119.56 versus the $154.04 close implies -22.4% — price has OUTRUN estimates.  |  V2 EXIT: hard stop $149.81; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      },
+      {
+        rank: 32,
+        ticker: "MU",
+        name: "Micron Technology",
+        sector: "Technology",
+        status: "EXTENDED — WATCH",
+        techScore: "8/8",
+        dataDate: "Close, Sep 18, 2026",
+        technical: [
+          {
+            metric: "Price (close, Sep 18, 2026)",
+            value: "$1015.8",
+            signal: "19.1% below 52w high"
+          },
+          {
+            metric: "50-Day MA",
+            value: "$927.26",
+            signal: "Price ABOVE 50MA",
+            good: true
+          },
+          {
+            metric: "150 / 200-Day MA",
+            value: "$744.61 / $640.15",
+            signal: "Full stack 50>150>200",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "9.5%",
+            signal: "Within buy range",
+            good: true
+          },
+          {
+            metric: "RS rank (vs 1,498)",
+            value: "99",
+            signal: "Strong",
+            good: true
+          },
+          {
+            metric: "Base tightness (10-day range)",
+            value: "15.5%",
+            signal: "Volume drying up",
+            good: true
+          },
+          {
+            metric: "Engine VCP reading",
+            value: "VCP NOT YET",
+            signal: "No pivot yet",
+            good: false
+          },
+          {
+            metric: "52-Week High / Low",
+            value: "$1255 / $154.65",
+            signal: "Pivot at 20-day high"
+          },
+          {
+            metric: "50-day average volume",
+            value: "34,407,208",
+            signal: "Adequate liquidity",
+            good: true
+          }
+        ],
+        eps: [],
+        epsNote: "EPS screen verdict: NO DATA. Analyst consensus $1513.00 versus the $1015.8 close implies +48.9% of room to run.",
+        entry: {
+          pivot: "$1042.4 (engine buy point)",
+          entryCondition: "Daily close above $1042.4 — BLOCKED: market gate active",
+          volumeTrigger: "≥ 48,170,091 shares (1.4× 50-day avg) — VERIFY ON TRADINGVIEW",
+          stop: "$964.22 (~7.5% below pivot)",
+          target1: "$1250.88 (+20%)",
+          target2: "$1355.12 (+30%)",
+          rr: "2.67:1",
+          sizing: "50% at pivot | 30% add +5–7% | 20% third entry — NOT THIS WEEK"
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "$1042.41 — close above pivot"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "$990.28 — 5% below pivot"
+          },
+          {
+            type: "HARD STOP",
+            price: "$964.22 — exit intraday if hit"
+          }
+        ],
+        notes: "RS 99, 9.5% extended, 19.1% below its high. No fundamental data retrieved, but consensus $1,513 against a $1,015.80 price implies roughly 49% room — the largest gap in the entire report. Memory cycle leverage; watch for a base.  |  FUNDAMENTALS: EPS screen verdict: NO DATA. Analyst consensus $1513.00 versus the $1015.8 close implies +48.9% of room to run.  |  V2 EXIT: hard stop $964.22; trend exit only on a WEEKLY close >3% below the 50DMA; cooldown 4–6 weeks after any exit."
+      }
+    ],
+    riskRules: [
+      "REGIME GATE FIRST — the market is not in a confirmed uptrend, so there are no new positions this week regardless of how good an individual chart looks.",
+      "RUN THE M&A CHECK BEFORE ANYTHING ELSE — four of this week's fifteen would-be buys are announced cash deals. A tight, low-volume base pinned just under a round number is a merger spread until proven otherwise.",
+      "CHECK FOR STALENESS AND DELISTINGS YOURSELF — AVNS scored 8/8 this week while no longer trading. The engine cannot see corporate actions after its last bar.",
+      "Hard stop ~7.5% below the pivot, placed when the position opens; honour it intraday.",
+      "v2 trend exit is buffered: act only on a WEEKLY close >3% below the 50DMA, never on a daily dip.",
+      "Re-entry cooldown of 4–6 weeks after any stop or exit, and only on a fresh higher base.",
+      "Never add to a loser. Tranches run 50% at the pivot, 30% on a 5–7% advance, 20% on a third confirmation — upward only.",
+      "If a name is already >10% above its 50DMA at entry, start at 25% size instead of 50% (AMD, TWLO this week).",
+      "Require reward-to-risk of at least 2.5:1 — but note the engine's fixed geometry returns roughly 2.67:1 for every name, so R:R is not a differentiator. Discriminate on base quality and earnings instead.",
+      "Be sceptical of thin volume: below ~300,000 shares of 50-day average the 1.4× trigger is unreliable (DXPE at 124k, ROG at 219k, NSIT at 377k, AAMI at 412k, MTRN at 316k this week).",
+      "Demand both trend AND earnings — a perfect 8/8 chart on falling EPS (AMN, IPAR, CRL this week) is a multiple-expansion trade, not a Minervini trade.",
+      "Watch where consensus already sits: PSMT, MRNA, VSTS, IRDM, MAN, AAMI and DELL all trade at or above their analyst targets, so the upside is re-rating, not estimate growth.",
+      "Sell into strength near +20% and +30% rather than waiting for a reversal.",
+      "Treat this as an idea generator, not a buy list — a backtest of this screen lagged buy-and-hold."
+    ],
+    verification: "Confirm current price, the 50/150/200MA stack, the base and pivot, and a real volume-expansion breakout on TradingView 1D before any trade. Prices are the 2026-09-18 close. Search EVERY ticker for pending M&A before acting — this week ITGR (KKR, $127), SAFT (Mapfre, $105), LNTH (Curium, $102.50 plus a CVR up to $12) and PAG (Penske/Mitsui, $210) all scored near-perfect algorithmic VCPs purely because they are frozen under announced cash bids. Also verify the security still trades: AVNS was scored 8/8 by the engine two months after its acquisition closed.",
+    disclaimer: "For informational and educational purposes only. Not financial advice."
+  },
+  {
     reportDate: "2026-09-17",
     title: "S&P 1500 Momentum Screen",
     framework: "Minervini SEPA — history-based engine v3 (full S&P 1500, 1,498 names evaluated)",
