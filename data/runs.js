@@ -13,6 +13,2975 @@
 
 window.SCREEN_RUNS = [
   {
+    reportDate: "2026-10-19",
+    title: "S&P 1500 Momentum Screen",
+    framework: "Minervini SEPA - history-based engine v3 (full S&P 1500, 1,496 names evaluated)",
+    market: {
+      index: "S&P 1500 breadth - 45.6% above 200MA (no index quote; universe = S&P 1500)",
+      verdict: "UNDER PRESSURE",
+      verdictNote: "REGIME GATE ACTIVE - the engine downgraded ALL 42 would-be BUY NOW and 251 would-be SETUP names to EXTENDED - WATCH, so nothing is actionable this week. Only 45.6% of 1,496 evaluated names are above their 200DMA (gate needs 60%), 35.3% above the 50DMA (up from 25.8% last run) and 37.3% hold a full 50>150>200 stack (needs 45%). Breadth is improving from the September low but not yet confirmed. Seven of the would-be buys are announced acquisitions (HZO, SAFT, OGN, TMHC, LNTH, MASI, ACA) and are disqualified: a sub-1% base tightness under a round price is a merger spread, not a VCP. 23 names carry stale last-bars (likely deals closed/closing), e.g. AVNS, WBD, QRVO, SEM, JHG. Raise cash, build the watchlist, wait for breadth.",
+      metrics: [
+        {
+          metric: "Universe evaluated",
+          value: "1,496 names",
+          signal: "of 1,506 attempted; 10 failed"
+        },
+        {
+          metric: "% above 200-day MA",
+          value: "45.6%",
+          signal: ">=60% = uptrend",
+          good: false
+        },
+        {
+          metric: "% above 50-day MA",
+          value: "35.3%",
+          signal: "Short-term breadth weak but improving",
+          good: false
+        },
+        {
+          metric: "% in full MA stack",
+          value: "37.3%",
+          signal: ">=45% = healthy",
+          good: false
+        },
+        {
+          metric: "Would-be BUY NOW (pre-gate)",
+          value: "42",
+          signal: "All downgraded by gate (7 are M&A)",
+          good: false
+        },
+        {
+          metric: "Would-be SETUP (pre-gate)",
+          value: "251",
+          signal: "All downgraded by gate",
+          good: false
+        },
+        {
+          metric: "Actionable buys this week",
+          value: "0",
+          signal: "REGIME GATE ACTIVE",
+          good: false
+        },
+        {
+          metric: "Stale last-bars",
+          value: "23",
+          signal: "Last bar != 2026-10-19",
+          good: false
+        }
+      ],
+      sectorAsOf: "n/a",
+      sectors: [],
+      sectorNote: "No sector data collected in v3 engine."
+    },
+    dataSources: [
+      "stockanalysis.com daily OHLCV (5Y, split-adjusted close) via in-app browser",
+      "stockanalysis.com quarterly financials (EPS / revenue growth YoY)",
+      "Web search for M&A confirmation"
+    ],
+    dataQualityNote: "1,496 of 1,506 evaluated. Failed: CTVA, EQR, FDP, FDXF, PSKY, Q, SATS, SOLS, VGNT, VSNT (HTTP 400 or <260 bars). 23 stale names (last bar != 2026-10-19). Full CSV not transferred this run (payload transfer limited to gated would-be buys/setups); see report CSV.",
+    dataQuality: [
+      {
+        ticker: "ALL",
+        source: "stockanalysis.com",
+        date: "2026-10-19",
+        status: "IN REPORT - 1,496 evaluated"
+      },
+      {
+        ticker: "CTVA,EQR,FDP,FDXF,PSKY,Q,SATS,SOLS,VGNT,VSNT",
+        source: "stockanalysis.com",
+        date: "2026-10-19",
+        status: "EXCLUDED - fetch failed / <260 bars"
+      }
+    ],
+    criteria: [
+      {
+        key: "C1",
+        label: "Price > 150MA & 200MA"
+      },
+      {
+        key: "C2",
+        label: "150MA > 200MA"
+      },
+      {
+        key: "C3",
+        label: "200MA rising (1 mo)"
+      },
+      {
+        key: "C4",
+        label: "50MA > 150MA > 200MA"
+      },
+      {
+        key: "C5",
+        label: "Price > 50MA"
+      },
+      {
+        key: "C6",
+        label: ">=30% above 52w low"
+      },
+      {
+        key: "C7",
+        label: "Within 25% of 52w high"
+      },
+      {
+        key: "C8",
+        label: "RS rank >= 70"
+      }
+    ],
+    summary: [
+      {
+        ticker: "HZO",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXCLUDED - M&A"
+      },
+      {
+        ticker: "SAFT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXCLUDED - M&A"
+      },
+      {
+        ticker: "OGN",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXCLUDED - M&A"
+      },
+      {
+        ticker: "TMHC",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXCLUDED - M&A"
+      },
+      {
+        ticker: "LNTH",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "EXCLUDED - M&A"
+      },
+      {
+        ticker: "MASI",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXCLUDED - M&A"
+      },
+      {
+        ticker: "ACA",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "EXCLUDED - M&A"
+      },
+      {
+        ticker: "SN",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "ZBRA",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "NUE",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "TRGP",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "THC",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "RS",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "RNG",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "CORT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "HAE",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "PSX",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "VLO",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "NSIT",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "CAKE",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "DELL",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        score: "7/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "MPC",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "MRNA",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "AMN",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      },
+      {
+        ticker: "ANF",
+        flags: [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        score: "8/8",
+        result: "WATCHLIST"
+      }
+    ],
+    stocksNote: "Nothing below is actionable - the regime gate blocks every entry. Seven DISQUALIFIED M&A cards first (the lesson of the run), then six clean would-be buys (VCP CONFIRMED), seven would-be setups, and five high-RS extended leaders. Levels are pre-computed for when breadth repairs.",
+    stocks: [
+      {
+        rank: 1,
+        ticker: "HZO",
+        name: "MarineMax",
+        sector: "Consumer Discretionary",
+        status: "DISQUALIFIED - M&A",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "52.38",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "52.28 / 38.88 / 36.20",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "98",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+0.2%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "0.3%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "21.42 - 52.56",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 0.1, 0.6, 0.3, 0.3%, 10d tightness 0.3%",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q3 2026",
+            growth: "n/a",
+            pass: false,
+            revenue: "-7.0% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "n/a",
+            pass: false,
+            revenue: "-16.5% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "n/a",
+            pass: false,
+            revenue: "+7.8% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "n/a",
+            pass: false,
+            revenue: "-1.9% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: FAIL (EPS YoY n/a, n/a, n/a, n/a; Rev YoY -7%, -16%, +8%, -2%; Q3 2026)",
+        entry: {
+          pivot: "N/A",
+          entryCondition: "DO NOT BUY - pinned under acquisition price.",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "None."
+        },
+        alerts: [],
+        notes: "DISQUALIFIED - ANNOUNCED ACQUISITION. Definitive agreement (9 Aug 2026) to be acquired by Blackstone-backed Safe Harbor Marinas in a ~$1.5B all-cash deal. The tight, low-volume 'base' is a merger spread, not a VCP; do not trade as a setup."
+      },
+      {
+        rank: 2,
+        ticker: "SAFT",
+        name: "Safety Insurance",
+        sector: "Financials",
+        status: "DISQUALIFIED - M&A",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "103.90",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "103.59 / 85.62 / 83.40",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "94",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+0.3%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "0.2%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "67.04 - 104.15",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 0.7, 0.4, 0.2, 0.2%, 10d tightness 0.4%",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+21.0%",
+            pass: false,
+            revenue: "+3.0% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "n/a",
+            pass: false,
+            revenue: "+4.4% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+153.2%",
+            pass: true,
+            revenue: "+11.4% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+10.4%",
+            pass: false,
+            revenue: "+10.6% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: FAIL (EPS YoY +21%, n/a, +153%, +10%; Rev YoY +3%, +4%, +11%, +11%; Q2 2026)",
+        entry: {
+          pivot: "N/A",
+          entryCondition: "DO NOT BUY - pinned under acquisition price.",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "None."
+        },
+        alerts: [],
+        notes: "DISQUALIFIED - ANNOUNCED ACQUISITION. Merger agreement (23 Jul 2026) with MAPFRE, ~$1.54B all cash. The tight, low-volume 'base' is a merger spread, not a VCP; do not trade as a setup."
+      },
+      {
+        rank: 3,
+        ticker: "OGN",
+        name: "Organon",
+        sector: "Health Care",
+        status: "DISQUALIFIED - M&A",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "13.75",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "13.72 / 12.40 / 11.26",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "90",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+0.2%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "0.6%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "5.69 - 13.83",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 1.1, 1.1, 0.4, 0.4%, 10d tightness 0.8%",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "-28.3%",
+            pass: false,
+            revenue: "-2.3% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+66.7%",
+            pass: true,
+            revenue: "-3.5% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "n/a",
+            pass: false,
+            revenue: "-5.3% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "-55.8%",
+            pass: false,
+            revenue: "+1.3% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: FAIL (EPS YoY -28%, +67%, n/a, -56%; Rev YoY -2%, -4%, -5%, +1%; Q2 2026)",
+        entry: {
+          pivot: "N/A",
+          entryCondition: "DO NOT BUY - pinned under acquisition price.",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "None."
+        },
+        alerts: [],
+        notes: "DISQUALIFIED - ANNOUNCED ACQUISITION. Sun Pharma acquisition (~$11.75B) announced Apr 2026; shareholders approved. The tight, low-volume 'base' is a merger spread, not a VCP; do not trade as a setup."
+      },
+      {
+        rank: 4,
+        ticker: "TMHC",
+        name: "Taylor Morrison",
+        sector: "Consumer Discretionary",
+        status: "DISQUALIFIED - M&A",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "72.45",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "68.09 / 63.74 / 63.07",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "72",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+6.4%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "0.1%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "54.15 - 72.50",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 0.5, 1, 0.7, 0.2%, 10d tightness 0.9%",
+            good: true
+          }
+        ],
+        eps: [],
+        epsNote: "",
+        entry: {
+          pivot: "N/A",
+          entryCondition: "DO NOT BUY - pinned under acquisition price.",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "None."
+        },
+        alerts: [],
+        notes: "DISQUALIFIED - ANNOUNCED ACQUISITION. Berkshire Hathaway agreed (1 Jun 2026) to buy Taylor Morrison in an all-cash deal. The tight, low-volume 'base' is a merger spread, not a VCP; do not trade as a setup."
+      },
+      {
+        rank: 5,
+        ticker: "LNTH",
+        name: "Lantheus",
+        sector: "Health Care",
+        status: "DISQUALIFIED - M&A",
+        techScore: "7/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "100.03",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "100.35 / 96.31 / 89.92",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "88",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "-0.3%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "10.6%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "50.16 - 111.86",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 2, 2.1, 1.7, 1.7%, 10d tightness 0.8%",
+            good: true
+          }
+        ],
+        eps: [],
+        epsNote: "",
+        entry: {
+          pivot: "N/A",
+          entryCondition: "DO NOT BUY - pinned under acquisition price.",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "None."
+        },
+        alerts: [],
+        notes: "DISQUALIFIED - ANNOUNCED ACQUISITION. Curium agreed (Aug 2026) to acquire Lantheus in an ~$8B deal. The tight, low-volume 'base' is a merger spread, not a VCP; do not trade as a setup."
+      },
+      {
+        rank: 6,
+        ticker: "MASI",
+        name: "Masimo",
+        sector: "Health Care",
+        status: "DISQUALIFIED - M&A",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "179.95",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "178.55 / 159.54 / 155.90",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "71",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+0.8%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "0.0%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "125.94 - 179.99",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP FORMING",
+            signal: "contractions 0.4, 0.3, 0.3, 0.4%, 10d tightness 0.9%",
+            good: false
+          }
+        ],
+        eps: [],
+        epsNote: "",
+        entry: {
+          pivot: "N/A",
+          entryCondition: "DO NOT BUY - pinned under acquisition price.",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "None."
+        },
+        alerts: [],
+        notes: "DISQUALIFIED - ANNOUNCED ACQUISITION. Danaher agreed to acquire Masimo for $180.00/share cash; price 179.95 vs bid. The tight, low-volume 'base' is a merger spread, not a VCP; do not trade as a setup."
+      },
+      {
+        rank: 7,
+        ticker: "ACA",
+        name: "Arcosa",
+        sector: "Industrials",
+        status: "DISQUALIFIED - M&A",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "147.13",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "145.86 / 133.70 / 129.23",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "85",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+0.9%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "0.3%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "90.90 - 147.50",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 0.4, 0.4, 0.5, 0.6%, 10d tightness 0.8%",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+448.6%",
+            pass: true,
+            revenue: "+1.7% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+57.8%",
+            pass: true,
+            revenue: "+4.4% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "n/a",
+            pass: false,
+            revenue: "+7.6% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+335.3%",
+            pass: true,
+            revenue: "+24.6% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: PASS (EPS YoY +449%, +58%, n/a, +335%; Rev YoY +2%, +4%, +8%, +25%; Q2 2026)",
+        entry: {
+          pivot: "N/A",
+          entryCondition: "DO NOT BUY - pinned under acquisition price.",
+          volumeTrigger: "N/A",
+          stop: "N/A",
+          target1: "N/A",
+          target2: "N/A",
+          rr: "N/A",
+          sizing: "None."
+        },
+        alerts: [],
+        notes: "DISQUALIFIED - ANNOUNCED ACQUISITION. CRH agreed to acquire Arcosa at $150/share; stockholders approved. The tight, low-volume 'base' is a merger spread, not a VCP; do not trade as a setup."
+      },
+      {
+        rank: 8,
+        ticker: "SN",
+        name: "SharkNinja",
+        sector: "Consumer Discretionary",
+        status: "WATCHLIST - Gated Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "188.78",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "180.06 / 145.29 / 138.96",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "95",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+4.8%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "3.9%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "83.12 - 196.35",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 19.3, 13.8, 6.2, 2.8%, 10d tightness 8.4%",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "-6.3%",
+            pass: false,
+            revenue: "+22.2% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+2.4%",
+            pass: false,
+            revenue: "+15.6% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+98.0%",
+            pass: true,
+            revenue: "+17.6% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+41.5%",
+            pass: true,
+            revenue: "+14.3% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: REV PASS (EPS YoY -6%, +2%, +98%, +41%; Rev YoY +22%, +16%, +18%, +14%; Q2 2026)",
+        entry: {
+          pivot: "196.35",
+          entryCondition: "Daily close above $196.35 on volume >= 2,292,456 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "2,292,456 sh",
+          stop: "181.62",
+          target1: "235.62",
+          target2: "255.26",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "196.36"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "186.53"
+          },
+          {
+            type: "STOP ALERT",
+            price: "181.62"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: REV PASS (EPS YoY -6%, +2%, +98%, +41%; Rev YoY +22%, +16%, +18%, +14%; Q2 2026). Volume trigger reliable (50d avg 1,637,469 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 9,
+        ticker: "ZBRA",
+        name: "Zebra Technologies",
+        sector: "Technology",
+        status: "WATCHLIST - Gated Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "377.30",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "365.83 / 285.48 / 274.42",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "94",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+3.1%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "3.5%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "199.05 - 390.80",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 12.9, 8.8, 7.8, 1.1%, 10d tightness 6.8%",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+121.5%",
+            pass: true,
+            revenue: "+20.4% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+3.8%",
+            pass: false,
+            revenue: "+14.3% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "-55.8%",
+            pass: false,
+            revenue: "+10.6% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "-25.4%",
+            pass: false,
+            revenue: "+5.2% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: STRONG PASS (EPS YoY +121%, +4%, -56%, -25%; Rev YoY +20%, +14%, +11%, +5%; Q2 2026)",
+        entry: {
+          pivot: "390.80",
+          entryCondition: "Daily close above $390.80 on volume >= 766,605 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "766,605 sh",
+          stop: "361.49",
+          target1: "468.96",
+          target2: "508.04",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "390.81"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "371.26"
+          },
+          {
+            type: "STOP ALERT",
+            price: "361.49"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: STRONG PASS (EPS YoY +121%, +4%, -56%, -25%; Rev YoY +20%, +14%, +11%, +5%; Q2 2026). Volume trigger reliable (50d avg 547,575 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 10,
+        ticker: "NUE",
+        name: "Nucor",
+        sector: "Materials",
+        status: "WATCHLIST - Gated Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "260.85",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "253.68 / 233.89 / 219.59",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "93",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+2.8%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "6.9%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "131.32 - 280.11",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 17.4, 14.6, 14.5, 8.6%, 10d tightness 8.5%",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+93.8%",
+            pass: true,
+            revenue: "+22.9% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+382.1%",
+            pass: true,
+            revenue: "+21.3% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+34.2%",
+            pass: true,
+            revenue: "+8.6% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+150.5%",
+            pass: true,
+            revenue: "+14.5% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: PASS (EPS YoY +94%, +382%, +34%, +150%; Rev YoY +23%, +21%, +9%, +14%; Q2 2026)",
+        entry: {
+          pivot: "265.83",
+          entryCondition: "Daily close above $265.83 on volume >= 1,780,678 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "1,780,678 sh",
+          stop: "245.89",
+          target1: "319.00",
+          target2: "345.58",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "265.84"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "252.54"
+          },
+          {
+            type: "STOP ALERT",
+            price: "245.89"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: PASS (EPS YoY +94%, +382%, +34%, +150%; Rev YoY +23%, +21%, +9%, +14%; Q2 2026). Volume trigger reliable (50d avg 1,271,913 sh). Barclays PT $272 (Jul) is only ~4% above price - little analyst headroom. M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 11,
+        ticker: "TRGP",
+        name: "Targa Resources",
+        sector: "Energy",
+        status: "WATCHLIST - Gated Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "291.89",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "286.25 / 268.45 / 254.07",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "93",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+2.0%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "5.2%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "144.14 - 307.94",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 13.3, 10.8, 10.5, 10%, 10d tightness 7.1%",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+23.3%",
+            pass: false,
+            revenue: "+4.2% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+142.9%",
+            pass: true,
+            revenue: "-10.2% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+74.5%",
+            pass: true,
+            revenue: "-7.9% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+25.7%",
+            pass: true,
+            revenue: "+7.8% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: FAIL (EPS YoY +23%, +143%, +74%, +26%; Rev YoY +4%, -10%, -8%, +8%; Q2 2026)",
+        entry: {
+          pivot: "296.77",
+          entryCondition: "Daily close above $296.77 on volume >= 1,573,215 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "1,573,215 sh",
+          stop: "274.51",
+          target1: "356.12",
+          target2: "385.80",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "296.78"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "281.93"
+          },
+          {
+            type: "STOP ALERT",
+            price: "274.51"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: FAIL (EPS YoY +23%, +143%, +74%, +26%; Rev YoY +4%, -10%, -8%, +8%; Q2 2026). Volume trigger reliable (50d avg 1,123,725 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 12,
+        ticker: "THC",
+        name: "Tenet Healthcare",
+        sector: "Health Care",
+        status: "WATCHLIST - Gated Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "267.02",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "264.35 / 218.46 / 217.17",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "92",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+1.0%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "5.7%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "157.58 - 283.05",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 12.1, 9, 8, 5.1%, 10d tightness 8.6%",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+213.4%",
+            pass: true,
+            revenue: "+6.8% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+87.6%",
+            pass: true,
+            revenue: "+2.8% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+27.6%",
+            pass: true,
+            revenue: "+8.9% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "-21.1%",
+            pass: false,
+            revenue: "+3.2% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: STRONG PASS (EPS YoY +213%, +88%, +28%, -21%; Rev YoY +7%, +3%, +9%, +3%; Q2 2026)",
+        entry: {
+          pivot: "278.39",
+          entryCondition: "Daily close above $278.39 on volume >= 983,425 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "983,425 sh",
+          stop: "257.51",
+          target1: "334.07",
+          target2: "361.91",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "278.40"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "264.47"
+          },
+          {
+            type: "STOP ALERT",
+            price: "257.51"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: STRONG PASS (EPS YoY +213%, +88%, +28%, -21%; Rev YoY +7%, +3%, +9%, +3%; Q2 2026). Volume trigger reliable (50d avg 702,447 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 13,
+        ticker: "RS",
+        name: "Reliance Inc.",
+        sector: "Materials",
+        status: "WATCHLIST - Gated Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "418.57",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "398.77 / 377.00 / 363.26",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "87",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+5.0%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "3.3%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "260.31 - 433.02",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP CONFIRMED",
+            signal: "contractions 12.3, 6.7, 5.9, 5.2%, 10d tightness 6.9%",
+            good: true
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+42.3%",
+            pass: true,
+            revenue: "+26.5% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+36.4%",
+            pass: true,
+            revenue: "+15.5% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+15.1%",
+            pass: false,
+            revenue: "+11.9% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "-0.6%",
+            pass: false,
+            revenue: "+6.8% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: STRONG PASS (EPS YoY +42%, +36%, +15%, -1%; Rev YoY +27%, +16%, +12%, +7%; Q2 2026)",
+        entry: {
+          pivot: "421.06",
+          entryCondition: "Daily close above $421.06 on volume >= 410,355 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "410,355 sh",
+          stop: "389.48",
+          target1: "505.27",
+          target2: "547.38",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "421.07"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "400.01"
+          },
+          {
+            type: "STOP ALERT",
+            price: "389.48"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: STRONG PASS (EPS YoY +42%, +36%, +15%, -1%; Rev YoY +27%, +16%, +12%, +7%; Q2 2026). THIN: 50d avg 293,111 sh under ~300k - size down or skip. M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 14,
+        ticker: "RNG",
+        name: "RingCentral",
+        sector: "Technology",
+        status: "WATCHLIST - Near Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "79.11",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "72.47 / 52.08 / 46.85",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "99",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+9.2%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "3.4%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "24.14 - 81.90",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP FORMING",
+            signal: "contractions 12.8, 11.7, 8, 9.4%, 10d tightness 10.3%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+221.4%",
+            pass: true,
+            revenue: "+5.9% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "n/a",
+            pass: false,
+            revenue: "+5.2% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "n/a",
+            pass: false,
+            revenue: "+4.8% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "n/a",
+            pass: false,
+            revenue: "+4.9% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: PASS (EPS YoY +221%, n/a, n/a, n/a; Rev YoY +6%, +5%, +5%, +5%; Q2 2026)",
+        entry: {
+          pivot: "81.90",
+          entryCondition: "Daily close above $81.90 on volume >= 2,028,704 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "2,028,704 sh",
+          stop: "75.76",
+          target1: "98.28",
+          target2: "106.47",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "81.91"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "77.81"
+          },
+          {
+            type: "STOP ALERT",
+            price: "75.76"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: PASS (EPS YoY +221%, n/a, n/a, n/a; Rev YoY +6%, +5%, +5%, +5%; Q2 2026). Volume trigger reliable (50d avg 1,449,075 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 15,
+        ticker: "CORT",
+        name: "Corcept Therapeutics",
+        sector: "Health Care",
+        status: "WATCHLIST - Near Buy",
+        techScore: "7/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "112.80",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "115.68 / 83.65 / 72.15",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "98",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "-2.5%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "10.7%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "28.66 - 126.38",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP FORMING",
+            signal: "contractions 12.2, 14.3, 8, 7.1%, 10d tightness 13.9%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+24.1%",
+            pass: false,
+            revenue: "+31.7% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "n/a",
+            pass: false,
+            revenue: "+4.9% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "-21.6%",
+            pass: false,
+            revenue: "+11.1% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "-61.0%",
+            pass: false,
+            revenue: "+13.8% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: REV PASS (EPS YoY +24%, n/a, -22%, -61%; Rev YoY +32%, +5%, +11%, +14%; Q2 2026)",
+        entry: {
+          pivot: "122.81",
+          entryCondition: "Daily close above $122.81 on volume >= 1,614,747 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "1,614,747 sh",
+          stop: "113.60",
+          target1: "147.37",
+          target2: "159.65",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "122.82"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "116.67"
+          },
+          {
+            type: "STOP ALERT",
+            price: "113.60"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: REV PASS (EPS YoY +24%, n/a, -22%, -61%; Rev YoY +32%, +5%, +11%, +14%; Q2 2026). Volume trigger reliable (50d avg 1,153,391 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 16,
+        ticker: "HAE",
+        name: "Haemonetics",
+        sector: "Health Care",
+        status: "WATCHLIST - Near Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "118.60",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "105.79 / 80.32 / 76.96",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "98",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+12.1%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "4.2%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "48.98 - 123.77",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP FORMING",
+            signal: "contractions 8.8, 8.3, 8.3, 5%, 10d tightness 22.2%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q1 2027",
+            growth: "+2.9%",
+            pass: false,
+            revenue: "+5.6% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "n/a",
+            pass: false,
+            revenue: "+4.8% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+28.4%",
+            pass: true,
+            revenue: "-2.8% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+22.7%",
+            pass: false,
+            revenue: "-5.3% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: FAIL (EPS YoY +3%, n/a, +28%, +23%; Rev YoY +6%, +5%, -3%, -5%; Q1 2027)",
+        entry: {
+          pivot: "123.77",
+          entryCondition: "Daily close above $123.77 on volume >= 983,779 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "983,779 sh",
+          stop: "114.49",
+          target1: "148.52",
+          target2: "160.90",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 25% starter (ext >10%), 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "123.78"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "117.58"
+          },
+          {
+            type: "STOP ALERT",
+            price: "114.49"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: FAIL (EPS YoY +3%, n/a, +28%, +23%; Rev YoY +6%, +5%, -3%, -5%; Q1 2027). Volume trigger reliable (50d avg 702,700 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 17,
+        ticker: "PSX",
+        name: "Phillips 66",
+        sector: "Energy",
+        status: "WATCHLIST - Near Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "290.75",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "257.48 / 206.12 / 192.48",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "98",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+12.9%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "2.9%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "126.92 - 299.39",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP FORMING",
+            signal: "contractions 6.4, 5.4, 10.3%, 10d tightness 12.4%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+344.9%",
+            pass: true,
+            revenue: "+53.1% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "-56.8%",
+            pass: false,
+            revenue: "+6.9% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+242728.4%",
+            pass: true,
+            revenue: "+1.3% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "-61.0%",
+            pass: false,
+            revenue: "-2.9% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: PASS (EPS YoY +345%, -57%, +242728%, -61%; Rev YoY +53%, +7%, +1%, -3%; Q2 2026)",
+        entry: {
+          pivot: "299.39",
+          entryCondition: "Daily close above $299.39 on volume >= 3,949,108 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "3,949,108 sh",
+          stop: "276.94",
+          target1: "359.27",
+          target2: "389.21",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 25% starter (ext >10%), 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "299.40"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "284.42"
+          },
+          {
+            type: "STOP ALERT",
+            price: "276.94"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: PASS (EPS YoY +345%, -57%, +242728%, -61%; Rev YoY +53%, +7%, +1%, -3%; Q2 2026). Volume trigger reliable (50d avg 2,820,792 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 18,
+        ticker: "VLO",
+        name: "Valero Energy",
+        sector: "Energy",
+        status: "WATCHLIST - Near Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "433.40",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "384.33 / 301.11 / 275.36",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "98",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+12.8%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "6.1%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "156.17 - 461.52",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP FORMING",
+            signal: "contractions 7.5, 5.1, 12.9%, 10d tightness 11.6%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+453.5%",
+            pass: true,
+            revenue: "+51.7% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "n/a",
+            pass: false,
+            revenue: "+6.6% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+317.9%",
+            pass: true,
+            revenue: "-2.1% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+209.7%",
+            pass: true,
+            revenue: "-3.2% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: PASS (EPS YoY +453%, n/a, +318%, +210%; Rev YoY +52%, +7%, -2%, -3%; Q2 2026)",
+        entry: {
+          pivot: "461.52",
+          entryCondition: "Daily close above $461.52 on volume >= 4,082,115 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "4,082,115 sh",
+          stop: "426.91",
+          target1: "553.82",
+          target2: "599.98",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 25% starter (ext >10%), 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "461.53"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "438.44"
+          },
+          {
+            type: "STOP ALERT",
+            price: "426.91"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: PASS (EPS YoY +453%, n/a, +318%, +210%; Rev YoY +52%, +7%, -2%, -3%; Q2 2026). Volume trigger reliable (50d avg 2,915,797 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 19,
+        ticker: "NSIT",
+        name: "Insight Enterprises",
+        sector: "Technology",
+        status: "WATCHLIST - Near Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "165.01",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "157.24 / 117.35 / 109.11",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "97",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+4.9%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "7.0%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "63.62 - 177.34",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP FORMING",
+            signal: "contractions 6.1, 9.9, 6, 4.1%, 10d tightness 13.9%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+76.0%",
+            pass: true,
+            revenue: "+14.7% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+340.9%",
+            pass: true,
+            revenue: "+1.2% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+66.5%",
+            pass: true,
+            revenue: "-1.2% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+6.6%",
+            pass: false,
+            revenue: "-4.0% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: PASS (EPS YoY +76%, +341%, +66%, +7%; Rev YoY +15%, +1%, -1%, -4%; Q2 2026)",
+        entry: {
+          pivot: "177.34",
+          entryCondition: "Daily close above $177.34 on volume >= 466,239 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "466,239 sh",
+          stop: "164.04",
+          target1: "212.81",
+          target2: "230.54",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "177.35"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "168.47"
+          },
+          {
+            type: "STOP ALERT",
+            price: "164.04"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: PASS (EPS YoY +76%, +341%, +66%, +7%; Rev YoY +15%, +1%, -1%, -4%; Q2 2026). Volume trigger reliable (50d avg 333,028 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 20,
+        ticker: "CAKE",
+        name: "Cheesecake Factory",
+        sector: "Consumer Discretionary",
+        status: "WATCHLIST - Near Buy",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "115.54",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "107.87 / 82.85 / 77.24",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "97",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+7.1%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "2.6%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "43.07 - 118.64",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP FORMING",
+            signal: "contractions 20.2, 18.3, 4.9%, 10d tightness 12.4%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+23.7%",
+            pass: false,
+            revenue: "+7.7% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+52.2%",
+            pass: true,
+            revenue: "+5.6% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "-27.9%",
+            pass: false,
+            revenue: "+4.4% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+8.2%",
+            pass: false,
+            revenue: "+4.8% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: FAIL (EPS YoY +24%, +52%, -28%, +8%; Rev YoY +8%, +6%, +4%, +5%; Q2 2026)",
+        entry: {
+          pivot: "118.64",
+          entryCondition: "Daily close above $118.64 on volume >= 2,058,188 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "2,058,188 sh",
+          stop: "109.74",
+          target1: "142.37",
+          target2: "154.23",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "118.65"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "112.71"
+          },
+          {
+            type: "STOP ALERT",
+            price: "109.74"
+          }
+        ],
+        notes: "REGIME GATE ACTIVE (market UNDER PRESSURE) - engine downgraded to EXTENDED - WATCH; nothing is actionable. Fundamentals: FAIL (EPS YoY +24%, +52%, -28%, +8%; Rev YoY +8%, +6%, +4%, +5%; Q2 2026). Volume trigger reliable (50d avg 1,470,135 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 21,
+        ticker: "DELL",
+        name: "Dell Technologies",
+        sector: "Technology",
+        status: "EXTENDED - WATCH",
+        techScore: "7/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "454.11",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "513.27 / 378.79 / 315.64",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "99",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "-11.5%",
+            signal: "<=14% ok",
+            good: true
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "23.7%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "110.22 - 595.51",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP NOT YET",
+            signal: "contractions 21.1, 14.3, 17.9, 12.6%, 10d tightness 32.7%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2027",
+            growth: "+272.9%",
+            pass: true,
+            revenue: "+57.8% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "+282.5%",
+            pass: true,
+            revenue: "+87.5% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+57.3%",
+            pass: true,
+            revenue: "+39.5% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+39.0%",
+            pass: true,
+            revenue: "+10.8% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: PASS (EPS YoY +273%, +282%, +57%, +39%; Rev YoY +58%, +88%, +39%, +11%; Q2 2027)",
+        entry: {
+          pivot: "595.06",
+          entryCondition: "Daily close above $595.06 on volume >= 11,241,449 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "11,241,449 sh",
+          stop: "550.43",
+          target1: "714.07",
+          target2: "773.58",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 50% at pivot, 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "595.07"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "565.31"
+          },
+          {
+            type: "STOP ALERT",
+            price: "550.43"
+          }
+        ],
+        notes: "Extended leader - strong trend, no base. Fundamentals: PASS (EPS YoY +273%, +282%, +57%, +39%; Rev YoY +58%, +88%, +39%, +11%; Q2 2027). Volume trigger reliable (50d avg 8,029,607 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 22,
+        ticker: "MPC",
+        name: "Marathon Petroleum",
+        sector: "Energy",
+        status: "EXTENDED - WATCH",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "475.17",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "399.36 / 306.08 / 277.92",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "99",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+19.0%",
+            signal: "Extended",
+            good: false
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "3.8%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "161.93 - 493.98",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP NOT YET",
+            signal: "contractions 8.6, 5.4, 12.1%, 10d tightness 15.6%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "+348.0%",
+            pass: true,
+            revenue: "+53.7% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "n/a",
+            pass: false,
+            revenue: "+8.8% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+350.7%",
+            pass: true,
+            revenue: "-1.2% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+141.2%",
+            pass: true,
+            revenue: "-0.8% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: PASS (EPS YoY +348%, n/a, +351%, +141%; Rev YoY +54%, +9%, -1%, -1%; Q2 2026)",
+        entry: {
+          pivot: "493.98",
+          entryCondition: "Daily close above $493.98 on volume >= 3,601,551 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "3,601,551 sh",
+          stop: "456.93",
+          target1: "592.78",
+          target2: "642.17",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 25% starter (ext >10%), 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "493.99"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "469.28"
+          },
+          {
+            type: "STOP ALERT",
+            price: "456.93"
+          }
+        ],
+        notes: "Extended leader - strong trend, no base. Fundamentals: PASS (EPS YoY +348%, n/a, +351%, +141%; Rev YoY +54%, +9%, -1%, -1%; Q2 2026). Volume trigger reliable (50d avg 2,572,537 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 23,
+        ticker: "MRNA",
+        name: "Moderna",
+        sector: "Health Care",
+        status: "EXTENDED - WATCH",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "230.48",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "158.36 / 89.35 / 78.40",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "99",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+45.5%",
+            signal: "Extended",
+            good: false
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "4.9%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "22.28 - 242.29",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP NOT YET",
+            signal: "contractions 19.2, 16.6, -21.9, 12.6%, 10d tightness 32.8%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "n/a",
+            pass: false,
+            revenue: "+2.1% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "n/a",
+            pass: false,
+            revenue: "+260.2% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "n/a",
+            pass: false,
+            revenue: "-29.8% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "n/a",
+            pass: false,
+            revenue: "-45.4% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: FAIL (EPS YoY n/a, n/a, n/a, n/a; Rev YoY +2%, +260%, -30%, -45%; Q2 2026)",
+        entry: {
+          pivot: "242.29",
+          entryCondition: "Daily close above $242.29 on volume >= 32,528,747 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "32,528,747 sh",
+          stop: "224.12",
+          target1: "290.75",
+          target2: "314.98",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 25% starter (ext >10%), 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "242.30"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "230.18"
+          },
+          {
+            type: "STOP ALERT",
+            price: "224.12"
+          }
+        ],
+        notes: "Extended leader - strong trend, no base. Fundamentals: FAIL (EPS YoY n/a, n/a, n/a, n/a; Rev YoY +2%, +260%, -30%, -45%; Q2 2026). Volume trigger reliable (50d avg 23,234,820 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 24,
+        ticker: "AMN",
+        name: "AMN Healthcare",
+        sector: "Health Care",
+        status: "EXTENDED - WATCH",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "41.63",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "35.12 / 29.77 / 27.11",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "98",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+18.5%",
+            signal: "Extended",
+            good: false
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "0.2%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "14.97 - 41.72",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP NOT YET",
+            signal: "contractions 9.7, 3.5, 6, 10%, 10d tightness 20.5%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2026",
+            growth: "n/a",
+            pass: false,
+            revenue: "+2.3% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "n/a",
+            pass: false,
+            revenue: "+99.9% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "n/a",
+            pass: false,
+            revenue: "+1.8% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "+321.3%",
+            pass: true,
+            revenue: "-7.7% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: FAIL (EPS YoY n/a, n/a, n/a, +321%; Rev YoY +2%, +100%, +2%, -8%; Q2 2026)",
+        entry: {
+          pivot: "41.72",
+          entryCondition: "Daily close above $41.72 on volume >= 922,996 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "922,996 sh",
+          stop: "38.59",
+          target1: "50.06",
+          target2: "54.24",
+          rr: "2.66",
+          sizing: "On a $10,000 position: 25% starter (ext >10%), 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "41.73"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "39.63"
+          },
+          {
+            type: "STOP ALERT",
+            price: "38.59"
+          }
+        ],
+        notes: "Extended leader - strong trend, no base. Fundamentals: FAIL (EPS YoY n/a, n/a, n/a, +321%; Rev YoY +2%, +100%, +2%, -8%; Q2 2026). Volume trigger reliable (50d avg 659,283 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      },
+      {
+        rank: 25,
+        ticker: "ANF",
+        name: "Abercrombie & Fitch",
+        sector: "Consumer Discretionary",
+        status: "EXTENDED - WATCH",
+        techScore: "8/8",
+        dataDate: "2026-10-19",
+        technical: [
+          {
+            metric: "Price (19 Oct 2026)",
+            value: "160.64",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "50 / 150 / 200 MA",
+            value: "134.42 / 103.89 / 102.71",
+            signal: "Stacked",
+            good: true
+          },
+          {
+            metric: "RS rank (vs S&P 1500)",
+            value: "98",
+            signal: ">=70 required",
+            good: true
+          },
+          {
+            metric: "Extension vs 50MA",
+            value: "+19.5%",
+            signal: "Extended",
+            good: false
+          },
+          {
+            metric: "Distance from 52w high",
+            value: "1.3%",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "52w range",
+            value: "65.45 - 162.69",
+            signal: "",
+            good: true
+          },
+          {
+            metric: "VCP",
+            value: "VCP NOT YET",
+            signal: "contractions 4.5, 16.3, 15.4, 15.7%, 10d tightness 18.1%",
+            good: false
+          }
+        ],
+        eps: [
+          {
+            quarter: "Q2 2027",
+            growth: "+43.3%",
+            pass: true,
+            revenue: "+4.8% YoY"
+          },
+          {
+            quarter: "Q-1",
+            growth: "-7.5%",
+            pass: false,
+            revenue: "+1.5% YoY"
+          },
+          {
+            quarter: "Q-2",
+            growth: "+3.0%",
+            pass: false,
+            revenue: "+5.4% YoY"
+          },
+          {
+            quarter: "Q-3",
+            growth: "-5.6%",
+            pass: false,
+            revenue: "+6.8% YoY"
+          }
+        ],
+        epsNote: "Fundamentals: PASS (EPS YoY +43%, -8%, +3%, -6%; Rev YoY +5%, +2%, +5%, +7%; Q2 2027)",
+        entry: {
+          pivot: "162.69",
+          entryCondition: "Daily close above $162.69 on volume >= 2,392,482 sh (1.4x 50d avg) - ONLY once market regime is a confirmed uptrend",
+          volumeTrigger: "2,392,482 sh",
+          stop: "150.49",
+          target1: "195.23",
+          target2: "211.50",
+          rr: "2.67",
+          sizing: "On a $10,000 position: 25% starter (ext >10%), 30% add +5-7% above pivot, 20% third entry. Never add to a loser."
+        },
+        alerts: [
+          {
+            type: "BREAKOUT ALERT",
+            price: "162.70"
+          },
+          {
+            type: "WARNING LEVEL",
+            price: "154.56"
+          },
+          {
+            type: "STOP ALERT",
+            price: "150.49"
+          }
+        ],
+        notes: "Extended leader - strong trend, no base. Fundamentals: PASS (EPS YoY +43%, -8%, +3%, -6%; Rev YoY +5%, +2%, +5%, +7%; Q2 2027). Volume trigger reliable (50d avg 1,708,916 sh). M&A check: no pending acquisition found in web search (not exhaustive). V2 exit: hard stop at engine stop; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop."
+      }
+    ],
+    riskRules: [
+      "Regime gate: no new buys unless >=60% above 200MA and >=45% full MA stack.",
+      "Weekly/buffered exit: a held name is only broken on a WEEKLY close >3% below its 50DMA.",
+      "Re-entry cooldown: 4-6 weeks after a stop, and only on a fresh higher base.",
+      "Hard stop at engine stop (~7.5% below pivot), exit intraday.",
+      "M&A check mandatory: sub-1% tightness under a round number is usually a merger spread.",
+      "Max 50% at pivot, 30% add +5-7%, 20% third; never add to a loser.",
+      "Require R:R >= 2.5.",
+      "Skip or size down names with 50d volume under ~300k shares.",
+      "Sell into strength near +20% / +30%.",
+      "Treat output as idea generator; backtests lagged buy-and-hold."
+    ],
+    verification: "Verify every level on TradingView (price, volume, pivot) and check news for deals before acting.",
+    disclaimer: "For informational purposes only. Not financial advice."
+  },
+  {
     reportDate: "2026-09-21",
     title: "S&P 1500 Momentum Screen",
     framework: "Minervini SEPA — history-based engine v3 (full S&P 1500, 1,498 names evaluated)",
