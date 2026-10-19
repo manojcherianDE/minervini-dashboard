@@ -10,6 +10,233 @@
    ========================================================================== */
 
 window.SCREEN_RUNS_DAX = [
+  {
+    reportDate: "2026-10-19",
+    title: "Germany Broad — DAX+MDAX+SDAX",
+    framework: "Minervini SEPA Framework (v3 engine, regime-gated) | German Equities — DAX + MDAX + SDAX",
+    market: {
+      index: "Germany Broad — DAX+MDAX+SDAX · Breadth UNDER PRESSURE · 47.7% > 200MA",
+      verdict: "UNDER PRESSURE",
+      verdictNote: "REGIME GATE ACTIVE — no name can be BUY or SETUP this week. Breadth across 155 German names: 47.7% above the 200-day (uptrend needs >=60%), 40.0% above the 50-day, 29.0% stacked 50>150>200 (needs >=45%). The gate downgraded 4 would-be BUY NOW and 26 would-be SETUP names to EXTENDED — WATCH. Several of these are not real setups: DHER (Uber EUR 41.50 bid) and NA9 (Persistent EUR 81 bid) are deal-spread pins, and YOU, ECV, KCO, B4B, COP and AOX carry stale bars from delistings/takeovers. No index quote is used — the verdict comes purely from breadth. Universe = DAX + MDAX + SDAX (177 attempted, 155 evaluated). Narrow, top-heavy tape. Data through 2026-10-19.",
+      metrics: [
+        { metric: "% above 200-day MA", value: "47.7%", signal: "Uptrend needs >=60%", good: false },
+        { metric: "% above 50-day MA", value: "40.0%", signal: "Short-term participation weak", good: false },
+        { metric: "% stacked 50 > 150 > 200", value: "29.0%", signal: "Uptrend needs >=45%", good: false },
+        { metric: "Names gated out by the market", value: "30", signal: "4 would-be BUY NOW + 26 would-be SETUP" }
+      ],
+      sectorAsOf: "",
+      sectors: [],
+      sectorNote: "Clean gated leaders (ex deal pins and delisted names): DHL, DB1, SY1, GFT, INH, EVK, BNR, MRK. Only DHL and GFT pair a near-pivot VCP with EPS growth >=25%. Quick-run caveat: the M&A check this week reused last run's findings (DHER, NA9 bids; stale delisted names) and did not re-search every featured ticker."
+    },
+    dataSources: [
+      "stockanalysis.com (ETR-*) — 5Y daily OHLCV per name via in-app browser, 155 of 177 symbols",
+      "Deterministic v3 engine (browser JS port of engine.py) — 8-criterion trend template, RS percentile vs the 155-name universe, algorithmic VCP, breadth regime gate",
+      "stockanalysis.com quarterly financials (EPS / revenue growth YoY) for featured names",
+      "Verify live on TradingView (XETR)."
+    ],
+    dataQualityNote: "155/177 tickers evaluated; 22 failed (retired/mistyped symbols, CGN short history) — same set as the prior run. 9 stale names carry an old last bar (YOU, ECV, KCO, B4B, COP, AOX, BIO3, SHA, M5Z), mostly delisted after takeovers. The 155-row payload transfer was replaced by a direct JSON read of the top rows (base64 copy mismatch); engine numbers are unchanged. Spec's de_universe.txt holds only 40 DAX names, so the 177-name de_universe_broad_176.txt + DHER list was used for comparability.",
+    dataQuality: [
+      { ticker: "Universe", source: "de_universe_broad_176.txt + DHER", date: "2026-10-19", status: "177 requested, 155 IN REPORT" },
+      { ticker: "Price history", source: "stockanalysis.com", date: "2026-10-19", status: "155 OK / 22 FAILED" },
+      { ticker: "YOU, ECV, KCO, B4B, COP, AOX, BIO3, SHA, M5Z", source: "stockanalysis.com", date: "2026-10-19", status: "STALE — 9 names, old last bar" },
+      { ticker: "Engine v3 + VCP", source: "browser engine", date: "2026-10-19", status: "COMPUTED" }
+    ],
+    criteria: [
+      { key: "c1", label: "Price > 200MA" },
+      { key: "c2", label: "200MA Trending Up" },
+      { key: "c3", label: "Price >= 30% Above 52W Low" },
+      { key: "c4", label: "Within 25% of 52W High" },
+      { key: "c5", label: "50MA > 200MA" },
+      { key: "c6", label: "Price > 50MA" },
+      { key: "c7", label: "RS >= 70 (vs universe)" }
+    ],
+    summary: [
+      { ticker: "DHER", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "YOU", flags: [0,1,1,1,0,1,1], score: "5/7", result: "FAIL" },
+      { ticker: "ECV", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "ALV", flags: [1,1,0,1,1,0,1], score: "5/7", result: "FAIL" },
+      { ticker: "KCO", flags: [1,1,1,1,1,0,1], score: "6/7", result: "FAIL" },
+      { ticker: "GFT", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "INH", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "EVK", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "NA9", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "SGL", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "DB1", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "TKA", flags: [1,1,1,1,1,0,1], score: "6/7", result: "FAIL" },
+      { ticker: "SY1", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "B4B", flags: [1,1,1,1,1,0,1], score: "6/7", result: "FAIL" },
+      { ticker: "SFQ", flags: [1,1,1,1,1,0,1], score: "6/7", result: "FAIL" },
+      { ticker: "DHL", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "TMV", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "FPE3", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "BNR", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "MRK", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "RHK", flags: [1,1,0,1,1,0,1], score: "5/7", result: "FAIL" },
+      { ticker: "COP", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "SRT3", flags: [1,1,1,1,0,1,1], score: "6/7", result: "FAIL" },
+      { ticker: "SRT", flags: [1,1,1,1,0,1,1], score: "6/7", result: "FAIL" },
+      { ticker: "TLX", flags: [1,1,0,1,1,1,1], score: "6/7", result: "FAIL" },
+      { ticker: "SZU", flags: [1,1,1,1,1,0,1], score: "6/7", result: "FAIL" },
+      { ticker: "BAYN", flags: [0,1,1,1,1,0,1], score: "5/7", result: "FAIL" },
+      { ticker: "BAS", flags: [1,1,0,1,1,1,1], score: "6/7", result: "FAIL" },
+      { ticker: "HNR1", flags: [1,1,0,1,1,1,1], score: "6/7", result: "FAIL" },
+      { ticker: "RWE", flags: [0,1,1,1,1,0,1], score: "5/7", result: "FAIL" },
+      { ticker: "S92", flags: [0,1,1,1,1,0,1], score: "5/7", result: "FAIL" },
+      { ticker: "GMM", flags: [1,1,1,0,1,0,1], score: "5/7", result: "FAIL" },
+      { ticker: "GXI", flags: [1,1,1,1,1,1,1], score: "7/7", result: "FAIL" },
+      { ticker: "AOX", flags: [0,1,1,1,0,1,1], score: "5/7", result: "FAIL" },
+      { ticker: "ZIL2", flags: [1,1,1,1,0,1,1], score: "6/7", result: "FAIL" },
+      { ticker: "SAP", flags: [1,0,1,1,0,1,1], score: "5/7", result: "WATCHLIST" },
+      { ticker: "IFX", flags: [0,1,1,0,0,0,0], score: "2/7", result: "FAIL" },
+      { ticker: "RHM", flags: [0,0,0,0,0,1,0], score: "1/7", result: "FAIL" }
+    ],
+    stocks: [
+      {
+        rank: 1, ticker: "ALV", name: "Allianz SE (DAX)", sector: "",
+        status: "EXTENDED — WATCH (gated by market)",
+        techScore: "6/8",
+        dataDate: "stockanalysis.com, 2026-10-19",
+        technical: [
+          { metric: "Price", value: "€425.90", signal: "6.3% from 52W high" },
+          { metric: "50-Day MA", value: "€435.39", signal: "Ext -2.2% vs 50MA", good: true },
+          { metric: "200-Day MA", value: "€398.78", signal: "Price above 200MA", good: true },
+          { metric: "52-Week High", value: "€454.60", signal: "Pivot reference" },
+          { metric: "RS Rank", value: "73", signal: "vs German universe", good: true },
+          { metric: "VCP", value: "VCP CONFIRMED", signal: "Tightness 5.8%, volume drying" },
+          { metric: "EPS / Revenue", value: "FAIL", signal: "EPS -7.99% / Rev 12.09% YoY (Q2 2026)" }
+        ],
+        entry: { pivot: "€444.10", entryCondition: "Daily close above €444.10 on volume >= 675,628 shares (1.4x 50-day avg)", volumeTrigger: ">= 675,628 shares — VERIFY ON TRADINGVIEW (XETR)", stop: "€410.79", target1: "€532.92", target2: "€577.33", rr: "2.67" },
+        alerts: [ { type: "BREAKOUT ALERT", price: "€444.11" }, { type: "WARNING LEVEL", price: "€421.89" }, { type: "STOP ALERT", price: "€410.79" } ],
+        notes: "Only would-be BUY NOW left after the M&A screen (VCP CONFIRMED) — GATED by the market. Price sits 2% below its 50MA (extension negative), so the engine's pivot is a recent-high reference rather than a tight base. Latest EPS -8%: a defensive technical setup, not a growth leader. No new bid found in the quick check. Exit: hard stop intraday; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop. Not actionable while the market gate is active."
+      },
+      {
+        rank: 2, ticker: "GFT", name: "GFT Technologies (SDAX)", sector: "",
+        status: "EXTENDED — WATCH (gated by market)",
+        techScore: "8/8",
+        dataDate: "stockanalysis.com, 2026-10-19",
+        technical: [
+          { metric: "Price", value: "€27.50", signal: "2.5% from 52W high" },
+          { metric: "50-Day MA", value: "€25.25", signal: "Ext +8.9% vs 50MA", good: true },
+          { metric: "200-Day MA", value: "€21.15", signal: "Price above 200MA", good: true },
+          { metric: "52-Week High", value: "€28.20", signal: "Pivot reference" },
+          { metric: "RS Rank", value: "98", signal: "vs German universe", good: true },
+          { metric: "VCP", value: "VCP FORMING", signal: "Tightness 10.8%, volume not drying" },
+          { metric: "EPS / Revenue", value: "STRONG PASS", signal: "EPS 35.14% / Rev 6.12% YoY (Q2 2026)" }
+        ],
+        entry: { pivot: "€28.20", entryCondition: "Daily close above €28.20 on volume >= 100,076 shares (1.4x 50-day avg)", volumeTrigger: ">= 100,076 shares — VERIFY ON TRADINGVIEW (XETR)", stop: "€26.09", target1: "€33.84", target2: "€36.66", rr: "2.67" },
+        alerts: [ { type: "BREAKOUT ALERT", price: "€28.21" }, { type: "WARNING LEVEL", price: "€26.79" }, { type: "STOP ALERT", price: "€26.09" } ],
+        notes: "EPS accelerating (+35%) but revenue only +6% (FLAG). Volume not drying. Thin liquidity (~71k shares/day): the 1.4x trigger is ~100k shares; size down. Exit: hard stop intraday; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop. Not actionable while the market gate is active."
+      },
+      {
+        rank: 3, ticker: "INH", name: "INDUS Holding (SDAX)", sector: "",
+        status: "EXTENDED — WATCH (gated by market)",
+        techScore: "8/8",
+        dataDate: "stockanalysis.com, 2026-10-19",
+        technical: [
+          { metric: "Price", value: "€38.15", signal: "10.7% from 52W high" },
+          { metric: "50-Day MA", value: "€37.29", signal: "Ext +2.3% vs 50MA", good: true },
+          { metric: "200-Day MA", value: "€31.32", signal: "Price above 200MA", good: true },
+          { metric: "52-Week High", value: "€42.70", signal: "Pivot reference" },
+          { metric: "RS Rank", value: "97", signal: "vs German universe", good: true },
+          { metric: "VCP", value: "VCP FORMING", signal: "Tightness 13.5%, volume drying" },
+          { metric: "EPS / Revenue", value: "PASS", signal: "EPS 270% / Rev 20.58% YoY (Q2 2026)" }
+        ],
+        entry: { pivot: "€42.70", entryCondition: "Daily close above €42.70 on volume >= 59,420 shares (1.4x 50-day avg)", volumeTrigger: ">= 59,420 shares — VERIFY ON TRADINGVIEW (XETR)", stop: "€39.50", target1: "€51.24", target2: "€55.51", rr: "2.67" },
+        alerts: [ { type: "BREAKOUT ALERT", price: "€42.71" }, { type: "WARNING LEVEL", price: "€40.56" }, { type: "STOP ALERT", price: "€39.50" } ],
+        notes: "Pivot is ~12% above price, not a near buy point. Very thin (~42k shares/day): liquidity risk — consider skipping or sizing down. Exit: hard stop intraday; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop. Not actionable while the market gate is active."
+      },
+      {
+        rank: 4, ticker: "EVK", name: "Evonik Industries (MDAX)", sector: "",
+        status: "EXTENDED — WATCH (gated by market)",
+        techScore: "8/8",
+        dataDate: "stockanalysis.com, 2026-10-19",
+        technical: [
+          { metric: "Price", value: "€21.34", signal: "2.3% from 52W high" },
+          { metric: "50-Day MA", value: "€19.09", signal: "Ext +11.8% vs 50MA", good: true },
+          { metric: "200-Day MA", value: "€16.66", signal: "Price above 200MA", good: true },
+          { metric: "52-Week High", value: "€21.84", signal: "Pivot reference" },
+          { metric: "RS Rank", value: "96", signal: "vs German universe", good: true },
+          { metric: "VCP", value: "VCP FORMING", signal: "Tightness 6.6%, volume drying" },
+          { metric: "EPS / Revenue", value: "FAIL", signal: "EPS -30.77% / Rev 11.26% YoY (Q2 2026)" }
+        ],
+        entry: { pivot: "€21.84", entryCondition: "Daily close above €21.84 on volume >= 1,873,813 shares (1.4x 50-day avg)", volumeTrigger: ">= 1,873,813 shares — VERIFY ON TRADINGVIEW (XETR)", stop: "€20.20", target1: "€26.21", target2: "€28.39", rr: "2.67" },
+        alerts: [ { type: "BREAKOUT ALERT", price: "€21.85" }, { type: "WARNING LEVEL", price: "€20.75" }, { type: "STOP ALERT", price: "€20.20" } ],
+        notes: "Tight, volume drying, 2% from high, but ext 11.8% above 50MA and EPS negative: price strength without earnings confirmation. Exit: hard stop intraday; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop. Not actionable while the market gate is active."
+      },
+      {
+        rank: 5, ticker: "DB1", name: "Deutsche Börse (DAX)", sector: "",
+        status: "EXTENDED — WATCH (gated by market)",
+        techScore: "8/8",
+        dataDate: "stockanalysis.com, 2026-10-19",
+        technical: [
+          { metric: "Price", value: "€307.70", signal: "1.4% from 52W high" },
+          { metric: "50-Day MA", value: "€285.21", signal: "Ext +7.9% vs 50MA", good: true },
+          { metric: "200-Day MA", value: "€253.07", signal: "Price above 200MA", good: true },
+          { metric: "52-Week High", value: "€312.20", signal: "Pivot reference" },
+          { metric: "RS Rank", value: "93", signal: "vs German universe", good: true },
+          { metric: "VCP", value: "VCP FORMING", signal: "Tightness 7.5%, volume not drying" },
+          { metric: "EPS / Revenue", value: "FAIL", signal: "EPS 13.75% / Rev 11.65% YoY (Q2 2026)" }
+        ],
+        entry: { pivot: "€312.20", entryCondition: "Daily close above €312.20 on volume >= 425,045 shares (1.4x 50-day avg)", volumeTrigger: ">= 425,045 shares — VERIFY ON TRADINGVIEW (XETR)", stop: "€288.79", target1: "€374.64", target2: "€405.86", rr: "2.67" },
+        alerts: [ { type: "BREAKOUT ALERT", price: "€312.21" }, { type: "WARNING LEVEL", price: "€296.59" }, { type: "STOP ALERT", price: "€288.79" } ],
+        notes: "1.4% under 52-week high; pivot €312.20. EPS +13.8% below the 25% bar. Volume not drying. Exit: hard stop intraday; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop. Not actionable while the market gate is active."
+      },
+      {
+        rank: 6, ticker: "DHL", name: "DHL Group (DAX)", sector: "",
+        status: "EXTENDED — WATCH (gated by market)",
+        techScore: "8/8",
+        dataDate: "stockanalysis.com, 2026-10-19",
+        technical: [
+          { metric: "Price", value: "€57.70", signal: "2.0% from 52W high" },
+          { metric: "50-Day MA", value: "€56.10", signal: "Ext +2.8% vs 50MA", good: true },
+          { metric: "200-Day MA", value: "€51.56", signal: "Price above 200MA", good: true },
+          { metric: "52-Week High", value: "€58.90", signal: "Pivot reference" },
+          { metric: "RS Rank", value: "86", signal: "vs German universe", good: true },
+          { metric: "VCP", value: "VCP FORMING", signal: "Tightness 7.4%, volume not drying" },
+          { metric: "EPS / Revenue", value: "STRONG PASS", signal: "EPS 28.57% / Rev 12.82% YoY (Q2 2026)" }
+        ],
+        entry: { pivot: "€58.90", entryCondition: "Daily close above €58.90 on volume >= 2,053,648 shares (1.4x 50-day avg)", volumeTrigger: ">= 2,053,648 shares — VERIFY ON TRADINGVIEW (XETR)", stop: "€54.48", target1: "€70.68", target2: "€76.57", rr: "2.67" },
+        alerts: [ { type: "BREAKOUT ALERT", price: "€58.91" }, { type: "WARNING LEVEL", price: "€55.95" }, { type: "STOP ALERT", price: "€54.48" } ],
+        notes: "Closest to a clean setup: tight, near pivot, low extension, EPS accelerating and liquid. Revenue growth only 12.8% and prior quarters negative — keep an eye. Still gated by the market. Exit: hard stop intraday; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop. Not actionable while the market gate is active."
+      },
+      {
+        rank: 7, ticker: "SY1", name: "Symrise (DAX)", sector: "",
+        status: "EXTENDED — WATCH (gated by market)",
+        techScore: "8/8",
+        dataDate: "stockanalysis.com, 2026-10-19",
+        technical: [
+          { metric: "Price", value: "€100.70", signal: "0.1% from 52W high" },
+          { metric: "50-Day MA", value: "€91.54", signal: "Ext +10.0% vs 50MA", good: true },
+          { metric: "200-Day MA", value: "€81.57", signal: "Price above 200MA", good: true },
+          { metric: "52-Week High", value: "€100.80", signal: "Pivot reference" },
+          { metric: "RS Rank", value: "90", signal: "vs German universe", good: true },
+          { metric: "VCP", value: "VCP FORMING", signal: "Tightness 12.0%, volume not drying" },
+          { metric: "EPS / Revenue", value: "FAIL", signal: "EPS -0.37% / Rev -0.56% YoY (H1 2026)" }
+        ],
+        entry: { pivot: "€100.80", entryCondition: "Daily close above €100.80 on volume >= 441,351 shares (1.4x 50-day avg)", volumeTrigger: ">= 441,351 shares — VERIFY ON TRADINGVIEW (XETR)", stop: "€93.24", target1: "€120.96", target2: "€131.04", rr: "2.67" },
+        alerts: [ { type: "BREAKOUT ALERT", price: "€100.81" }, { type: "WARNING LEVEL", price: "€95.76" }, { type: "STOP ALERT", price: "€93.24" } ],
+        notes: "At its 52-week high, 10% extended; EPS flat, revenue declining — technical only. Exit: hard stop intraday; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop. Not actionable while the market gate is active."
+      },
+      {
+        rank: 8, ticker: "MRK", name: "Merck KGaA (DAX)", sector: "",
+        status: "EXTENDED — WATCH (gated by market)",
+        techScore: "8/8",
+        dataDate: "stockanalysis.com, 2026-10-19",
+        technical: [
+          { metric: "Price", value: "€144.35", signal: "3.0% from 52W high" },
+          { metric: "50-Day MA", value: "€136.88", signal: "Ext +5.5% vs 50MA", good: true },
+          { metric: "200-Day MA", value: "€128.65", signal: "Price above 200MA", good: true },
+          { metric: "52-Week High", value: "€148.80", signal: "Pivot reference" },
+          { metric: "RS Rank", value: "84", signal: "vs German universe", good: true },
+          { metric: "VCP", value: "VCP FORMING", signal: "Tightness 7.2%, volume not drying" },
+          { metric: "EPS / Revenue", value: "FAIL", signal: "EPS -24.67% / Rev 3.41% YoY (Q2 2026)" }
+        ],
+        entry: { pivot: "€145.15", entryCondition: "Daily close above €145.15 on volume >= 367,577 shares (1.4x 50-day avg)", volumeTrigger: ">= 367,577 shares — VERIFY ON TRADINGVIEW (XETR)", stop: "€134.26", target1: "€174.18", target2: "€188.70", rr: "2.67" },
+        alerts: [ { type: "BREAKOUT ALERT", price: "€145.16" }, { type: "WARNING LEVEL", price: "€137.89" }, { type: "STOP ALERT", price: "€134.26" } ],
+        notes: "Tight base but EPS down 25% — fails the fundamental screen. Exit: hard stop intraday; trend exit only on a WEEKLY close >3% below the 50MA; 4-6 week cooldown after any stop. Not actionable while the market gate is active."
+      }
+    ]
+  },
     {
     reportDate: "2026-10-17",
     title: "Germany Broad — DAX+MDAX+SDAX",
